@@ -20,6 +20,10 @@ jobs:
         with:
           node-version: 15.x
       - name: Install dependencies
-        run: npm install redoc
+        run: |
+          npm install redoc
+          npm install openapi-merge-cli
+      - name: Merge OpenAPI Specs
+        run: npx openapi-merge-cli
       - name: Bundle ReDoc
         run: npx redoc-cli bundle ocm-api.json
