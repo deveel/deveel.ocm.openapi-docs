@@ -7,11 +7,14 @@
       "contact": {
         "name": "Antonello Provenzano",
         "email": "antonello@deveel.com"
+      },
+      "x-logo": {
+        "url": "https://github.com/deveel/deveel.ocm.openapi-docs/deveel-logo.jpg"
       }
     },
     "servers": [
       {
-        "url": "https://api.ocm.deveel.com"
+        "url": "https://api.ocm.deveel.net"
       }
     ],
     "paths": {
