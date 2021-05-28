@@ -1,0 +1,35 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "Deveel OCM API",
+      "version": "v1",
+      "description": "Deveel Omni-Channel Messaging API",
+      "contact": {
+        "name": "Antonello Provenzano",
+        "email": "antonello@deveel.com"
+      }
+    },
+    "servers": [
+      {
+        "url": "https://api.ocm.deveel.com"
+      }
+    ],
+    "paths": {
+    },
+    "components": {
+      "securitySchemes": {
+        "oauth2": {
+          "type": "oauth2",
+          "flows": {
+            "clientCredentials": {
+              "tokenUrl": "https://deveel.eu.auth0.com/oauth/token",
+              "scopes": {
+                  "message:send": "Send messages to individuals",
+                  "message:receive": "Receive messages from individuals"
+              }
+            }
+          }
+        }
+      }
+    }
+}

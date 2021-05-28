@@ -1,0 +1,14 @@
+{
+    "inputs": [
+        {
+            "inputFile": "./openapi-base.json"
+        },
+        {
+            "inputURL": "http://ocm-msg-api.azurewebsites.net/swagger/v1/swagger.json",
+            "pathModification": {
+                "prepend": "/message"
+            }
+        }
+    ], 
+    "output": "./ocm-api-v1.json"
+  }
