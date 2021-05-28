@@ -26,4 +26,4 @@ jobs:
       - name: Merge OpenAPI Specs
         run: npx openapi-merge-cli
       - name: Bundle ReDoc
-        run: npx redoc-cli bundle ocm-api.json
+        run: npx redoc-cli bundle ocm-api-v1.json
