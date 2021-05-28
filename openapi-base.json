@@ -9,7 +9,7 @@
         "email": "antonello@deveel.com"
       },
       "x-logo": {
-        "url": "https://github.com/deveel/deveel.ocm.openapi-docs/deveel-logo.jpg"
+        "url": "https://github.com/deveel/deveel.ocm.openapi-docs/raw/main/deveel-logo.png"
       }
     },
     "servers": [
