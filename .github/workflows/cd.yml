@@ -22,6 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm install redoc
+          npm install openapi-cli
           npm install openapi-merge-cli
       - name: Merge OpenAPI Specs
         run: |
