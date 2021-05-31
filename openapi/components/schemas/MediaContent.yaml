@@ -1,0 +1,10 @@
+required:
+  - mediaType
+  - source
+type: object
+properties:
+  mediaType:
+    type: string
+  source:
+    type: string
+additionalProperties: false

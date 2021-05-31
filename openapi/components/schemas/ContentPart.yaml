@@ -1,0 +1,16 @@
+type: object
+properties:
+  html:
+    minLength: 1
+    type: string
+    nullable: true
+  text:
+    minLength: 1
+    type: string
+    nullable: true
+  embed:
+    type: array
+    items:
+      $ref: .\Attachment.yaml
+    nullable: true
+additionalProperties: false

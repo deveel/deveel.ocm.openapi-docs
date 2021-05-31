@@ -4,10 +4,7 @@
             "inputFile": "./openapi-base.json"
         },
         {
-            "inputURL": "http://ocm-msg-api.azurewebsites.net/swagger/v1/swagger.json",
-            "pathModification": {
-                "prepend": "/message"
-            }
+            "inputURL": "http://ocm-msg-api.azurewebsites.net/swagger/v1/swagger.json"
         }
     ], 
     "output": "./ocm-api-v1.json"

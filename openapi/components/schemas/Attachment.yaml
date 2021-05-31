@@ -1,0 +1,18 @@
+required:
+  - content
+  - id
+type: object
+properties:
+  id:
+    type: string
+  content:
+    type: string
+  contentType:
+    type: string
+    nullable: true
+  fileName:
+    type: string
+    nullable: true
+  type:
+    $ref: .\AttachmentType.yaml
+additionalProperties: false

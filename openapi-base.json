@@ -8,6 +8,10 @@
         "name": "Antonello Provenzano",
         "email": "antonello@deveel.com"
       },
+      "license": {
+        "name": "Deveel EULA",
+        "url": "https://docs.ocm.deveel.net/LICENSE.html"
+      },
       "x-logo": {
         "url": "https://github.com/deveel/deveel.ocm.openapi-docs/raw/main/deveel-logo.png"
       }

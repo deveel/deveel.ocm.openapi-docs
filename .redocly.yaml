@@ -8,6 +8,9 @@ lint:
     no-unused-components: warning
 referenceDocs:
   htmlTemplate: ./docs/index.html
+  expandResponses: "200,201,202"
+  jsonSampleExpandLevel: all
+  pagination: section
   theme:
     colors:
       primary:

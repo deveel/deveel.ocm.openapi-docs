@@ -1,0 +1,14 @@
+required:
+  - messages
+type: object
+properties:
+  context:
+    type: object
+    additionalProperties: {}
+    nullable: true
+  messages:
+    minItems: 1
+    type: array
+    items:
+      $ref: .\Message.yaml
+additionalProperties: false

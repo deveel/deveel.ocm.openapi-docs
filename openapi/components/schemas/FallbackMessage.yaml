@@ -1,0 +1,22 @@
+required:
+  - channel
+  - content
+  - receiver
+  - sender
+type: object
+properties:
+  sender:
+    $ref: .\SenderTerminal.yaml
+  receiver:
+    $ref: .\ReceiverTerminal.yaml
+  channel:
+    type: string
+  content:
+    $ref: .\MessageContent.yaml
+  options:
+    type: object
+    additionalProperties: {}
+    nullable: true
+  fallback:
+    $ref: .\FallbackMessage.yaml
+additionalProperties: {}
