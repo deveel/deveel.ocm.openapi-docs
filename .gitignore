@@ -4,10 +4,10 @@ node_modules
 
 ocm-api-v1.json
 package-lock.json
-
-dist.yaml
 openapi-base.json
 openapi-merge.json
+
+dist.yaml
 redoc/index.html
 build-redoc.ps1
 bundle-redoc.ps1
