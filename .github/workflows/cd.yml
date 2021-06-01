@@ -25,7 +25,8 @@ jobs:
           
       - name: Bundle ReDoc
         run: |
-          npx redoc-cli bundle --output ./redoc/index.html ./openapi/openapi.yaml
+          npx openapi bundle ./openapi/openapi.yaml --output ./dist.yaml
+          npx redoc-cli bundle --output ./redoc/index.html ./dist.yaml
           cp ./docs/favicon.png ./redoc/favicon.png
           cp ./assets/CNAME ./redoc/CNAME
           sed -i '7 i \ \ <link rel="icon" type="image/png" href="favicon.png"/>' ./redoc/index.html
