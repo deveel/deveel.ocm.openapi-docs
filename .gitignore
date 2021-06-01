@@ -3,8 +3,9 @@ dist
 node_modules
 
 ocm-api-v1.json
-dist.yaml
 package-lock.json
 
+dist.yaml
 openapi-base.json
 openapi-merge.json
+redoc/index.html
