@@ -27,13 +27,11 @@ jobs:
           
       - name: Merge OpenAPI Specs
         run: npx openapi-merge-cli
-      
-      - name: Build ReDoc
-        run: npm run build
         
       - name: Bundle ReDoc
         run: |
-          npx redoc-cli bundle --output ./redoc/index.html ocm-api-v1.json
+          npm run build
+          npx redoc-cli bundle --output ./redoc/index.html dist.yml
           cp ./docs/favicon.png ./redoc/favicon.png
           cp ./assets/CNAME ./redoc/CNAME
           sed -i '7 i \ \ <link rel="icon" type="image/png" href="favicon.png"/>' ./redoc/index.html
@@ -43,15 +41,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./redoc
-          
-#      - name: Deploy to Azure
-#        uses: Azure/static-web-apps-deploy@v1
-#        with:
-#          # Action to perform
-#          action: upload
-#          # Directory location of the application source code
-#          app_location: ./
-#          # Required token
-#          azure_static_web_apps_api_token:  ${{ secrets.AZURE_WEB_APP_TOKEN }}
-#          # Skips the build step for the application source code if set to true.
-#          skip_app_build: true
