@@ -21,7 +21,9 @@ jobs:
           node-version: 15.x
           
       - name: Install dependencies
-        run: npm install redoc
+        run: |
+          npm install @redocly/openapi-cli
+          npm install redoc
           
       - name: Bundle ReDoc
         run: |
