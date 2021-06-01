@@ -1,9 +1,0 @@
-required:
-  - messageId
-type: object
-properties:
-  messageId:
-    type: string
-  fallback:
-    $ref: .\FallbackMessageResult.yaml
-additionalProperties: false
