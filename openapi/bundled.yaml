@@ -1,0 +1,753 @@
+openapi: 3.0.3
+info:
+  title: Deveel OCM API
+  version: v1
+  description: "# Omni-Channel Messaging\r\n\r\nThe interface provided by this system supports a unified messaging experience, allowing users to send or receive messages through multiple types of messaging channels (eg. _SMS_, _WhatsApp_, _E-mail_, etc.).\r\n\r\nMessages that go from a client application of Deveel OCM to an individual are named _outbound messages_, while the messages incoming from individuals to a client application (through webhook callbacks) are named _inbound messages_: it will be possible to find several time in these documents reference to such directions.  \r\n\r\n# Outbound Messaging\r\n\r\n\r\n## Outbound Message Status Webhooks\r\n\r\n# Inbound Messaging\r\n\r\n## Inbound Message Webhooks"
+  contact:
+    name: Antonello Provenzano
+    email: antonello@deveel.com
+  license:
+    name: Deveel EULA
+    url: 'https://docs.ocm.deveel.net/LICENSE.html'
+  x-logo:
+    url: 'https://github.com/deveel/deveel.ocm.openapi-docs/raw/main/deveel-logo.png'
+servers:
+  - url: 'https://api.ocm.deveel.net'
+paths:
+  /message/batch:
+    post:
+      tags:
+        - message
+      summary: Sends a batch of Messages
+      description: ''
+      operationId: message_batchSend
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/MessageBatch'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageBatch'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/MessageBatch'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/MessageBatch'
+      responses:
+        '202':
+          description: All the messages in the batch were accepted for processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageBatchResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MessageBatchResult'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '401':
+          description: The request is unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: The requested action is forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: >-
+            One of the entities referenced in the message was not found in the
+            tenant space
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '405':
+          description: One of the channels is not enabled for the tenant
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '415':
+          description: One of the media passed in a message is not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '429':
+          description: Too many messages in the batch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      security:
+        - oauth2:
+            - 'message:send'
+  /message:
+    post:
+      tags:
+        - message
+      summary: Sends a single Message
+      description: ''
+      operationId: message_send
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/Message'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Message'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Message'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Message'
+      responses:
+        '202':
+          description: The message is under processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MessageResult'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '401':
+          description: The request is unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: The requested action is forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: >-
+            One of the entities referenced in the message was not found in the
+            tenant space
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '405':
+          description: One of the channels is not enabled for the tenant
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '415':
+          description: One of the media passed in a message is not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      security:
+        - oauth2:
+            - 'message:send'
+  /message/receiver:
+    post:
+      tags:
+        - message
+      summary: Adds a new Receiver of Incoming Messages
+      operationId: message_addReceiver
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewMessageReceiver'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/NewMessageReceiver'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/NewMessageReceiver'
+        required: true
+      responses:
+        '201':
+          description: The receiver was created
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/MessageReceiver'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageReceiver'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MessageReceiver'
+        '400':
+          description: The request is invalid
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '401':
+          description: The request is unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: The requested action is forbidden
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: The channel was not found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '405':
+          description: The channel does not support inbound messaging
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: An unknown error occurred
+      security:
+        - oauth2:
+            - 'message:receive'
+  '/message/receiver/{id}':
+    get:
+      tags:
+        - message
+      summary: Gets a Receiver of Incoming Messages
+      operationId: message_getReceiver
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            nullable: true
+      responses:
+        '200':
+          description: The receiver with the given ID was found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/MessageReceiver'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageReceiver'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/MessageReceiver'
+        '401':
+          description: The request is unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: The requested action is forbidden
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: No receiver was found with the given ID
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: An unknown error occurred
+      security:
+        - oauth2:
+            - 'message:receive'
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: 'https://deveel.eu.auth0.com/oauth/token'
+          scopes:
+            'message:send': Send messages to individuals
+            'message:receive': Receive messages from individuals
+  schemas:
+    SenderTerminal:
+      type: object
+      properties:
+        label:
+          minLength: 2
+          pattern: '^[a-zA-Z][a-zA-Z0-9]*$'
+          type: string
+          nullable: true
+        email:
+          type: string
+          format: email
+          nullable: true
+        displayName:
+          type: string
+          nullable: true
+        number:
+          type: string
+          format: tel
+          nullable: true
+      additionalProperties: false
+    ReceiverTerminal:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          nullable: true
+        displayName:
+          type: string
+          nullable: true
+        number:
+          type: string
+          format: tel
+          nullable: true
+      additionalProperties: false
+    MediaContent:
+      required:
+        - mediaType
+        - source
+      type: object
+      properties:
+        mediaType:
+          type: string
+        source:
+          type: string
+      additionalProperties: false
+    AttachmentType:
+      enum:
+        - inline
+        - file
+      type: string
+      x-ms-enum:
+        name: AttachmentType
+        modelAsString: true
+    Attachment:
+      required:
+        - content
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+        content:
+          type: string
+        contentType:
+          type: string
+          nullable: true
+        fileName:
+          type: string
+          nullable: true
+        type:
+          $ref: '#/components/schemas/AttachmentType'
+      additionalProperties: false
+    ContentPart:
+      type: object
+      properties:
+        html:
+          minLength: 1
+          type: string
+          nullable: true
+        text:
+          minLength: 1
+          type: string
+          nullable: true
+        embed:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+          nullable: true
+      additionalProperties: false
+    MessageContent:
+      type: object
+      properties:
+        text:
+          minLength: 1
+          type: string
+          nullable: true
+        html:
+          minLength: 1
+          type: string
+          nullable: true
+        media:
+          $ref: '#/components/schemas/MediaContent'
+        parts:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentPart'
+          nullable: true
+        embed:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+          nullable: true
+      additionalProperties: false
+    FallbackMessage:
+      required:
+        - channel
+        - content
+        - receiver
+        - sender
+      type: object
+      properties:
+        sender:
+          $ref: '#/components/schemas/SenderTerminal'
+        receiver:
+          $ref: '#/components/schemas/ReceiverTerminal'
+        channel:
+          type: string
+        content:
+          $ref: '#/components/schemas/MessageContent'
+        options:
+          type: object
+          additionalProperties: {}
+          nullable: true
+        fallback:
+          $ref: '#/components/schemas/FallbackMessage'
+      additionalProperties: {}
+    Message:
+      required:
+        - channel
+        - content
+        - receiver
+        - sender
+      type: object
+      properties:
+        sender:
+          $ref: '#/components/schemas/SenderTerminal'
+        receiver:
+          $ref: '#/components/schemas/ReceiverTerminal'
+        channel:
+          type: string
+        content:
+          $ref: '#/components/schemas/MessageContent'
+        context:
+          type: object
+          additionalProperties: {}
+          nullable: true
+        options:
+          type: object
+          additionalProperties: {}
+          nullable: true
+        fallback:
+          $ref: '#/components/schemas/FallbackMessage'
+      additionalProperties: {}
+    MessageBatch:
+      required:
+        - messages
+      type: object
+      properties:
+        context:
+          type: object
+          additionalProperties: {}
+          nullable: true
+        messages:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+      additionalProperties: false
+    FallbackMessageResult:
+      required:
+        - messageId
+      type: object
+      properties:
+        messageId:
+          type: string
+        fallback:
+          $ref: '#/components/schemas/FallbackMessageResult'
+      additionalProperties: false
+    MessageResult:
+      required:
+        - messageId
+      type: object
+      properties:
+        messageId:
+          type: string
+        context:
+          type: object
+          additionalProperties: {}
+          nullable: true
+        fallback:
+          $ref: '#/components/schemas/FallbackMessageResult'
+      additionalProperties: false
+    MessageBatchResult:
+      required:
+        - batchId
+      type: object
+      properties:
+        batchId:
+          type: string
+        context:
+          type: object
+          additionalProperties: {}
+          nullable: true
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageResult'
+          nullable: true
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+    NewMessageReceiver:
+      required:
+        - channelName
+        - destinationUrl
+        - to
+      type: object
+      properties:
+        channelName:
+          type: string
+        destinationUrl:
+          type: string
+          format: uri
+        secret:
+          type: string
+          nullable: true
+        filter:
+          type: string
+          nullable: true
+        headers:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+        to:
+          type: string
+      additionalProperties: false
+    MessageReceiver:
+      required:
+        - channelName
+        - destinationUrl
+        - id
+        - to
+      type: object
+      properties:
+        channelName:
+          type: string
+        destinationUrl:
+          type: string
+          format: uri
+        secret:
+          type: string
+          nullable: true
+        filter:
+          type: string
+          nullable: true
+        headers:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+        id:
+          type: string
+        to:
+          type: string
+      additionalProperties: false
