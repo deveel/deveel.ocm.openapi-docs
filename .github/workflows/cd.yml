@@ -26,9 +26,11 @@ jobs:
           npm install openapi-merge-cli
           
       - name: Merge OpenAPI Specs
-        run: |
-          npx openapi-merge-cli
-          
+        run: npx openapi-merge-cli
+      
+      - name: Build ReDoc
+        run: npm run build
+        
       - name: Bundle ReDoc
         run: |
           npx redoc-cli bundle --output ./redoc/index.html ocm-api-v1.json
