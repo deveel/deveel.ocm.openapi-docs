@@ -27,11 +27,16 @@ jobs:
 #      - name: Merge OpenAPI Specs
 #        run: |
 #          npx openapi-merge-cli
-#          npx openapi-cli join openapi-base.json https://ocm-msg-api.azurewebsites.net/swagger/v1/swagger.json
           
-#      - name: Bundle ReDoc
-#        run: npx redoc-cli bundle --output ./redoc/index.html ocm-api-v1.json
+      - name: Bundle ReDoc
+        run: npx redoc-cli bundle --output ./redoc/index.html ocm-api-v1.json
         
+      - name: GitHub Pages v3
+        uses: peaceiris/actions-github-pages@v3.1.12
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./redoc
+          
       - name: Deploy to Azure
         uses: Azure/static-web-apps-deploy@v1
         with:
