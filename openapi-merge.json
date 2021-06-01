@@ -5,6 +5,9 @@
         },
         {
             "inputURL": "http://ocm-msg-api.azurewebsites.net/swagger/v1/swagger.json"
+        },
+        {
+            "inputURL": "http://ocm-receiver-api.azurewebsites.net/swagger/v1/swagger.json"
         }
     ], 
     "output": "./ocm-api-v1.json"
