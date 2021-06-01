@@ -9,3 +9,4 @@ dist.yaml
 openapi-base.json
 openapi-merge.json
 redoc/index.html
+build-redoc.ps1
