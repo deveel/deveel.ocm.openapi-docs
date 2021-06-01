@@ -2,7 +2,8 @@
   "name": "deveel-omni-channel-messaging-v1",
   "version": "1.0.0",
   "dependencies": {
-    "@redocly/openapi-cli": "*"
+    "@redocly/openapi-cli": "*",
+    "redoc-cli": "^0.11.4"
   },
   "private": true,
   "scripts": {

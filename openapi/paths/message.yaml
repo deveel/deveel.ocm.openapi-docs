@@ -20,7 +20,7 @@ post:
           $ref: ..\components\schemas\Message.yaml
   responses:
     '202':
-      description: The message was queued
+      description: The message is under processing
       content:
         application/json:
           schema:
@@ -107,21 +107,6 @@ post:
             $ref: ..\components\schemas\ProblemDetails.yaml
     '415':
       description: One of the media passed in a message is not supported
-      content:
-        application/json:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
-        text/json:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
-        application/xml:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
-        text/xml:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
-    '429':
-      description: Too many messages in the batch
       content:
         application/json:
           schema:

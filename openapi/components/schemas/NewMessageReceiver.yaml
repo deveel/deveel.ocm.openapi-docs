@@ -1,0 +1,25 @@
+required:
+  - channelName
+  - destinationUrl
+  - to
+type: object
+properties:
+  channelName:
+    type: string
+  destinationUrl:
+    type: string
+    format: uri
+  secret:
+    type: string
+    nullable: true
+  filter:
+    type: string
+    nullable: true
+  headers:
+    type: object
+    additionalProperties:
+      type: string
+    nullable: true
+  to:
+    type: string
+additionalProperties: false

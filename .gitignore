@@ -4,3 +4,7 @@ node_modules
 
 ocm-api-v1.json
 dist.yaml
+package-lock.json
+
+openapi-base.json
+openapi-merge.json

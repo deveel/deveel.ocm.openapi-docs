@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Deveel OCM API
   version: v1
-  description: 
+  description:
     $ref: description.md
   contact:
     name: Antonello Provenzano
@@ -19,6 +19,10 @@ paths:
     $ref: paths\message@batch.yaml
   /message:
     $ref: paths\message.yaml
+  /message/receiver:
+    $ref: paths\message@receiver.yaml
+  '/message/receiver/{id}':
+    $ref: 'paths\message@receiver@{id}.yaml'
 components:
   securitySchemes:
     oauth2:
