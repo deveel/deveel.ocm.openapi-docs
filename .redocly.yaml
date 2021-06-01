@@ -12,6 +12,8 @@ referenceDocs:
   jsonSampleExpandLevel: all
   pagination: section
   theme:
+    sidebar:
+      breakPath: true
     colors:
       primary:
         main: "#32329f"
