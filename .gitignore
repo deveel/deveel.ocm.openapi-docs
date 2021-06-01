@@ -2,4 +2,5 @@
 dist
 node_modules
 
-*api*.json
+ocm-api-v1.json
+dist.yaml
