@@ -33,6 +33,7 @@ jobs:
         run: |
           npx redoc-cli bundle --output ./redoc/index.html ocm-api-v1.json
           cp ./docs/favicon.png ./redoc/favicon.png
+          cp ./assets/CNAME ./redoc/CNAME
           sed -i '7 i \ \ <link rel="icon" type="image/png" href="favicon.png"/>' ./redoc/index.html
         
       - name: GitHub Pages v3
