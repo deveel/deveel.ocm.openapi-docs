@@ -11,7 +11,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -27,10 +27,11 @@ jobs:
           
       - name: Bundle ReDoc
         run: |
+          npm run build
           npx redoc-cli bundle --output ./redoc/index.html ./openapi/bundled.yaml
-          cp ./docs/favicon.png ./redoc/favicon.png
-          cp ./assets/CNAME ./redoc/CNAME
-          sed -i '7 i \ \ <link rel="icon" type="image/png" href="favicon.png"/>' ./redoc/index.html
+          copy ./docs/favicon.png ./redoc/favicon.png
+          copy ./assets/CNAME ./redoc/CNAME
+#          sed -i '7 i \ \ <link rel="icon" type="image/png" href="favicon.png"/>' ./redoc/index.html
         
       - name: GitHub Pages v3
         uses: peaceiris/actions-github-pages@v3.1.12
