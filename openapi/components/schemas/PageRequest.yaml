@@ -1,0 +1,12 @@
+required:
+  - page
+  - size
+type: object
+properties:
+  page:
+    type: integer
+    format: int32
+  size:
+    type: integer
+    format: int32
+additionalProperties: false

@@ -16,6 +16,8 @@ Please refer to the [Single Message Send](#operation/message_send) or [Batch Mes
 
 ## Inbound Messaging
 
+### Message Receivers
+
 # Webhooks
 
 ## Message State Changes

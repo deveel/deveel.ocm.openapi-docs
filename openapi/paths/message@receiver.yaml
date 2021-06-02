@@ -1,6 +1,7 @@
 post:
   tags:
     - message
+    - receiver
   summary: Adds a new Receiver of Incoming Messages
   operationId: message_addReceiver
   requestBody:

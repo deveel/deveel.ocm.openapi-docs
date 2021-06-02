@@ -23,6 +23,8 @@ paths:
     $ref: paths\message@receiver.yaml
   '/message/receiver/{id}':
     $ref: 'paths\message@receiver@{id}.yaml'
+  /message/receiver/page:
+    $ref: paths\message@receiver@page.yaml
 components:
   securitySchemes:
     oauth2:
