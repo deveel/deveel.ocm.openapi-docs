@@ -4,17 +4,18 @@ The interface provided by this system supports a unified messaging experience, a
 Messages that go from a client application of Deveel OCM to an individual are named _outbound messages_, while the messages incoming from individuals to a client application (through webhook callbacks) are named _inbound messages_: it will be possible to find several time in these documents reference to such directions.  
 
 ## Outbound Messaging
-Sending messages to individuals requires the integration of the messaging APIs that support a unified design, independently from the channels, and their typical idiosynchrasies.
+Sending messages to individuals requires the integration of the messaging APIs provided by the Omni-Channel Service: this offers you a unified design, independently from the channels, and their typical idiosynchrasies, so that integrators will not have to handle multiple integration strategies when trying to reach individuals through multiple messsging channels.
 
-Applications must specify, for every message, at least the following information to be able to send messages:
-* **Sender** - An authorized terminal (eg. _e-mail address_, _alpha-numeric label_, _telephone number_, etc.) that is displayed to the receiver as the sender of the message 
+For every message, applications must specify, at least the following information when sending messages:
+* **Sender** - A terminal (eg. _e-mail address_, _alpha-numeric label_, _telephone number_, etc.), previously validated and authorized by Deveel, that is displayed ton the device of the receiver as the sender of the message 
 * **Receiver** - The terminal belonging to an individual that is receiving the message
-* **Content** - A channel-aware content of the message
-* **Channel** - The name of the pre-configured channel used to transport the message (**note**: this must be previously provisioned by Deveel)
+* **Content** - A _channel-aware_ content of the message (_for example_, it is not possible to send HTML contents throw a SMS channel)
+* **Channel** - The name of one of the pre-configured channels (that can be obtained calling the [clhannel isting endpoint](#channel_getPage) ) used to transport the message (**note**: this must be previously provisioned by Deveel)
 
 Please refer to the [Single Message Send](#operation/message_send) or [Batch Message Send](#operation/message_batchSend) operations for more details
 
 ## Inbound Messaging
+
 
 ### Message Receivers
 
