@@ -25,6 +25,10 @@ paths:
     $ref: 'paths\message@receiver@{id}.yaml'
   /message/receiver/page:
     $ref: paths\message@receiver@page.yaml
+  '/channel/{channelId}':
+    $ref: 'paths\channel@{channelId}.yaml'
+  /channel:
+    $ref: paths\channel.yaml
 components:
   securitySchemes:
     oauth2:

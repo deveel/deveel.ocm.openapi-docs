@@ -1,6 +1,5 @@
 post:
   tags:
-    - message
     - receiver
   summary: Creates a new Receiver of Incoming Messages
   operationId: receiver_create

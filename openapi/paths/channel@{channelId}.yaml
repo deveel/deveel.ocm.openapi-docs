@@ -1,40 +1,28 @@
 get:
   tags:
-    - receiver
-  summary: Gets a page of Message Receivers
-  operationId: receiver_getPage
+    - channel
+  summary: Gets a Channel
+  operationId: channel_get
   parameters:
-    - name: number
-      in: query
+    - name: channelId
+      in: path
+      required: true
       schema:
-        type: integer
-        format: int32
-        default: 1
-    - name: size
-      in: query
-      schema:
-        type: integer
-        format: int32
-        default: 10
+        type: string
+        nullable: true
   responses:
     '200':
-      description: The page was successfully returned
+      description: The channel with the given ID is returned
       content:
-        text/plain:
-          schema:
-            $ref: ..\components\schemas\PageResultOfMessageReceiver.yaml
         application/json:
           schema:
-            $ref: ..\components\schemas\PageResultOfMessageReceiver.yaml
+            $ref: ..\components\schemas\Channel.yaml
         text/json:
           schema:
-            $ref: ..\components\schemas\PageResultOfMessageReceiver.yaml
+            $ref: ..\components\schemas\Channel.yaml
     '401':
       description: The request is unauthorized
       content:
-        text/plain:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
         application/json:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
@@ -44,17 +32,22 @@ get:
     '403':
       description: The requested action is forbidden
       content:
-        text/plain:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
         application/json:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
         text/json:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
-    '500':
-      description: An unknown error occurred
+    '404':
+      description: No channel with the given ID was found
+      content:
+        application/json:
+          schema:
+            $ref: ..\components\schemas\ProblemDetails.yaml
+        text/json:
+          schema:
+            $ref: ..\components\schemas\ProblemDetails.yaml
   security:
     - oauth2:
-        - 'message:receive'
+        - 'channel:manage'
+        - 'channel:read'

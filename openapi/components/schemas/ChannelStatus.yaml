@@ -1,0 +1,9 @@
+enum:
+  - requested
+  - active
+  - suspended
+  - denied
+type: string
+x-ms-enum:
+  name: ChannelStatus
+  modelAsString: true

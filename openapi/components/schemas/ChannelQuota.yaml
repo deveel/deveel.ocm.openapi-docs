@@ -1,0 +1,15 @@
+required:
+  - limit
+  - metricType
+  - period
+type: object
+properties:
+  metricType:
+    type: string
+  period:
+    $ref: .\ChannelQuotaPeriod.yaml
+  limit:
+    type: integer
+    format: int64
+    readOnly: true
+additionalProperties: false

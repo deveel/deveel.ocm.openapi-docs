@@ -1,0 +1,10 @@
+enum:
+  - sms
+  - messenger
+  - whatsapp
+  - email
+  - sandbox
+type: string
+x-ms-enum:
+  name: ChannelType
+  modelAsString: true

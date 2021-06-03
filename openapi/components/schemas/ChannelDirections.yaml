@@ -1,0 +1,8 @@
+enum:
+  - outbound
+  - inbound
+  - inboundOutbound
+type: string
+x-ms-enum:
+  name: ChannelDirections
+  modelAsString: true

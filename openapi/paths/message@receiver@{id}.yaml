@@ -1,6 +1,5 @@
 get:
   tags:
-    - message
     - receiver
   summary: Gets a Receiver of Incoming Messages
   operationId: receiver_get
@@ -67,7 +66,6 @@ get:
         - 'message:receive'
 delete:
   tags:
-    - message
     - receiver
   summary: Deletes a given Message Receiver
   operationId: receiver_delete
@@ -124,7 +122,6 @@ delete:
         - 'message:receive'
 put:
   tags:
-    - message
     - receiver
   summary: Updates the information of a Message Receiver
   operationId: receiver_update

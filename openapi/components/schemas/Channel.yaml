@@ -1,0 +1,38 @@
+required:
+  - contentTypes
+  - name
+  - provider
+  - type
+type: object
+properties:
+  name:
+    type: string
+  type:
+    $ref: .\ChannelType.yaml
+  provider:
+    type: string
+  directions:
+    $ref: .\ChannelDirections.yaml
+  settings:
+    type: object
+    additionalProperties: {}
+    nullable: true
+  id:
+    type: string
+    nullable: true
+  contentTypes:
+    minItems: 1
+    type: array
+    items:
+      type: string
+  quotas:
+    type: array
+    items:
+      $ref: .\ChannelQuota.yaml
+    nullable: true
+  states:
+    type: array
+    items:
+      $ref: .\ChannelState.yaml
+    nullable: true
+additionalProperties: false

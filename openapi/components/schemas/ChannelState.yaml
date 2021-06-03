@@ -1,0 +1,18 @@
+required:
+  - status
+  - timeStamp
+type: object
+properties:
+  status:
+    $ref: .\ChannelStatus.yaml
+  timeStamp:
+    type: string
+    format: date-time
+  actor:
+    type: string
+    nullable: true
+  data:
+    type: object
+    additionalProperties: {}
+    nullable: true
+additionalProperties: false
