@@ -2,8 +2,8 @@ post:
   tags:
     - message
     - receiver
-  summary: Adds a new Receiver of Incoming Messages
-  operationId: message_addReceiver
+  summary: Creates a new Receiver of Incoming Messages
+  operationId: receiver_create
   requestBody:
     content:
       application/json:

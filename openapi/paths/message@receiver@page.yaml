@@ -3,7 +3,7 @@ get:
     - message
     - receiver
   summary: Gets a page of Message Receivers
-  operationId: message_getReceiversPage
+  operationId: receiver_getPage
   parameters:
     - name: number
       in: query

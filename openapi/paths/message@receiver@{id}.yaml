@@ -3,7 +3,7 @@ get:
     - message
     - receiver
   summary: Gets a Receiver of Incoming Messages
-  operationId: message_getReceiver
+  operationId: receiver_get
   parameters:
     - name: id
       in: path
@@ -70,7 +70,7 @@ delete:
     - message
     - receiver
   summary: Deletes a given Message Receiver
-  operationId: message_deleteReceiver
+  operationId: receiver_delete
   parameters:
     - name: id
       in: path
@@ -127,7 +127,7 @@ put:
     - message
     - receiver
   summary: Updates the information of a Message Receiver
-  operationId: message_updateReceiver
+  operationId: receiver_update
   parameters:
     - name: id
       in: path
@@ -149,7 +149,7 @@ put:
     required: true
   responses:
     '200':
-      description: The receiver was successfully updated
+      description: The updated version of the receiver
       content:
         text/plain:
           schema:
@@ -160,7 +160,7 @@ put:
         text/json:
           schema:
             $ref: ..\components\schemas\MessageReceiver.yaml
-    '304':
+    '204':
       description: The update request did not cause any changes
     '401':
       description: The request is unauthorized
