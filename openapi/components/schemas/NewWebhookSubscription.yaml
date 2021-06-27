@@ -1,0 +1,29 @@
+required:
+  - channel
+  - destinationUrl
+  - eventType
+type: object
+properties:
+  name:
+    type: string
+    nullable: true
+  destinationUrl:
+    type: string
+    format: uri
+  secret:
+    type: string
+    nullable: true
+  channel:
+    minLength: 3
+    type: string
+  headers:
+    type: object
+    additionalProperties:
+      type: string
+    nullable: true
+  eventType:
+    type: string
+  filter:
+    type: string
+    nullable: true
+additionalProperties: false

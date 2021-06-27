@@ -1,34 +1,34 @@
 post:
   tags:
     - message
-  summary: Sends a batch of Messages
+  summary: Sends a single Message
   description: ''
-  operationId: message_batchSend
+  operationId: message_send
   requestBody:
     content:
       application/json-patch+json:
         schema:
-          $ref: ..\components\schemas\MessageBatch.yaml
+          $ref: ..\components\schemas\Message.yaml
       application/json:
         schema:
-          $ref: ..\components\schemas\MessageBatch.yaml
+          $ref: ..\components\schemas\Message.yaml
       text/json:
         schema:
-          $ref: ..\components\schemas\MessageBatch.yaml
+          $ref: ..\components\schemas\Message.yaml
       application/*+json:
         schema:
-          $ref: ..\components\schemas\MessageBatch.yaml
+          $ref: ..\components\schemas\Message.yaml
     required: true
   responses:
     '202':
-      description: All the messages in the batch were accepted for processing
+      description: The message is under processing
       content:
         application/json:
           schema:
-            $ref: ..\components\schemas\MessageBatchResult.yaml
+            $ref: ..\components\schemas\MessageResult.yaml
         text/json:
           schema:
-            $ref: ..\components\schemas\MessageBatchResult.yaml
+            $ref: ..\components\schemas\MessageResult.yaml
     '400':
       description: Bad Request
       content:
@@ -108,21 +108,6 @@ post:
             $ref: ..\components\schemas\ProblemDetails.yaml
     '415':
       description: One of the media passed in a message is not supported
-      content:
-        application/json:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
-        text/json:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
-        application/xml:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
-        text/xml:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
-    '429':
-      description: Too many messages in the batch
       content:
         application/json:
           schema:
