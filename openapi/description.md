@@ -4,19 +4,30 @@ The interface provided by this system supports a unified messaging experience, a
 Messages that go from a client application of Deveel OCM to an individual are named _outbound messages_, while the messages incoming from individuals to a client application (through webhook callbacks) are named _inbound messages_: it will be possible to find several time in these documents reference to such directions.  
 
 ## Outbound Messaging
-Sending messages to individuals requires the integration of the messaging APIs that support a unified design, independently from the channels, and their typical idiosynchrasies.
+Sending messages to individuals requires the integration of the messaging APIs provided by the Omni-Channel Service: this offers you a unified design, independently from the channels, and their typical idiosynchrasies, so that integrators will not have to handle multiple integration strategies when trying to reach individuals through multiple messsging channels.
 
-Applications must specify, for every message, at least the following information to be able to send messages:
-* **Sender** - An authorized terminal (eg. _e-mail address_, _alpha-numeric label_, _telephone number_, etc.) that is displayed to the receiver as the sender of the message 
+For every message, applications must specify, at least the following information when sending messages:
+* **Sender** - A terminal (eg. _e-mail address_, _alpha-numeric label_, _telephone number_, etc.), previously validated and authorized by Deveel, that is displayed ton the device of the receiver as the sender of the message 
 * **Receiver** - The terminal belonging to an individual that is receiving the message
-* **Content** - A channel-aware content of the message
-* **Channel** - The name of the pre-configured channel used to transport the message (**note**: this must be previously provisioned by Deveel)
+* **Content** - A _channel-aware_ content of the message (_for example_, it is not possible to send HTML contents throw a SMS channel)
+* **Channel** - The name of one of the pre-configured channels (that can be obtained calling the [clhannel isting endpoint](#channel_getPage) ) used to transport the message (**note**: this must be previously provisioned by Deveel)
 
 Please refer to the [Single Message Send](#operation/message_send) or [Batch Message Send](#operation/message_batchSend) operations for more details
 
 ## Inbound Messaging
+Dealing with the other direction of the messaging scenarios, the Omni-Channel Service offers also a unified design to receive messages from individuals, through multiple channels of communication, relieving the integrators from having to deal with multiple formats and protocols to interpret the requests from the operators.
 
 ### Message Receivers
+Customers who wish to receive messages should register the so-called _message receivers_, that are listeners of messages directed to specific terminals (eg. _telephone numbers_, _e-mail addresses_, etc.) of the customers, that Deveel OCM intercepts, to subsequently route them (in the form of webhooks) to given HTTP addresses.
+
+Message Listeners require the following information:
+* **To Address** - The terminal address where the messages are directed to
+* **Destination URL** - The HTTP address that is invoked to route the messsge, by sending a webhook that includes information of the sender and the message contents
+
+Additionaly to the above configurations, customers can specify further optional ones
+* **Filter** - An additional filter (appended to the internal filters) that allows the user to further control the routing of messages (see the "filter formats" section)
+* **Secret** - A secret word used to secure the access to the request to the destination URL where the message is forwarded
+* **Headers** -
 
 # Webhooks
 
@@ -70,15 +81,19 @@ This callback notifies that the given message was sent through the channel and w
 
 ### Message Delivered
 
-## Inbound Messages
+## Inbound Message
+
 
 # Pre-Requisites
 
-Accessing the Messaging APIs and eventually consuming the webhooks produced by the system requires some pre-requisites, in terms of security (_tenant_, _user credentials_) and provisioned configurations (_channels_, _quotas_).
+Accessing the outbound Messaging APIs and eventually consuming the webhooks produced by the system requires some pre-requisites, in terms of security (_customers_, _tenants_, _user credentials_) and provisioned configurations (_channels_, _terminals_, _quotas_).
+
+## Customer and Tenants
+
 
 ## User Credentials
 
-Before you can start consuming the APIs provided by Deveel OCM you must obtain valid credentials for the supported authentication schemes (at today, just _OAuth2 Client Credentials_).
+Before you can start consuming the APIs provided by Deveel OCM you must obtain valid credentials for the supported authentication schemes (at today, just _OAuth 2.0 Client Credentials_ and _OAuth 2.0 Authorization Code_).
 
 Contact _info@deveel.com_ to request for the creation of a valid user
 
@@ -86,6 +101,13 @@ Contact _info@deveel.com_ to request for the creation of a valid user
 Client applications and users must be authenticated using one of the following security schemes
 
 <SecurityDefinitions />
+
+## Channels
+
+## Terminals
+
+## Quotas 
+
 
 # Errors
 
