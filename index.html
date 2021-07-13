@@ -1,18 +1,32 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <meta charset="utf8" />
-  <title>Deveel OCM API</title>
-  <!-- needed for adaptive design -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      padding: 0;
-      margin: 0;
-    }
-  </style>
-  <script src="https://unpkg.com/redoc@next/bundles/redoc.standalone.js"></script><style data-styled="true" data-styled-version="5.1.1">.kwETCN{width:calc(100% - 40%);padding:0 40px;}/*!sc*/
+  <head>
+    <title>Deveel OCM API</title>
+    <!-- needed for adaptive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-400LTXCL2E"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      gtag('config', 'G-400LTXCL2E');
+    </script>
+    
+    <!--
+    ReDoc uses font options from the parent element
+    So override default browser styles
+    -->
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script src="https://unpkg.com/redoc@next/bundles/redoc.standalone.js"></script><style data-styled="true" data-styled-version="5.1.1">.kwETCN{width:calc(100% - 40%);padding:0 40px;}/*!sc*/
 @media print,screen and (max-width:75rem){.kwETCN{width:100%;padding:40px 40px;}}/*!sc*/
 .kVsQWt{width:calc(100% - 40%);padding:0 40px;}/*!sc*/
 @media print,screen and (max-width:75rem){.kVsQWt{width:100%;padding:0px 40px;}}/*!sc*/
@@ -543,11 +557,9 @@ data-styled.g140[id="sc-pzMyG"]{content:"EBHFd,"}/*!sc*/
 @media screen and (-ms-high-contrast:active),(-ms-high-contrast:none){.ps{overflow:auto !important;}}/*!sc*/
 data-styled.g143[id="sc-global-kJtbWf1"]{content:"sc-global-kJtbWf1,"}/*!sc*/
 </style>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
-</head>
-
-<body>
-  
+  </head>
+  <body>
+    
     <div id="redoc"><div class="sc-pciEQ epDZfL redoc-wrap"><div class="sc-pZOBi WRXpA menu-content" style="top:0px;height:calc(100vh - 0px)"><div class="sc-fzppip dFiIMI"><img src="https://github.com/deveel/deveel.ocm.openapi-docs/raw/main/deveel-logo.png" alt="logo" class="sc-fzpdyU lexfvL"/></div><div role="search" class="sc-qQYBZ iiRohi"><svg class="sc-pzMyG EBHFd search-icon" version="1.1" viewBox="0 0 1000 1000" x="0px" xmlns="http://www.w3.org/2000/svg" y="0px"><path d="M968.2,849.4L667.3,549c83.9-136.5,66.7-317.4-51.7-435.6C477.1-25,252.5-25,113.9,113.4c-138.5,138.3-138.5,362.6,0,501C219.2,730.1,413.2,743,547.6,666.5l301.9,301.4c43.6,43.6,76.9,14.9,104.2-12.4C981,928.3,1011.8,893,968.2,849.4z M524.5,522c-88.9,88.7-233,88.7-321.8,0c-88.9-88.7-88.9-232.6,0-321.3c88.9-88.7,233-88.7,321.8,0C613.4,289.4,613.4,433.3,524.5,522z"></path></svg><input type="text" value="" placeholder="Search..." aria-label="Search" class="sc-qZtCU hBzgoJ search-input"/></div><div class="sc-fzoJMP bcldUy scrollbar-container undefined"><ul class="sc-fzocqA bXUeVH" role="navigation"><li data-item-id="section/Omni-Channel-Messaging" class="sc-fzonZV eezEtV"><label type="section" role="menuitem" class="sc-fzqyOu gdtRWl -depth1"><span title="Omni-Channel Messaging" class="sc-fzqKxP fHqnhU">Omni-Channel Messaging</span><svg class="sc-fznKkj cgKiHf" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></label><ul class="sc-fzocqA jmIcBG"><li data-item-id="section/Omni-Channel-Messaging/Outbound-Messaging" class="sc-fzonZV eezEtV"><label type="section" role="menuitem" class="sc-fzqyOu iMTjtc -depth2"><span title="Outbound Messaging" class="sc-fzqKxP fHqnhU">Outbound Messaging</span></label></li><li data-item-id="section/Omni-Channel-Messaging/Inbound-Messaging" class="sc-fzonZV eezEtV"><label type="section" role="menuitem" class="sc-fzqyOu iMTjtc -depth2"><span title="Inbound Messaging" class="sc-fzqKxP fHqnhU">Inbound Messaging</span></label></li></ul></li><li data-item-id="section/Webhooks" class="sc-fzonZV eezEtV"><label type="section" role="menuitem" class="sc-fzqyOu gdtRWl -depth1"><span title="Webhooks" class="sc-fzqKxP fHqnhU">Webhooks</span><svg class="sc-fznKkj cgKiHf" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></label><ul class="sc-fzocqA jmIcBG"><li data-item-id="section/Webhooks/Message-State-Changes" class="sc-fzonZV eezEtV"><label type="section" role="menuitem" class="sc-fzqyOu iMTjtc -depth2"><span title="Message State Changes" class="sc-fzqKxP fHqnhU">Message State Changes</span></label></li><li data-item-id="section/Webhooks/Inbound-Messages" class="sc-fzonZV eezEtV"><label type="section" role="menuitem" class="sc-fzqyOu iMTjtc -depth2"><span title="Inbound Messages" class="sc-fzqKxP fHqnhU">Inbound Messages</span></label></li></ul></li><li data-item-id="section/Pre-Requisites" class="sc-fzonZV eezEtV"><label type="section" role="menuitem" class="sc-fzqyOu gdtRWl -depth1"><span title="Pre-Requisites" class="sc-fzqKxP fHqnhU">Pre-Requisites</span><svg class="sc-fznKkj cgKiHf" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></label><ul class="sc-fzocqA jmIcBG"><li data-item-id="section/Pre-Requisites/Customer-and-Tenants" class="sc-fzonZV eezEtV"><label type="section" role="menuitem" class="sc-fzqyOu iMTjtc -depth2"><span title="Customer and Tenants" class="sc-fzqKxP fHqnhU">Customer and Tenants</span></label></li><li data-item-id="section/Pre-Requisites/User-Credentials" class="sc-fzonZV eezEtV"><label type="section" role="menuitem" class="sc-fzqyOu iMTjtc -depth2"><span title="User Credentials" class="sc-fzqKxP fHqnhU">User Credentials</span></label></li><li data-item-id="section/Pre-Requisites/Channels" class="sc-fzonZV eezEtV"><label type="section" role="menuitem" class="sc-fzqyOu iMTjtc -depth2"><span title="Channels" class="sc-fzqKxP fHqnhU">Channels</span></label></li><li data-item-id="section/Pre-Requisites/Terminals" class="sc-fzonZV eezEtV"><label type="section" role="menuitem" class="sc-fzqyOu iMTjtc -depth2"><span title="Terminals" class="sc-fzqKxP fHqnhU">Terminals</span></label></li><li data-item-id="section/Pre-Requisites/Quotas" class="sc-fzonZV eezEtV"><label type="section" role="menuitem" class="sc-fzqyOu iMTjtc -depth2"><span title="Quotas" class="sc-fzqKxP fHqnhU">Quotas</span></label></li></ul></li><li data-item-id="section/Errors" class="sc-fzonZV eezEtV"><label type="section" role="menuitem" class="sc-fzqyOu gdtRWl -depth1"><span title="Errors" class="sc-fzqKxP fHqnhU">Errors</span></label></li><li data-item-id="section/API-References" class="sc-fzonZV eezEtV"><label type="section" role="menuitem" class="sc-fzqyOu gdtRWl -depth1"><span title="API References" class="sc-fzqKxP fHqnhU">API References</span></label></li><li data-item-id="tag/message" class="sc-fzonZV eezEtV"><label type="tag" role="menuitem" class="sc-fzqyOu gdtRWl -depth1"><span title="message" class="sc-fzqKxP fHqnhU">message</span><svg class="sc-fznKkj cgKiHf" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></label><ul class="sc-fzocqA jmIcBG"><li data-item-id="operation/message_batchSend" class="sc-fzonZV eezEtV"><label role="menuitem" class="sc-fzqyOu buCtgC -depth2"><span type="post" class="sc-fznNvL gVcbJV operation-type post">post</span><span width="calc(100% - 38px)" class="sc-fzqKxP dvkysR">Sends a batch of Messages</span></label></li><li data-item-id="operation/message_send" class="sc-fzonZV eezEtV"><label role="menuitem" class="sc-fzqyOu buCtgC -depth2"><span type="post" class="sc-fznNvL gVcbJV operation-type post">post</span><span width="calc(100% - 38px)" class="sc-fzqKxP dvkysR">Sends a single Message</span></label></li></ul></li><li data-item-id="tag/webhook" class="sc-fzonZV eezEtV"><label type="tag" role="menuitem" class="sc-fzqyOu gdtRWl -depth1"><span title="webhook" class="sc-fzqKxP fHqnhU">webhook</span><svg class="sc-fznKkj cgKiHf" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></label><ul class="sc-fzocqA jmIcBG"><li data-item-id="operation/webhook_subscribe" class="sc-fzonZV eezEtV"><label role="menuitem" class="sc-fzqyOu buCtgC -depth2"><span type="post" class="sc-fznNvL gVcbJV operation-type post">post</span><span width="calc(100% - 38px)" class="sc-fzqKxP dvkysR">Subscribes to an Event HTTP Notification (Webhook)</span></label></li></ul></li><li data-item-id="tag/receiver" class="sc-fzonZV eezEtV"><label type="tag" role="menuitem" class="sc-fzqyOu gdtRWl -depth1"><span title="receiver" class="sc-fzqKxP fHqnhU">receiver</span><svg class="sc-fznKkj cgKiHf" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></label><ul class="sc-fzocqA jmIcBG"><li data-item-id="operation/receiver_create" class="sc-fzonZV eezEtV"><label role="menuitem" class="sc-fzqyOu buCtgC -depth2"><span type="post" class="sc-fznNvL gVcbJV operation-type post">post</span><span width="calc(100% - 38px)" class="sc-fzqKxP dvkysR">Creates a new Receiver of Incoming Messages</span></label></li><li data-item-id="operation/receiver_get" class="sc-fzonZV eezEtV"><label role="menuitem" class="sc-fzqyOu buCtgC -depth2"><span type="get" class="sc-fznNvL gVcbJV operation-type get">get</span><span width="calc(100% - 38px)" class="sc-fzqKxP dvkysR">Gets a Receiver of Incoming Messages</span></label></li><li data-item-id="operation/receiver_delete" class="sc-fzonZV eezEtV"><label role="menuitem" class="sc-fzqyOu buCtgC -depth2"><span type="delete" class="sc-fznNvL gVcbJV operation-type delete">del</span><span width="calc(100% - 38px)" class="sc-fzqKxP dvkysR">Deletes a given Message Receiver</span></label></li><li data-item-id="operation/receiver_update" class="sc-fzonZV eezEtV"><label role="menuitem" class="sc-fzqyOu buCtgC -depth2"><span type="put" class="sc-fznNvL gVcbJV operation-type put">put</span><span width="calc(100% - 38px)" class="sc-fzqKxP dvkysR">Updates the information of a Message Receiver</span></label></li><li data-item-id="operation/receiver_getPage" class="sc-fzonZV eezEtV"><label role="menuitem" class="sc-fzqyOu buCtgC -depth2"><span type="get" class="sc-fznNvL gVcbJV operation-type get">get</span><span width="calc(100% - 38px)" class="sc-fzqKxP dvkysR">Gets a page of Message Receivers</span></label></li></ul></li><li data-item-id="tag/channel" class="sc-fzonZV eezEtV"><label type="tag" role="menuitem" class="sc-fzqyOu gdtRWl -depth1"><span title="channel" class="sc-fzqKxP fHqnhU">channel</span><svg class="sc-fznKkj cgKiHf" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></label><ul class="sc-fzocqA jmIcBG"><li data-item-id="operation/channel_get" class="sc-fzonZV eezEtV"><label role="menuitem" class="sc-fzqyOu buCtgC -depth2"><span type="get" class="sc-fznNvL gVcbJV operation-type get">get</span><span width="calc(100% - 38px)" class="sc-fzqKxP dvkysR">Gets a Channel</span></label></li><li data-item-id="operation/channel_getAll" class="sc-fzonZV eezEtV"><label role="menuitem" class="sc-fzqyOu buCtgC -depth2"><span type="get" class="sc-fznNvL gVcbJV operation-type get">get</span><span width="calc(100% - 38px)" class="sc-fzqKxP dvkysR">Gets all Channel</span></label></li></ul></li></ul><div class="sc-pANHa dXbQSq"><a target="_blank" rel="noopener noreferrer" href="https://github.com/Redocly/redoc">Documentation Powered by ReDoc</a></div></div></div><div class="sc-oTNDV cRvwQY"><div class="sc-pRtAn czGSHs"><svg class="" style="transform:translate(2px, -4px) rotate(180deg);transition:transform 0.2s ease" viewBox="0 0 926.23699 573.74994" version="1.1" x="0px" y="0px" width="15" height="15"><g transform="translate(904.92214,-879.1482)"><path d="
           m -673.67664,1221.6502 -231.2455,-231.24803 55.6165,
           -55.627 c 30.5891,-30.59485 56.1806,-55.627 56.8701,-55.627 0.6894,
@@ -913,6 +925,5 @@ your client must be prepared to gracefully handle additional members of the resp
     Redoc.hydrate(__redoc_state, container);
 
     </script>
-</body>
-
+  </body>
 </html>
