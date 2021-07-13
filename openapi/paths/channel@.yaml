@@ -1,31 +1,22 @@
 get:
   tags:
-    - receiver
-  summary: Gets a page of Message Receivers
-  operationId: receiver_getPage
-  parameters:
-    - name: number
-      in: query
-      schema:
-        type: integer
-        format: int32
-        default: 1
-    - name: size
-      in: query
-      schema:
-        type: integer
-        format: int32
-        default: 10
+    - channel
+  summary: Gets all Channel
+  operationId: channel_getAll
   responses:
     '200':
-      description: The page was successfully returned
+      description: The list of channels of the current tenant
       content:
         application/json:
           schema:
-            $ref: ..\components\schemas\PageResultOfMessageReceiver.yaml
+            type: array
+            items:
+              $ref: ..\components\schemas\Channel.yaml
         text/json:
           schema:
-            $ref: ..\components\schemas\PageResultOfMessageReceiver.yaml
+            type: array
+            items:
+              $ref: ..\components\schemas\Channel.yaml
     '401':
       description: The request is unauthorized
       content:
@@ -44,8 +35,7 @@ get:
         text/json:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
-    '500':
-      description: An unknown error occurred
   security:
     - oauth2:
-        - 'message:receive'
+        - 'channel:manage'
+        - 'channel:read'

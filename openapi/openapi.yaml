@@ -17,18 +17,20 @@ servers:
 paths:
   /message/batch:
     $ref: paths\message@batch.yaml
-  /message:
-    $ref: paths\message.yaml
-  /message/receiver:
-    $ref: paths\message@receiver.yaml
+  /message/:
+    $ref: paths\message@.yaml
+  /message/webhook/subscription:
+    $ref: paths\message@webhook@subscription.yaml
+  /message/receiver/:
+    $ref: paths\message@receiver@.yaml
   '/message/receiver/{id}':
     $ref: 'paths\message@receiver@{id}.yaml'
   /message/receiver/page:
     $ref: paths\message@receiver@page.yaml
   '/channel/{channelId}':
     $ref: 'paths\channel@{channelId}.yaml'
-  /channel:
-    $ref: paths\channel.yaml
+  /channel/:
+    $ref: paths\channel@.yaml
 components:
   securitySchemes:
     oauth2:
@@ -39,3 +41,17 @@ components:
           scopes:
             'message:send': Send messages to individuals
             'message:receive': Receive messages from individuals
+            'phone:read': Read-only access to the phone numbers owned by the tenant
+            'email:read': Read-only access to the e-mail addresses owned by the tenant
+            'alphaNumeric:read': Read-only access to the alpha-numeric lables owned by the tenant
+            'channel:read': Read-only access to the channels owned by the tenant
+        authorizationCode:
+          authorizationUrl: 'https://deveel.eu.auth0.com/authorize'
+          tokenUrl: 'https://deveel.eu.auth0.com/oauth/token'
+          scopes:
+            'message:send': Send messages to individuals
+            'message:receive': Receive messages from individuals
+            'phone:read': Read-only access to the phone numbers owned by the tenant
+            'email:read': Read-only access to the e-mail addresses owned by the tenant
+            'alphaNumeric:read': Read-only access to the alpha-numeric lables owned by the tenant
+            'channel:read': Read-only access to the channels owned by the tenant

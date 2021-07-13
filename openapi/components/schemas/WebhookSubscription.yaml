@@ -1,27 +1,33 @@
 required:
   - destinationUrl
-  - to
+  - eventType
+  - name
 type: object
 properties:
-  channelName:
+  name:
     type: string
-    nullable: true
-  channelType:
-    $ref: .\ChannelType.yaml
   destinationUrl:
     type: string
     format: uri
   secret:
     type: string
     nullable: true
-  filter:
-    type: string
-    nullable: true
+  isActive:
+    type: boolean
+  retryCount:
+    type: integer
+    format: int32
   headers:
     type: object
     additionalProperties:
       type: string
     nullable: true
-  to:
+  eventType:
     type: string
+  filter:
+    type: string
+    nullable: true
+  id:
+    type: string
+    nullable: true
 additionalProperties: false

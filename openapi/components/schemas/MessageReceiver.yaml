@@ -1,5 +1,4 @@
 required:
-  - channelName
   - destinationUrl
   - id
   - to
@@ -7,6 +6,9 @@ type: object
 properties:
   channelName:
     type: string
+    nullable: true
+  channelType:
+    $ref: .\ChannelType.yaml
   destinationUrl:
     type: string
     format: uri

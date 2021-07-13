@@ -1,0 +1,8 @@
+enum:
+  - unknown
+  - inventory
+  - customer
+type: string
+x-ms-enum:
+  name: ChannelSource
+  modelAsString: true

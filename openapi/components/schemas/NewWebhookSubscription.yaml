@@ -1,23 +1,29 @@
+required:
+  - channel
+  - destinationUrl
+  - eventType
+  - name
 type: object
 properties:
+  name:
+    type: string
   destinationUrl:
     type: string
     format: uri
-    nullable: true
-  channelName:
-    type: string
-    nullable: true
-  channelType:
-    $ref: .\ChannelType.yaml
   secret:
     type: string
     nullable: true
-  filter:
+  channel:
+    minLength: 3
     type: string
-    nullable: true
   headers:
     type: object
     additionalProperties:
       type: string
+    nullable: true
+  eventType:
+    type: string
+  filter:
+    type: string
     nullable: true
 additionalProperties: false

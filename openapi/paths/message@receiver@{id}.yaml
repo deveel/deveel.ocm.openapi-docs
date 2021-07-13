@@ -14,9 +14,6 @@ get:
     '200':
       description: The receiver with the given ID was found
       content:
-        text/plain:
-          schema:
-            $ref: ..\components\schemas\MessageReceiver.yaml
         application/json:
           schema:
             $ref: ..\components\schemas\MessageReceiver.yaml
@@ -26,9 +23,6 @@ get:
     '401':
       description: The request is unauthorized
       content:
-        text/plain:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
         application/json:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
@@ -38,9 +32,6 @@ get:
     '403':
       description: The requested action is forbidden
       content:
-        text/plain:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
         application/json:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
@@ -50,9 +41,6 @@ get:
     '404':
       description: No receiver was found with the given ID
       content:
-        text/plain:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
         application/json:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
@@ -82,9 +70,6 @@ delete:
     '401':
       description: The request is unauthorized
       content:
-        text/plain:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
         application/json:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
@@ -94,9 +79,6 @@ delete:
     '403':
       description: The requested action is forbidden
       content:
-        text/plain:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
         application/json:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
@@ -106,9 +88,6 @@ delete:
     '404':
       description: None receiver was found with the given ID
       content:
-        text/plain:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
         application/json:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
@@ -134,6 +113,9 @@ put:
         nullable: true
   requestBody:
     content:
+      application/json-patch+json:
+        schema:
+          $ref: ..\components\schemas\MessageReceiverUpdate.yaml
       application/json:
         schema:
           $ref: ..\components\schemas\MessageReceiverUpdate.yaml
@@ -148,9 +130,6 @@ put:
     '200':
       description: The updated version of the receiver
       content:
-        text/plain:
-          schema:
-            $ref: ..\components\schemas\MessageReceiver.yaml
         application/json:
           schema:
             $ref: ..\components\schemas\MessageReceiver.yaml
@@ -162,9 +141,6 @@ put:
     '401':
       description: The request is unauthorized
       content:
-        text/plain:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
         application/json:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
@@ -174,9 +150,6 @@ put:
     '403':
       description: The requested action is forbidden
       content:
-        text/plain:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
         application/json:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
@@ -186,9 +159,6 @@ put:
     '404':
       description: None receiver was found with the given ID
       content:
-        text/plain:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
         application/json:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
