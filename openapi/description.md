@@ -17,6 +17,24 @@ For every message, applications must specify, at least the following information
 
 Please refer to the [Single Message Send](#operation/message_send) or [Batch Message Send](#operation/message_batchSend) operations for more details
 
+### Message Terminals
+
+| Channel Type | Phone | E-Mail | Label |
+|--------------|-------|--------|-------|
+| sms          |   √   |    x   |   √   |
+| email        |   x   |    √   |   x   |
+| facebook     |   √   |    x   |   x   |
+| sanbox       |   √   |    √   |   √   |
+
+### Message Contents
+
+| Channel Type | Text  | HTML | Media | Multi-Part |
+|--------------|-------|------|-------|------------|
+| sms          |   √   |   x  |   x   |      x     |
+| email        |   √   |   √  |   x   |      √     |
+| facebook     |   √   |   x  |   √   |      x     |
+| sanbox       |   √   |   √  |   √   |      √     |
+
 ## Inbound Messaging
 Dealing with the other direction of the messaging scenarios, the Omni-Channel Service offers also a unified design to receive messages from individuals, through multiple channels of communication, relieving the integrators from having to deal with multiple formats and protocols to interpret the requests from the operators.
 
