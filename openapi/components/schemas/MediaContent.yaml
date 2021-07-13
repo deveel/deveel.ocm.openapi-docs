@@ -4,7 +4,11 @@ required:
 type: object
 properties:
   mediaType:
+    $ref: .\MediaType.yaml
+  contentType:
     type: string
+    nullable: true
   source:
     type: string
+    format: uri
 additionalProperties: false

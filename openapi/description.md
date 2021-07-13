@@ -1,12 +1,15 @@
 # Omni-Channel Messaging
+
 The interface provided by this system supports a unified messaging experience, allowing users to send or receive messages through multiple types of messaging channels (eg. _SMS_, _WhatsApp_, _E-mail_, etc.).
 
 Messages that go from a client application of Deveel OCM to an individual are named _outbound messages_, while the messages incoming from individuals to a client application (through webhook callbacks) are named _inbound messages_: it will be possible to find several time in these documents reference to such directions.  
 
 ## Outbound Messaging
+
 Sending messages to individuals requires the integration of the messaging APIs provided by the Omni-Channel Service: this offers you a unified design, independently from the channels, and their typical idiosynchrasies, so that integrators will not have to handle multiple integration strategies when trying to reach individuals through multiple messsging channels.
 
 For every message, applications must specify, at least the following information when sending messages:
+
 * **Sender** - A terminal (eg. _e-mail address_, _alpha-numeric label_, _telephone number_, etc.), previously validated and authorized by Deveel, that is displayed ton the device of the receiver as the sender of the message 
 * **Receiver** - The terminal belonging to an individual that is receiving the message
 * **Content** - A _channel-aware_ content of the message (_for example_, it is not possible to send HTML contents throw a SMS channel)
@@ -15,21 +18,32 @@ For every message, applications must specify, at least the following information
 Please refer to the [Single Message Send](#operation/message_send) or [Batch Message Send](#operation/message_batchSend) operations for more details
 
 ## Inbound Messaging
+
 Dealing with the other direction of the messaging scenarios, the Omni-Channel Service offers also a unified design to receive messages from individuals, through multiple channels of communication, relieving the integrators from having to deal with multiple formats and protocols to interpret the requests from the operators.
 
 ### Message Receivers
+
 Customers who wish to receive messages should register the so-called _message receivers_, that are listeners of messages directed to specific terminals (eg. _telephone numbers_, _e-mail addresses_, etc.) of the customers, that Deveel OCM intercepts, to subsequently route them (in the form of webhooks) to given HTTP addresses.
 
-Message Listeners require the following information:
-* **To Address** - The terminal address where the messages are directed to
+_Message Receivers_ require the following information:
+
+* **To Address** - The terminal address where messages from individuals are directed to
 * **Destination URL** - The HTTP address that is invoked to route the messsge, by sending a webhook that includes information of the sender and the message contents
 
 Additionaly to the above configurations, customers can specify further optional ones
+
 * **Filter** - An additional filter (appended to the internal filters) that allows the user to further control the routing of messages (see the "filter formats" section)
 * **Secret** - A secret word used to secure the access to the request to the destination URL where the message is forwarded
-* **Headers** -
+* **Headers** - Additional HTTP headers that are attached to the request that is transporting the incoming message to the given destination
+**Channel Name** - The name of the transportation channel instance that belonging to the user, used to filter the delivery of messages
+**Channel Type** - The type of transportation channel, used to further filter the delivered messages
 
 # Webhooks
+
+The HTTP notifications delivered to the consumers of the system can be (at today) of two kinds:
+
+* **Message State Change** - Indicates a change to the state of a message sent by the user
+* **Inbound Message** - A message sent from an individual to a given address through a channel
 
 ## Message State Changes
 
@@ -37,16 +51,45 @@ The system produces a set of HTTP callbacks (_webhooks_), to inform subscribing 
 
 The payload of the callback (an HTTP request) is typically composed of the following elements:
 
-| Property   | Description |
-|------------|-------------|
-| messageId  | The unique identifier provided as response from the messaging APIs
-| statusCode | Indiates the status of the message
+| Property    | Description                                                         |
+|-------------|---------------------------------------------------------------------|
+| id          | A globally unique identifier of the event                           |
+| messageId   | The unique identifier provided as response from the messaging APIs  |
+| statusCode  | Indiates the status of the message (see the list below)             |
+| channelName | The name of the channel instance used to transport the message      |
+| context     | A dictionary of contextual data set to the original message         |
+| timeStamp   | The exact time-stamp of the event (as on the server side)           |
+
+Additionally to the above ones, other event-specific fields are present, at the same level: see the list below to learn about them.
+
+Error events (_delivery retried_ and _delivery failed_) include some additional fields for informing the user of the reason of the delivery failure state
+
+| Property     | Description                                                        |
+|--------------|--------------------------------------------------------------------|
+| errorCode    | A well-known code that hints the user on the kind of error         |
+| errorMessage | A message that is describing in more details the error             |
+
+The _statusCode_ field in the payload of the event can have one of the following values:
+
+| **Code**             | Description                                                        |
+|----------------------|--------------------------------------------------------------------|
+| _QUEUED_             | The system queued the message                                      |
+| _SENT_               | The message was actually sent to the provider                      |
+| _DELIVERED_          | The message was successfully delivered to the receiver             |
+| _DELIVERY_RETRIED_   | An attept to deliver the message failed for any reason             |
+| _DELIVERY_FAILED_    | It was not possible to deliver the message after a number of tries |
+| _READ_               | The receiver read the message (not supported by all channels)      |
+| _DELETED_            | The receiver deleted the message (not supported by all channels)   |
+
+**Note**: Request to send a message or a batch of messages through the APIs provided by this service might not immediately return any error, since the only handling at that level is the check of the format of the request: listening to the status updates would inform on the real status of the message delivery and if any error occurred during its transportation to the receiver.
 
 ### Message Queued
+
 This callback notifies the listening application that a message was queued and it will be processed soon.
 
-```json
+``` json
 {
+    "id": "9d0918f6d23c4d40bfe2ee579cb9d81d",
     "statusCode": "QUEUED",
     "messageId": "a28fe2bb188642c8b175f816fa32aa0e",
     "channelName": "channel-1",
@@ -54,8 +97,8 @@ This callback notifies the listening application that a message was queued and i
         "prop1": "value1",
         "prop2": 33,
         ...
-    }
-    ...
+    },
+    "timeStamp": "2021-07-13T20:17:37+0100"
 }
 ```
 
@@ -63,26 +106,135 @@ This callback notifies the listening application that a message was queued and i
 
 This callback notifies that the given message was sent through the channel and we are waiting to know if it was _delivered_ or if its _delivery failed_.
 
-```json
+``` json
 {
+    "id": "6b3900f233484cfc8c82e4f629e894bb",
     "statusCode": "SENT",
     "messageId": "a28fe2bb188642c8b175f816fa32aa0e",
     "channelName": "channel-1",
     "context": {
         "prop1": "value",
         ...
-    }
+    },
+    "timeStamp": "2021-07-13T20:17:38+0100"
 }
 ```
 
 ### Message Delivery Retried
 
+The delivery of a message is retried a certain number of configured times per channel, and each time a failure is notified to the system, a new attempt is performed, until the maximum number is reached, before moving into a permanent failure state (that triggers a _fallback_ to another message, if configured)
+
+If subscribed, this event is notified to the user (as a webhook) each time the an attempt to delivery a message failed, but the maximum number of retries was not reached.
+
+``` json
+{
+    "id": "c65671e1d9fd4a448e3805cb200868ff",
+    "statusCode": "DELIVERY_RETRIED",
+    "messageId": "a28fe2bb188642c8b175f816fa32aa0e",
+    "channelName": "channel-1",
+    "errorCode": "CHANNEL_UNKNOWN_ERROR",
+    "errorMessage": "The channel suffered an internal error",
+    "context": {
+        "prop1": "value",
+        ...
+    },
+    "timeStamp": "2021-07-13T20:17:56+0100"
+}
+```
+
 ### Message Delivery Failed
+
+After the maximum number of delivery attempts through a channel is reached, the message enters in a permanent failure state, that means its delivery will not be attempted anymore.
+
+If the message failed to be delivered had a fallback message configuration  then this is triggered
+
+``` json
+{
+    "id": "57721f483fa946ff9176ba86956057f0",
+    "statusCode": "DELIVERY_FAILED",
+    "messageId": "a28fe2bb188642c8b175f816fa32aa0e",
+    "channelName": "channel-1",
+    "errorCode": "REJECTED_BY_CHANNEL",
+    "errorMessage": "The channel actively rejected the delivery of the message",
+    "fallbackTo": "4094c9a0dd1e4413b41ae3f35a465dae",
+    "context": {
+        "prop1": "value",
+        ...
+    },
+    "timeStamp": "2021-07-13T20:18:18+0100"
+}
+```
+
+Additionally to the normal fields present in the payload, if any _fallback_ was specified for the message, this event includes the reference to the next message in the chain (through the _fallbackTo_ field)
 
 ### Message Delivered
 
-## Inbound Message
+If a message is successfully delivered to the receiver, no futher attempts are done: this is the happy scenario of messaging.
 
+``` json
+{
+    "id": "44c32607b09049f88e891d066ed57511",
+    "statusCode": "DELIVERED",
+    "messageId": "a28fe2bb188642c8b175f816fa32aa0e",
+    "channelName": "channel-1",
+    "context": {
+        "prop1": "value",
+        ...
+    },
+    "timeStamp": "2021-07-13T20:19:31+0100"
+}
+```
+
+### Message Read 
+
+Some messaging channels are capable to provide a feedback to the sender to notify if a message was actually read by the receiver.
+
+This feature is typically offered by _Over-the-Top_ (OTT) channels (like _WhatsApp_, _Viber_, _Facebook_ and others), although it might also fail to reach the sender with the notification, if the individual actively opted-out for such notification (to respect the personal privacy).
+
+``` json
+{
+    "id": "2a3a51bb5e9c45fd8a60c01c39becb0e",
+    "statusCode": "READ",
+    "messageId": "a28fe2bb188642c8b175f816fa32aa0e",
+    "channelName": "channel-1",
+    "context": {
+        "prop1": "value",
+        ...
+    },
+    "env": {
+        "os.name": "ios",
+        "os.version": "13.1",
+        "app.name": "whatsapp",
+        "app.version": "23.2",
+        ...
+    },
+    "timeStamp": "2021-07-14T11:34:21+0100"
+}
+```
+
+It is possible to receive some environment information, when the channels support such capability
+
+### Message Deleted
+
+## Inbound Messages
+
+The system allows to subscribe to the routing of messages sent from individuals to a **Terminal** (eg. a _telephone number_ or an _email address_) that is registered by a tenant (see the paragraph below).
+
+These messages are transported to the consumer through a _webhook_ of a specific kind, named **Message Receiver**: this can be configured by the users of the customers ahead of time (see the paragraph below).
+
+The payload of such events are typically specifying the following properties:
+
+| Property        | Description                                                             |
+|-----------------|-------------------------------------------------------------------------|
+| id              | The globally unique identifier of the event                             |
+| messageId       | A globally unique identifier of the message                             |
+| timeStamp       | The exact time-stamp of the event                                       |
+| channel         | Provides the name and type of channel that transported the message      |
+| sender          | An object describing the sender (eg. the person's address)              |
+| receiver        | An object describing the receiver (eg. the customer's terminal address) |
+| content         | Encapsulates an eventually complex content of the message               |
+
+The fields _channel_, _sender_, _receiver_ and _content_ are complex and respect the same _unified design_ used for the outbound messages.
 
 # Pre-Requisites
 
@@ -90,6 +242,7 @@ Accessing the outbound Messaging APIs and eventually consuming the webhooks prod
 
 ## Customer and Tenants
 
+The major pre-requisite to enable the integration of the API is the creation and assignment by **Deveel** of a _customer_ object, to hold the financial relationships (invoices, payments), and a _tenant_ within that customer, that is a space where certain resources (_terminals_ and _channels_) are made available to users
 
 ## User Credentials
 
@@ -98,6 +251,7 @@ Before you can start consuming the APIs provided by Deveel OCM you must obtain v
 Contact _info@deveel.com_ to request for the creation of a valid user
 
 ### Authentication
+
 Client applications and users must be authenticated using one of the following security schemes
 
 <SecurityDefinitions />
@@ -106,8 +260,7 @@ Client applications and users must be authenticated using one of the following s
 
 ## Terminals
 
-## Quotas 
-
+## Quotas
 
 # Errors
 

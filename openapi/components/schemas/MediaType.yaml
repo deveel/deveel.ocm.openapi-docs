@@ -1,0 +1,10 @@
+enum:
+  - unknown
+  - file
+  - image
+  - audio
+  - video
+type: string
+x-ms-enum:
+  name: MediaType
+  modelAsString: true

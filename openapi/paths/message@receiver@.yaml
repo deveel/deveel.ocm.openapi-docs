@@ -5,6 +5,9 @@ post:
   operationId: receiver_create
   requestBody:
     content:
+      application/json-patch+json:
+        schema:
+          $ref: ..\components\schemas\NewMessageReceiver.yaml
       application/json:
         schema:
           $ref: ..\components\schemas\NewMessageReceiver.yaml
@@ -19,9 +22,6 @@ post:
     '201':
       description: The receiver was created
       content:
-        text/plain:
-          schema:
-            $ref: ..\components\schemas\MessageReceiver.yaml
         application/json:
           schema:
             $ref: ..\components\schemas\MessageReceiver.yaml
@@ -31,9 +31,6 @@ post:
     '400':
       description: The request is invalid
       content:
-        text/plain:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
         application/json:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
@@ -43,9 +40,6 @@ post:
     '401':
       description: The request is unauthorized
       content:
-        text/plain:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
         application/json:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
@@ -55,9 +49,6 @@ post:
     '403':
       description: The requested action is forbidden
       content:
-        text/plain:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
         application/json:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
@@ -67,9 +58,6 @@ post:
     '404':
       description: The channel was not found
       content:
-        text/plain:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
         application/json:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
@@ -79,9 +67,6 @@ post:
     '405':
       description: The channel does not support inbound messaging
       content:
-        text/plain:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
         application/json:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml

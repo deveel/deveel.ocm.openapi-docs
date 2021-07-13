@@ -1,8 +1,11 @@
 enum:
+  - unknown
   - sms
   - messenger
   - whatsapp
   - email
+  - viber
+  - rcs
   - sandbox
 type: string
 x-ms-enum:

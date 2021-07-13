@@ -29,6 +29,12 @@ post:
         text/json:
           schema:
             $ref: ..\components\schemas\MessageResult.yaml
+        application/xml:
+          schema:
+            $ref: ..\components\schemas\MessageResult.yaml
+        text/xml:
+          schema:
+            $ref: ..\components\schemas\MessageResult.yaml
     '400':
       description: Bad Request
       content:

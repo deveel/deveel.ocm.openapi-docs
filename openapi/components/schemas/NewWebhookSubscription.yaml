@@ -2,11 +2,11 @@ required:
   - channel
   - destinationUrl
   - eventType
+  - name
 type: object
 properties:
   name:
     type: string
-    nullable: true
   destinationUrl:
     type: string
     format: uri

@@ -13,6 +13,11 @@ properties:
     type: string
   directions:
     $ref: .\ChannelDirections.yaml
+  source:
+    $ref: .\ChannelSource.yaml
+  sourceId:
+    type: string
+    nullable: true
   settings:
     type: object
     additionalProperties: {}
