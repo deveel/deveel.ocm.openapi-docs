@@ -21,14 +21,12 @@ jobs:
           node-version: 15.x
           
       - name: Install dependencies
-        run: |
-          npm install @redocly/openapi-cli
-          npm install redoc
+        run: npm install redoc
           
       - name: Bundle ReDoc
         run: |
           npm run build
-          npx redoc-cli bundle --output ./redoc/index.html ./dist.yaml
+          npx redoc-cli bundle --output ./redoc/index.html --cdn ./dist.yaml
           copy ./docs/favicon.png ./redoc/favicon.png
           copy ./assets/CNAME ./redoc/CNAME
 #          sed -i '7 i \ \ <link rel="icon" type="image/png" href="favicon.png"/>' ./redoc/index.html
