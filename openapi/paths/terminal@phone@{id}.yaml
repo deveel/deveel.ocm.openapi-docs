@@ -1,31 +1,25 @@
 get:
   tags:
-    - receiver
-  summary: Gets a page of Message Receivers
-  operationId: receiver_getPage
+    - phone
+  summary: Gets a Phone Number
+  operationId: phoneNumber_get
   parameters:
-    - name: number
-      in: query
+    - name: id
+      in: path
+      required: true
       schema:
-        type: integer
-        format: int32
-        default: 1
-    - name: size
-      in: query
-      schema:
-        type: integer
-        format: int32
-        default: 10
+        type: string
+        nullable: true
   responses:
     '200':
-      description: The page was successfully returned
+      description: The number was found and returned
       content:
         application/json:
           schema:
-            $ref: ..\components\schemas\PageResultOfMessageReceiver.yaml
+            $ref: ..\components\schemas\ServerPhoneNumber.yaml
         text/json:
           schema:
-            $ref: ..\components\schemas\PageResultOfMessageReceiver.yaml
+            $ref: ..\components\schemas\ServerPhoneNumber.yaml
     '401':
       description: The request is unauthorized
       content:
@@ -44,8 +38,15 @@ get:
         text/json:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
-    '500':
-      description: An unknown error occurred
+    '404':
+      description: None number with the given ID was not found
+      content:
+        application/json:
+          schema:
+            $ref: ..\components\schemas\ProblemDetails.yaml
+        text/json:
+          schema:
+            $ref: ..\components\schemas\ProblemDetails.yaml
   security:
     - oauth2:
-        - 'receive:message'
+        - 'read:phone'

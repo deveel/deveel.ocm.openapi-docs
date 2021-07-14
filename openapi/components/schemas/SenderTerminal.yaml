@@ -16,4 +16,7 @@ properties:
     type: string
     format: tel
     nullable: true
+  id:
+    type: string
+    nullable: true
 additionalProperties: false

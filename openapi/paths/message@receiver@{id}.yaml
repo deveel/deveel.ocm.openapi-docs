@@ -51,7 +51,7 @@ get:
       description: An unknown error occurred
   security:
     - oauth2:
-        - 'message:receive'
+        - 'receive:message'
 delete:
   tags:
     - receiver
@@ -98,7 +98,7 @@ delete:
       description: An unknown error occurred
   security:
     - oauth2:
-        - 'message:receive'
+        - 'receive:message'
 put:
   tags:
     - receiver
@@ -169,4 +169,4 @@ put:
       description: An unknown error occurred
   security:
     - oauth2:
-        - 'message:receive'
+        - 'receive:message'

@@ -129,4 +129,4 @@ post:
             $ref: ..\components\schemas\ProblemDetails.yaml
   security:
     - oauth2:
-        - 'message:send'
+        - 'send:message'

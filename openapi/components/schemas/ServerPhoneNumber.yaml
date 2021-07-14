@@ -1,0 +1,22 @@
+required:
+  - number
+type: object
+properties:
+  number:
+    type: string
+    format: tel
+  states:
+    type: array
+    items:
+      $ref: .\ServerTerminalState.yaml
+    nullable: true
+  settings:
+    type: object
+    additionalProperties: {}
+    nullable: true
+  id:
+    type: string
+    nullable: true
+  source:
+    $ref: .\TerminalSource.yaml
+additionalProperties: false

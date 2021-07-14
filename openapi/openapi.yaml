@@ -31,6 +31,10 @@ paths:
     $ref: 'paths\channel@{channelId}.yaml'
   /channel/:
     $ref: paths\channel@.yaml
+  /terminal/phone:
+    $ref: paths\terminal@phone.yaml
+  '/terminal/phone/{id}':
+    $ref: 'paths\terminal@phone@{id}.yaml'
 components:
   securitySchemes:
     oauth2:
@@ -39,19 +43,37 @@ components:
         clientCredentials:
           tokenUrl: 'https://deveel.eu.auth0.com/oauth/token'
           scopes:
-            'message:send': Send messages to individuals
-            'message:receive': Receive messages from individuals
-            'phone:read': Read-only access to the phone numbers owned by the tenant
-            'email:read': Read-only access to the e-mail addresses owned by the tenant
-            'alphaNumeric:read': Read-only access to the alpha-numeric lables owned by the tenant
-            'channel:read': Read-only access to the channels owned by the tenant
+            'send:message': Send messages or batch of messages to individuals
+            'receive:message': Receive messages from individuals
+            'read:channel': Read-only access to Channels
+            'read:phone': Read-only access to server phone numbers
+            'create:phone': Request the registration of server phone numbers
+            'update:phone': Update the status and settings of server phone numbers
+            'delete:phone': Delete a server phone numbers
+            'read:email': Read-only access to server email addresses
+            'create:email': Request the registration of server email addresses
+            'update:email': Update the status and settings of server email addresses
+            'delete:email': Delete a server phone number
+            'read:label': Read-only access to server alpha-numeric labels
+            'create:label': Request the registration of server alpha-numeric labels
+            'update:label': Update the status and settings of server alpha-numeric labels
+            'delete:label': Delete a server alpha-numeric labels
         authorizationCode:
           authorizationUrl: 'https://deveel.eu.auth0.com/authorize'
           tokenUrl: 'https://deveel.eu.auth0.com/oauth/token'
           scopes:
-            'message:send': Send messages to individuals
-            'message:receive': Receive messages from individuals
-            'phone:read': Read-only access to the phone numbers owned by the tenant
-            'email:read': Read-only access to the e-mail addresses owned by the tenant
-            'alphaNumeric:read': Read-only access to the alpha-numeric lables owned by the tenant
-            'channel:read': Read-only access to the channels owned by the tenant
+            'send:message': Send messages or batch of messages to individuals
+            'receive:message': Receive messages from individuals
+            'read:channel': Read-only access to Channels
+            'read:phone': Read-only access to server phone numbers
+            'create:phone': Request the registration of server phone numbers
+            'update:phone': Update the status and settings of server phone numbers
+            'delete:phone': Delete a server phone numbers
+            'read:email': Read-only access to server email addresses
+            'create:email': Request the registration of server email addresses
+            'update:email': Update the status and settings of server email addresses
+            'delete:email': Delete a server phone number
+            'read:label': Read-only access to server alpha-numeric labels
+            'create:label': Request the registration of server alpha-numeric labels
+            'update:label': Update the status and settings of server alpha-numeric labels
+            'delete:label': Delete a server alpha-numeric labels

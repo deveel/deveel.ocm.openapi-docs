@@ -4,11 +4,6 @@ properties:
     type: string
     format: uri
     nullable: true
-  channelName:
-    type: string
-    nullable: true
-  channelType:
-    $ref: .\ChannelType.yaml
   secret:
     type: string
     nullable: true

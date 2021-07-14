@@ -77,4 +77,4 @@ post:
       description: An unknown error occurred
   security:
     - oauth2:
-        - 'message:receive'
+        - 'receive:message'

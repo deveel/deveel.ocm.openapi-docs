@@ -37,5 +37,5 @@ get:
             $ref: ..\components\schemas\ProblemDetails.yaml
   security:
     - oauth2:
-        - 'channel:manage'
-        - 'channel:read'
+        - 'manage:channel'
+        - 'read:channel'

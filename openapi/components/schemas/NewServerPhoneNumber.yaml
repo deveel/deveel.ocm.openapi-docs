@@ -1,0 +1,14 @@
+required:
+  - number
+type: object
+properties:
+  number:
+    type: string
+    format: tel
+  settings:
+    type: object
+    additionalProperties: {}
+    nullable: true
+  source:
+    $ref: .\TerminalSource.yaml
+additionalProperties: false

@@ -1,0 +1,18 @@
+required:
+  - actor
+  - status
+  - timeStamp
+type: object
+properties:
+  status:
+    $ref: .\ServerTerminalStatus.yaml
+  timeStamp:
+    type: string
+    format: date-time
+  actor:
+    type: string
+  data:
+    type: object
+    additionalProperties: {}
+    nullable: true
+additionalProperties: false
