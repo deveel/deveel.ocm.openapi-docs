@@ -19,14 +19,25 @@ Please refer to the [Single Message Send](#operation/message_send) or [Batch Mes
 
 ### Message Terminals
 
-| Channel Type | Phone | E-Mail | Label |
-|--------------|-------|--------|-------|
-| sms          |   √   |    x   |   √   |
-| email        |   x   |    √   |   x   |
-| facebook     |   √   |    x   |   x   |
-| sanbox       |   √   |    √   |   √   |
+The capability of establishing a messaging conversation between two or more parties is enabled by the _terminal points_ of  ommunication, that are the source and destination of messages.
+
+It is possible to edetermine the kind of terminal that is possible to use when sending _outbound messages_ throught a type of channel, as described in this matrix
+
+| Channel Type | Phone Number | E-Mail Address | Alpha-Numeric Label |
+|--------------|--------------|----------------|---------------------|
+| sms          |   √          |    x           |   √                 |
+| email        |   x          |    √           |   x                 |
+| whatsapp     |   √          |    x           |   x                 |
+| facebook     |   √          |    x           |   x                 |
+| sanbox       |   √          |    √           |   √                 |
 
 ### Message Contents
+
+Although the foundational idea of the omni-channel messaging is _to be able to reach the users with one single message throught multiple channels_, this ambition is sometimes limited by the capabilities of the channels to transport certain type of contents.
+
+Developers who integrate the _Deveel Omni-Channel API_ should be aware of the kind of content is allowed by the channels they are using in the messaging requests.
+
+Some channels support multiple more than one content type (even within the same message, as a _multi-part_).
 
 | Channel Type | Text  | HTML | Media | Multi-Part |
 |--------------|-------|------|-------|------------|
@@ -35,10 +46,26 @@ Please refer to the [Single Message Send](#operation/message_send) or [Batch Mes
 | facebook     |   √   |   x  |   √   |      x     |
 | sanbox       |   √   |   √  |   √   |      √     |
 
+This is an example of a request to deliver a textual message through a SMS channel 
+
+```json
+{
+  "channel": "sms-channel-1",
+  "sender": { "number": "NO-2254" },
+  "receiver": { "number": "+479426775" },
+  "content": { "text": "Hello! you have a special offer waiting" },
+  "context": {
+    "userId": "47aeg-11hde-dffe4-ga2c5"
+  }
+}
+```
+
+**Note**: e-mail HTML contents must be provided as _base-64_ encoded string
+
 ## Inbound Messaging
 Dealing with the other direction of the messaging scenarios, the Omni-Channel Service offers also a unified design to receive messages from individuals, through multiple channels of communication, relieving the integrators from having to deal with multiple formats and protocols to interpret the requests from the operators.
 
-Dealing with the other direction of the messaging scenarios, the Omni-Channel Service offers also a unified design to receive messages from individuals, through multiple channels of communication, relieving the integrators from having to deal with multiple formats and protocols to interpret the requests from the operators.
+Dealing with the other direction of the messaging scenarios, the _Omni-Channel Service_ offers also a unified design to receive messages from individuals, through multiple channels of communication, relieving the integrators from having to deal with multiple formats and protocols to interpret the requests from the operators.
 
 ### Message Receivers
 
@@ -49,7 +76,7 @@ _Message Receivers_ require the following information:
 * **To Address** - The terminal address where messages from individuals are directed to
 * **Destination URL** - The HTTP address that is invoked to route the messsge, by sending a webhook that includes information of the sender and the message contents
 
-Additionaly to the above configurations, customers can specify further optional ones
+Additionaly to the above configurations, customers can specify furth/er optional ones
 
 * **Filter** - An additional filter (appended to the internal filters) that allows the user to further control the routing of messages (see the "filter formats" section)
 * **Secret** - A secret word used to secure the access to the request to the destination URL where the message is forwarded
@@ -234,6 +261,25 @@ This feature is typically offered by _Over-the-Top_ (OTT) channels (like _WhatsA
 It is possible to receive some environment information, when the channels support such capability
 
 ### Message Deleted
+
+```json
+{
+    "id": "57721f483fa946ff9176ba86956057f0",
+    "statusCode": "DELETED",
+    "messageId": "a28fe2bb188642c8b175f816fa32aa0e",
+    "channelName": "channel-1",
+    "context": {
+        "prop1": "value",
+        ...
+    },
+    "timeStamp": "2021-07-15T23:17:51+0100"
+}
+```
+
+**Note**: the notification of this event is not assured
+* The event might never occur (the receiver doesn't care deleting the message on its device)
+* The event might occur after the expiration of the message within the cache
+* The receiver has configured its device to not provide such feedback
 
 ## Inbound Messages
 
