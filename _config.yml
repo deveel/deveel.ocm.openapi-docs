@@ -1,4 +1,4 @@
-theme: just-the-docs
+remote_theme: pmarsceill/just-the-docs
 title: Deveel OCM
 logo: https://github.com/deveel/deveel.ocm.openapi-docs/raw/main/deveel-logo.png
 url: https://docs.ocm.deveel.net/
