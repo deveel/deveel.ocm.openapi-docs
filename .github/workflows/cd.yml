@@ -19,6 +19,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 15.x
+    
+      - name: Install Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.6'
           
       - name: Install dependencies
         run: npm install redoc
@@ -27,9 +32,17 @@ jobs:
         run: |
           npm run build
           npx redoc-cli bundle --output ./bundle/index.html --cdn -t ./docs/template.hbs ./dist.yaml
-          copy ./docs/favicon.png ./bundle/favicon.png
-          copy ./assets/CNAME ./bundle/CNAME
-          copy ./docs/pages/* ./bundle
+      
+      - name: Copy Files and folders
+        run: |
+           copy ./docs/favicon.png ./bundle/favicon.png
+           copy ./assets/CNAME ./bundle/CNAME
+           copy ./docs/pages/* ./bundle
+
+      - name: Bundle Jekyll theme
+        run: |
+          cd ./bundle
+          bundle
         
       - name: GitHub Pages v3
         uses: peaceiris/actions-github-pages@v3.1.12
