@@ -20,10 +20,10 @@ jobs:
         with:
           node-version: 15.x
     
-      - name: Install Ruby
-        uses: actions/setup-ruby@v1
-        with:
-          ruby-version: '2.6'
+#      - name: Install Ruby
+#        uses: actions/setup-ruby@v1
+#        with:
+#          ruby-version: '2.6'
           
       - name: Install dependencies
         run: npm install redoc
@@ -39,10 +39,10 @@ jobs:
            copy ./assets/CNAME ./bundle/CNAME
            copy ./docs/pages/* ./bundle
 
-      - name: Bundle Jekyll theme
-        run: |
-          cd ./bundle
-          bundle
+#      - name: Bundle Jekyll theme
+#        run: |
+#          cd ./bundle
+#          bundle
         
       - name: GitHub Pages v3
         uses: peaceiris/actions-github-pages@v3.1.12
