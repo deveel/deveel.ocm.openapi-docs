@@ -29,7 +29,7 @@ jobs:
           npx redoc-cli bundle --output ./bundle/index.html --cdn -t ./docs/template.hbs ./dist.yaml
           copy ./docs/favicon.png ./bundle/favicon.png
           copy ./assets/CNAME ./bundle/CNAME
-          copy ./docs/errors/* ./bundle
+          copy ./docs/pages/* ./bundle
         
       - name: GitHub Pages v3
         uses: peaceiris/actions-github-pages@v3.1.12
