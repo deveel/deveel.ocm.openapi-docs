@@ -27,9 +27,9 @@ jobs:
         run: |
           npm run build
           npx redoc-cli bundle --output ./bundle/index.html --cdn -t ./docs/template.hbs ./dist.yaml
-          xcopy .\docs\favicon.png .\bundle\favicon.png
-          xcopy .\assets\CNAME .\bundle\CNAME
-          xcopy .\docs\pages .\bundle /s
+          copy ./docs/favicon.png ./bundle/favicon.png
+          copy ./assets/CNAME ./bundle/CNAME
+          copy ./docs/errors/* ./bundle
         
       - name: GitHub Pages v3
         uses: peaceiris/actions-github-pages@v3.1.12
