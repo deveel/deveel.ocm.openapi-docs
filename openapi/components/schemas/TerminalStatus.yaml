@@ -1,0 +1,11 @@
+enum:
+  - none
+  - requested
+  - validated
+  - active
+  - reported
+  - blocked
+type: string
+x-ms-enum:
+  name: TerminalStatus
+  modelAsString: true

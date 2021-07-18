@@ -19,8 +19,14 @@ paths:
     $ref: paths\message@batch.yaml
   /message/:
     $ref: paths\message@.yaml
-  /message/webhook/subscription:
-    $ref: paths\message@webhook@subscription.yaml
+  /message/state/subscription:
+    $ref: paths\message@state@subscription.yaml
+  '/message/state/subscription/{id}':
+    $ref: 'paths\message@state@subscription@{id}.yaml'
+  /message/state/subscription/page:
+    $ref: paths\message@state@subscription@page.yaml
+  '/message/received/{id}':
+    $ref: 'paths\message@received@{id}.yaml'
   /message/receiver/:
     $ref: paths\message@receiver@.yaml
   '/message/receiver/{id}':
@@ -45,7 +51,10 @@ components:
           scopes:
             'send:message': Send messages or batch of messages to individuals
             'receive:message': Receive messages from individuals
-            'read:channel': Read-only access to Channels
+            'read:channel': Read-only access to user Channels
+            'create:channel': Create new user Channels
+            'update:channel': Update settings of existing user Channels
+            'delete:channel': Delete existing user Channels
             'read:phone': Read-only access to server phone numbers
             'create:phone': Request the registration of server phone numbers
             'update:phone': Update the status and settings of server phone numbers
@@ -64,7 +73,10 @@ components:
           scopes:
             'send:message': Send messages or batch of messages to individuals
             'receive:message': Receive messages from individuals
-            'read:channel': Read-only access to Channels
+            'read:channel': Read-only access to user Channels
+            'create:channel': Create new user Channels
+            'update:channel': Update settings of existing user Channels
+            'delete:channel': Delete existing user Channels
             'read:phone': Read-only access to server phone numbers
             'create:phone': Request the registration of server phone numbers
             'update:phone': Update the status and settings of server phone numbers

@@ -1,10 +1,12 @@
 required:
   - channel
   - destinationUrl
-  - to
+  - event
+  - id
 type: object
 properties:
   channel:
+    pattern: '^[a-zA-Z0-9_.-]+$'
     type: string
   destinationUrl:
     type: string
@@ -20,6 +22,8 @@ properties:
     additionalProperties:
       type: string
     nullable: true
-  to:
-    $ref: .\Terminal.yaml
+  id:
+    type: string
+  event:
+    type: string
 additionalProperties: false

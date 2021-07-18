@@ -1,26 +1,26 @@
 required:
-  - channel
   - content
   - receiver
   - sender
+  - timeStamp
 type: object
 properties:
-  sender:
-    $ref: .\SenderTerminal.yaml
   channel:
+    $ref: .\MessageChannel.yaml
+  id:
     type: string
-  options:
-    type: object
-    additionalProperties: {}
     nullable: true
-  fallback:
-    $ref: .\FallbackMessage.yaml
+  sender:
+    $ref: .\Terminal.yaml
   receiver:
     $ref: .\Terminal.yaml
   content:
     $ref: .\MessageContent.yaml
+  timeStamp:
+    type: string
+    format: date-time
   context:
     type: object
     additionalProperties: {}
     nullable: true
-additionalProperties: {}
+additionalProperties: false

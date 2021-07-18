@@ -1,0 +1,12 @@
+required:
+  - name
+type: object
+properties:
+  name:
+    type: string
+  type:
+    $ref: .\ChannelType.yaml
+  id:
+    type: string
+    nullable: true
+additionalProperties: false

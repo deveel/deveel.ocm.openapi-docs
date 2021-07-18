@@ -1,7 +1,7 @@
 get:
   tags:
     - channel
-  summary: Gets all Channel
+  summary: Gets all Channels
   operationId: channel_getAll
   responses:
     '200':
@@ -37,5 +37,4 @@ get:
             $ref: ..\components\schemas\ProblemDetails.yaml
   security:
     - oauth2:
-        - 'manage:channel'
         - 'read:channel'

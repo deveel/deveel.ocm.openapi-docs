@@ -2,7 +2,6 @@ post:
   tags:
     - message
   summary: Sends a batch of Messages
-  description: ''
   operationId: message_batchSend
   requestBody:
     content:
@@ -36,7 +35,7 @@ post:
           schema:
             $ref: ..\components\schemas\MessageBatchResult.yaml
     '400':
-      description: Bad Request
+      description: One of the messages in the batch has invalid elements
       content:
         application/json:
           schema:
@@ -81,9 +80,7 @@ post:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
     '404':
-      description: >-
-        One of the entities referenced in the message was not found in the
-        tenant space
+      description: A channel or a terminal referenced in one of the messages was not found
       content:
         application/json:
           schema:
@@ -113,7 +110,7 @@ post:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
     '415':
-      description: One of the media passed in a message is not supported
+      description: A media in one of the messages is not supported by the channel
       content:
         application/json:
           schema:

@@ -1,41 +1,33 @@
-post:
+get:
   tags:
     - message
-  summary: Sends a single Message
-  operationId: message_send
-  requestBody:
-    content:
-      application/json-patch+json:
-        schema:
-          $ref: ..\components\schemas\Message.yaml
-      application/json:
-        schema:
-          $ref: ..\components\schemas\Message.yaml
-      text/json:
-        schema:
-          $ref: ..\components\schemas\Message.yaml
-      application/*+json:
-        schema:
-          $ref: ..\components\schemas\Message.yaml
-    required: true
+  summary: Gets a Received Message from Cache
+  operationId: message_getReceived
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        nullable: true
   responses:
-    '202':
-      description: The message is under processing
+    '200':
+      description: The message was found in cache
       content:
         application/json:
           schema:
-            $ref: ..\components\schemas\MessageResult.yaml
+            $ref: ..\components\schemas\ReceivedMessage.yaml
         text/json:
           schema:
-            $ref: ..\components\schemas\MessageResult.yaml
+            $ref: ..\components\schemas\ReceivedMessage.yaml
         application/xml:
           schema:
-            $ref: ..\components\schemas\MessageResult.yaml
+            $ref: ..\components\schemas\ReceivedMessage.yaml
         text/xml:
           schema:
-            $ref: ..\components\schemas\MessageResult.yaml
+            $ref: ..\components\schemas\ReceivedMessage.yaml
     '400':
-      description: The message has invalid elements
+      description: The message is not inbound
       content:
         application/json:
           schema:
@@ -80,37 +72,7 @@ post:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
     '404':
-      description: A channel or a server terminal referenced in the message was not found
-      content:
-        application/json:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
-        text/json:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
-        application/xml:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
-        text/xml:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
-    '405':
-      description: One of the channels is not enabled or does not allow outbound
-      content:
-        application/json:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
-        text/json:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
-        application/xml:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
-        text/xml:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
-    '415':
-      description: A media item in the message is not supported by the channel
+      description: The message was not found
       content:
         application/json:
           schema:
@@ -126,4 +88,4 @@ post:
             $ref: ..\components\schemas\ProblemDetails.yaml
   security:
     - oauth2:
-        - 'send:message'
+        - 'receive:message'

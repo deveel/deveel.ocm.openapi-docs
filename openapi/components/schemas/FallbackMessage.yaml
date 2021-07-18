@@ -7,16 +7,16 @@ type: object
 properties:
   sender:
     $ref: .\SenderTerminal.yaml
-  receiver:
-    $ref: .\ReceiverTerminal.yaml
   channel:
     type: string
-  content:
-    $ref: .\MessageContent.yaml
   options:
     type: object
     additionalProperties: {}
     nullable: true
   fallback:
     $ref: .\FallbackMessage.yaml
+  receiver:
+    $ref: .\Terminal.yaml
+  content:
+    $ref: .\MessageContent.yaml
 additionalProperties: {}

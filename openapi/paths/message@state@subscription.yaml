@@ -1,0 +1,75 @@
+post:
+  tags:
+    - message
+  summary: Subscribes to Messages States
+  operationId: message_subscribe
+  requestBody:
+    content:
+      application/json-patch+json:
+        schema:
+          $ref: ..\components\schemas\NewMessageStateSubscription.yaml
+      application/json:
+        schema:
+          $ref: ..\components\schemas\NewMessageStateSubscription.yaml
+      text/json:
+        schema:
+          $ref: ..\components\schemas\NewMessageStateSubscription.yaml
+      application/*+json:
+        schema:
+          $ref: ..\components\schemas\NewMessageStateSubscription.yaml
+      application/xml:
+        schema:
+          $ref: ..\components\schemas\NewMessageStateSubscription.yaml
+      text/xml:
+        schema:
+          $ref: ..\components\schemas\NewMessageStateSubscription.yaml
+      application/*+xml:
+        schema:
+          $ref: ..\components\schemas\NewMessageStateSubscription.yaml
+    required: true
+  responses:
+    '201':
+      description: The subscription was created
+      content:
+        application/json:
+          schema:
+            $ref: ..\components\schemas\MessageStateSubscription.yaml
+        text/json:
+          schema:
+            $ref: ..\components\schemas\MessageStateSubscription.yaml
+        application/xml:
+          schema:
+            $ref: ..\components\schemas\MessageStateSubscription.yaml
+        text/xml:
+          schema:
+            $ref: ..\components\schemas\MessageStateSubscription.yaml
+    '400':
+      description: The contents of the request is invalid
+      content:
+        application/json:
+          schema:
+            $ref: ..\components\schemas\ProblemDetails.yaml
+        text/json:
+          schema:
+            $ref: ..\components\schemas\ProblemDetails.yaml
+        application/xml:
+          schema:
+            $ref: ..\components\schemas\ProblemDetails.yaml
+        text/xml:
+          schema:
+            $ref: ..\components\schemas\ProblemDetails.yaml
+    '404':
+      description: The channel was not found
+      content:
+        application/json:
+          schema:
+            $ref: ..\components\schemas\ProblemDetails.yaml
+        text/json:
+          schema:
+            $ref: ..\components\schemas\ProblemDetails.yaml
+        application/xml:
+          schema:
+            $ref: ..\components\schemas\ProblemDetails.yaml
+        text/xml:
+          schema:
+            $ref: ..\components\schemas\ProblemDetails.yaml

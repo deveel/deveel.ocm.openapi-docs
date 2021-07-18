@@ -5,7 +5,7 @@ required:
 type: object
 properties:
   status:
-    $ref: .\ServerTerminalStatus.yaml
+    $ref: .\TerminalStatus.yaml
   timeStamp:
     type: string
     format: date-time

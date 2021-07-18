@@ -1,10 +1,11 @@
 required:
   - channel
   - destinationUrl
-  - to
+  - event
+  - name
 type: object
 properties:
-  channel:
+  name:
     type: string
   destinationUrl:
     type: string
@@ -12,14 +13,17 @@ properties:
   secret:
     type: string
     nullable: true
-  filter:
+  channel:
+    minLength: 3
     type: string
-    nullable: true
   headers:
     type: object
     additionalProperties:
       type: string
     nullable: true
-  to:
-    $ref: .\Terminal.yaml
+  event:
+    type: string
+  filter:
+    type: string
+    nullable: true
 additionalProperties: false

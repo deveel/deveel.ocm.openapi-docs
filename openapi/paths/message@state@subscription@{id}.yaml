@@ -1,8 +1,8 @@
 get:
   tags:
-    - receiver
-  summary: Gets a Receiver of Incoming Messages
-  operationId: receiver_get
+    - message
+  summary: Gets a Subscription to Messages States
+  operationId: message_getSubscription
   parameters:
     - name: id
       in: path
@@ -12,14 +12,20 @@ get:
         nullable: true
   responses:
     '200':
-      description: The receiver with the given ID was found
+      description: The subscription was found
       content:
         application/json:
           schema:
-            $ref: ..\components\schemas\MessageReceiver.yaml
+            $ref: ..\components\schemas\MessageStateSubscription.yaml
         text/json:
           schema:
-            $ref: ..\components\schemas\MessageReceiver.yaml
+            $ref: ..\components\schemas\MessageStateSubscription.yaml
+        application/xml:
+          schema:
+            $ref: ..\components\schemas\MessageStateSubscription.yaml
+        text/xml:
+          schema:
+            $ref: ..\components\schemas\MessageStateSubscription.yaml
     '401':
       description: The request is unauthorized
       content:
@@ -27,6 +33,12 @@ get:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
         text/json:
+          schema:
+            $ref: ..\components\schemas\ProblemDetails.yaml
+        application/xml:
+          schema:
+            $ref: ..\components\schemas\ProblemDetails.yaml
+        text/xml:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
     '403':
@@ -38,8 +50,14 @@ get:
         text/json:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
+        application/xml:
+          schema:
+            $ref: ..\components\schemas\ProblemDetails.yaml
+        text/xml:
+          schema:
+            $ref: ..\components\schemas\ProblemDetails.yaml
     '404':
-      description: No receiver was found with the given ID
+      description: The subscription was not found
       content:
         application/json:
           schema:
@@ -47,16 +65,20 @@ get:
         text/json:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
-    '500':
-      description: An unknown error occurred
+        application/xml:
+          schema:
+            $ref: ..\components\schemas\ProblemDetails.yaml
+        text/xml:
+          schema:
+            $ref: ..\components\schemas\ProblemDetails.yaml
   security:
     - oauth2:
-        - 'receive:message'
+        - 'send:message'
 delete:
   tags:
-    - receiver
-  summary: Deletes a given Message Receiver
-  operationId: receiver_delete
+    - message
+  summary: Unsubscribes from Message States
+  operationId: message_unsubscribe
   parameters:
     - name: id
       in: path
@@ -66,7 +88,7 @@ delete:
         nullable: true
   responses:
     '204':
-      description: The receiver was successfully deleted
+      description: The subscription was deleted
     '401':
       description: The request is unauthorized
       content:
@@ -74,6 +96,12 @@ delete:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
         text/json:
+          schema:
+            $ref: ..\components\schemas\ProblemDetails.yaml
+        application/xml:
+          schema:
+            $ref: ..\components\schemas\ProblemDetails.yaml
+        text/xml:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
     '403':
@@ -85,81 +113,14 @@ delete:
         text/json:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
-    '404':
-      description: None receiver was found with the given ID
-      content:
-        application/json:
+        application/xml:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
-        text/json:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
-    '500':
-      description: An unknown error occurred
-  security:
-    - oauth2:
-        - 'receive:message'
-put:
-  tags:
-    - receiver
-  summary: Updates the information of a Message Receiver
-  operationId: receiver_update
-  parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        nullable: true
-  requestBody:
-    content:
-      application/json-patch+json:
-        schema:
-          $ref: ..\components\schemas\MessageReceiverUpdate.yaml
-      application/json:
-        schema:
-          $ref: ..\components\schemas\MessageReceiverUpdate.yaml
-      text/json:
-        schema:
-          $ref: ..\components\schemas\MessageReceiverUpdate.yaml
-      application/*+json:
-        schema:
-          $ref: ..\components\schemas\MessageReceiverUpdate.yaml
-    required: true
-  responses:
-    '200':
-      description: The updated version of the receiver
-      content:
-        application/json:
-          schema:
-            $ref: ..\components\schemas\MessageReceiver.yaml
-        text/json:
-          schema:
-            $ref: ..\components\schemas\MessageReceiver.yaml
-    '204':
-      description: The update request did not cause any changes
-    '304':
-      description: No changes were made to the receiver
-    '401':
-      description: The request is unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
-        text/json:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
-    '403':
-      description: The requested action is forbidden
-      content:
-        application/json:
-          schema:
-            $ref: ..\components\schemas\ProblemDetails.yaml
-        text/json:
+        text/xml:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
     '404':
-      description: None receiver was found with the given ID
+      description: None subscription with the given ID was found
       content:
         application/json:
           schema:
@@ -167,8 +128,12 @@ put:
         text/json:
           schema:
             $ref: ..\components\schemas\ProblemDetails.yaml
-    '500':
-      description: An unknown error occurred
+        application/xml:
+          schema:
+            $ref: ..\components\schemas\ProblemDetails.yaml
+        text/xml:
+          schema:
+            $ref: ..\components\schemas\ProblemDetails.yaml
   security:
     - oauth2:
-        - 'receive:message'
+        - 'send:message'
