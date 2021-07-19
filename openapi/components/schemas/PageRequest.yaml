@@ -9,4 +9,9 @@ properties:
   size:
     type: integer
     format: int32
+  sortBy:
+    type: array
+    items:
+      $ref: .\PageSort.yaml
+    nullable: true
 additionalProperties: false

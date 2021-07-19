@@ -6,19 +6,24 @@ type: object
 properties:
   channel:
     type: string
+    description: The name of the channel transporting the incoming messages
   destinationUrl:
     type: string
+    description: The URL where to deliver the incoming messages
     format: uri
   secret:
     type: string
+    description: An optional secret word used to sign the webhook
     nullable: true
   filter:
     type: string
+    description: "An optional additional filter used to retrict the messages \r\nto be delivered"
     nullable: true
   headers:
     type: object
     additionalProperties:
       type: string
+    description: "An optional set of headers attached to the delivery\r\nrequest (used for correlation)"
     nullable: true
   to:
     $ref: .\Terminal.yaml

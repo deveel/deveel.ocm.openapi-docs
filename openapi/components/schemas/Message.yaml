@@ -9,9 +9,11 @@ properties:
     $ref: .\SenderTerminal.yaml
   channel:
     type: string
+    description: The name of the channel that is used to transport the message
   options:
     type: object
     additionalProperties: {}
+    description: "Configuration options for modeling the behavior of the channel\r\nwhen transporting the message"
     nullable: true
   fallback:
     $ref: .\FallbackMessage.yaml
@@ -22,5 +24,7 @@ properties:
   context:
     type: object
     additionalProperties: {}
+    description: A custom-defined context of the message (typically used to correlate).
     nullable: true
 additionalProperties: {}
+description: A single outbound omni-channel message

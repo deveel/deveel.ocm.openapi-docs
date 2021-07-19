@@ -1,0 +1,16 @@
+required:
+  - body
+type: object
+properties:
+  title:
+    minLength: 3
+    type: string
+    nullable: true
+  subtitle:
+    type: string
+    nullable: true
+  body:
+    $ref: .\MessageContent.yaml
+  footer:
+    $ref: .\MessageContent.yaml
+additionalProperties: false

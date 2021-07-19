@@ -6,6 +6,7 @@ enum:
   - email
   - viber
   - rcs
+  - push
   - sandbox
 type: string
 x-ms-enum:

@@ -1,0 +1,13 @@
+enum:
+  - unknown
+  - queued
+  - sent
+  - delivered
+  - deliveryRetried
+  - deliveryFailed
+  - read
+  - deleted
+type: string
+x-ms-enum:
+  name: MessageStatus
+  modelAsString: true

@@ -23,8 +23,8 @@ paths:
     $ref: paths\message@state@subscription.yaml
   '/message/state/subscription/{id}':
     $ref: 'paths\message@state@subscription@{id}.yaml'
-  /message/state/subscription/page:
-    $ref: paths\message@state@subscription@page.yaml
+  '/message/{id}/state':
+    $ref: 'paths\message@{id}@state.yaml'
   '/message/received/{id}':
     $ref: 'paths\message@received@{id}.yaml'
   /message/receiver/:

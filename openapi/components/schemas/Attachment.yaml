@@ -5,14 +5,19 @@ type: object
 properties:
   id:
     type: string
+    description: "The unique identifier (within the context of the message)\r\nof the attachment"
   content:
     type: string
+    description: The base-64 encoded content of the attachment
   contentType:
     type: string
+    description: Specifies the MIME type of the content of the attachment
     nullable: true
   fileName:
     type: string
+    description: The file name of the attachment
     nullable: true
   type:
     $ref: .\AttachmentType.yaml
 additionalProperties: false
+description: A single attachment to a message or to the part of a message

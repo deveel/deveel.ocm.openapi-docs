@@ -1,0 +1,34 @@
+required:
+  - channel
+  - messageId
+  - status
+  - timeStamp
+type: object
+properties:
+  messageId:
+    type: string
+  channel:
+    $ref: .\MessageChannel.yaml
+  status:
+    $ref: .\MessageStatus.yaml
+  timeStamp:
+    type: string
+    format: date-time
+  errorCode:
+    type: string
+    nullable: true
+  errorMessage:
+    type: string
+    nullable: true
+  attemptCount:
+    type: integer
+    format: int32
+    nullable: true
+  fallbackTo:
+    type: string
+    nullable: true
+  context:
+    type: object
+    additionalProperties: {}
+    nullable: true
+additionalProperties: false

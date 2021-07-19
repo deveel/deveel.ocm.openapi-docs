@@ -1,0 +1,25 @@
+required:
+  - text
+type: object
+properties:
+  text:
+    minLength: 3
+    type: string
+  reply:
+    minLength: 3
+    type: string
+    nullable: true
+  dial:
+    type: string
+    format: tel
+    nullable: true
+  openUrl:
+    type: string
+    format: uri
+    nullable: true
+  viewLocation:
+    $ref: .\ViewLocation.yaml
+  shareLocation:
+    type: boolean
+    nullable: true
+additionalProperties: false

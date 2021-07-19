@@ -4,10 +4,15 @@ type: object
 properties:
   messageId:
     type: string
+    description: The unique identifier of the message within the system
   context:
     type: object
     additionalProperties: {}
+    description: >-
+      The context provided when requesting the enqueue of the message (for
+      correlation)
     nullable: true
   fallback:
     $ref: .\FallbackMessageResult.yaml
 additionalProperties: false
+description: The result of to the request to enqueue a message

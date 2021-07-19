@@ -3,10 +3,20 @@ properties:
   text:
     minLength: 1
     type: string
+    description: Simple textual content
     nullable: true
   html:
     minLength: 1
     type: string
+    description: The content of the message is HTML base-64 encoded text
+    nullable: true
+  attach:
+    type: array
+    items:
+      $ref: .\Attachment.yaml
+    description: >-
+      Attachments embedded in the message alognside the textual content (simple
+      or HTML)
     nullable: true
   media:
     $ref: .\MediaContent.yaml
@@ -15,10 +25,11 @@ properties:
     type: array
     items:
       $ref: .\ContentPart.yaml
+    description: The content of the message is multi-parted (typical of e-mail channels)
     nullable: true
-  embed:
-    type: array
-    items:
-      $ref: .\Attachment.yaml
-    nullable: true
+  card:
+    $ref: .\CardContent.yaml
+  button:
+    $ref: .\ButtonContent.yaml
 additionalProperties: false
+description: Represents the content of a message

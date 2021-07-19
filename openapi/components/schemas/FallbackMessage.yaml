@@ -9,9 +9,11 @@ properties:
     $ref: .\SenderTerminal.yaml
   channel:
     type: string
+    description: The name of the channel that is used to transport the message
   options:
     type: object
     additionalProperties: {}
+    description: "Configuration options for modeling the behavior of the channel\r\nwhen transporting the message"
     nullable: true
   fallback:
     $ref: .\FallbackMessage.yaml
@@ -20,3 +22,4 @@ properties:
   content:
     $ref: .\MessageContent.yaml
 additionalProperties: {}
+description: "Represents a message is activated when a previous one\r\nfailed to be delivered to a receipient"

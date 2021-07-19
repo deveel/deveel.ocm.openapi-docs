@@ -4,13 +4,17 @@ type: object
 properties:
   batchId:
     type: string
+    description: The unique identifier of the batch within the system
   context:
     type: object
     additionalProperties: {}
+    description: "The context that was specified when requesting to send\r\nthe batch (for correlation)"
     nullable: true
   messages:
     type: array
     items:
       $ref: .\MessageResult.yaml
+    description: The list of results of the messages contained in the batch
     nullable: true
 additionalProperties: false
+description: The result to the request to enqueue a batch of messages

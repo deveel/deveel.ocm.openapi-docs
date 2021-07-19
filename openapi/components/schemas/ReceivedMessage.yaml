@@ -22,5 +22,6 @@ properties:
   context:
     type: object
     additionalProperties: {}
+    description: A custom-defined context of the message (typically used to correlate).
     nullable: true
 additionalProperties: false

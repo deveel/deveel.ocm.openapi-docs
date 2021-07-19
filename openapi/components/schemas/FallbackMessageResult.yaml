@@ -4,6 +4,8 @@ type: object
 properties:
   messageId:
     type: string
+    description: The unique identifier of the message within the system
   fallback:
     $ref: .\FallbackMessageResult.yaml
 additionalProperties: false
+description: The result to the request to send a fallback message
