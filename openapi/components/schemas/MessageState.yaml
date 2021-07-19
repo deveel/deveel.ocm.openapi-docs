@@ -7,28 +7,36 @@ type: object
 properties:
   messageId:
     type: string
+    description: The unique identifier of the message
   channel:
     $ref: .\MessageChannel.yaml
   status:
     $ref: .\MessageStatus.yaml
   timeStamp:
     type: string
+    description: The exact time when the event occured
     format: date-time
   errorCode:
     type: string
+    description: "If the message was not delivered, this provides the \r\ntype of error that prevented the delivery"
     nullable: true
   errorMessage:
     type: string
+    description: "If the message was not delivered, this provides\r\nthe reason that prevented the delivery"
     nullable: true
   attemptCount:
     type: integer
+    description: "If the message delivery was retried, this\r\nindicates the number of attempts done so far"
     format: int32
     nullable: true
   fallbackTo:
     type: string
+    description: "If the message was not delivered and it had a fallback \r\nconfigured, this provides the unique identifier of \r\nthe message that will be enqueued"
     nullable: true
   context:
     type: object
     additionalProperties: {}
+    description: "Provides a context of the state (eg. environment,\r\nmetadata, configured callbacks, etc.)"
     nullable: true
 additionalProperties: false
+description: Describes the change of state of an outbound message

@@ -4,19 +4,27 @@ properties:
     minLength: 2
     pattern: '^[a-zA-Z][a-zA-Z0-9]*$'
     type: string
+    description: The sender is an alpha-numeric label
     nullable: true
   id:
     type: string
+    description: The identifier of a terminal provisioned to the tenant
     nullable: true
   email:
     type: string
+    description: The email address of the terminal
     format: email
     nullable: true
   displayName:
     type: string
+    description: An optional display name for an e-mail terminal
     nullable: true
   number:
     type: string
+    description: The telephone number (MSISDN) of the terminal
     format: tel
     nullable: true
 additionalProperties: false
+description: >-
+  A terminal used to send messages to receivers (typically from a server
+  application)

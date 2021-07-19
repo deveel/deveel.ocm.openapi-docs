@@ -28,3 +28,4 @@ properties:
   to:
     $ref: .\Terminal.yaml
 additionalProperties: false
+description: The request to create a new receiver of messages

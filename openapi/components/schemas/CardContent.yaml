@@ -5,12 +5,15 @@ properties:
   title:
     minLength: 3
     type: string
+    description: The title displayed on the card
     nullable: true
   subtitle:
     type: string
+    description: An optional subtitle displayed on the card
     nullable: true
   body:
     $ref: .\MessageContent.yaml
   footer:
     $ref: .\MessageContent.yaml
 additionalProperties: false
+description: A formatted card content of a message

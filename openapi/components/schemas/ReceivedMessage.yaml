@@ -25,3 +25,4 @@ properties:
     description: A custom-defined context of the message (typically used to correlate).
     nullable: true
 additionalProperties: false
+description: An inbound message sent from an individual

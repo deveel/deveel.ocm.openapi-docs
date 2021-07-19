@@ -4,9 +4,12 @@ type: object
 properties:
   name:
     type: string
+    description: The name of the channel instance
   type:
     $ref: .\ChannelType.yaml
   id:
     type: string
+    description: The unique identifier of the channel instance
     nullable: true
 additionalProperties: false
+description: "Specifies the channel instance used to send \r\nor receive a message"

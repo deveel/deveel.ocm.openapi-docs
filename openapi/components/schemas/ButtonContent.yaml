@@ -5,21 +5,27 @@ properties:
   text:
     minLength: 3
     type: string
+    description: The text displayed on the button
   reply:
     minLength: 3
     type: string
+    description: The reply sent back from the receiver when clicking the button
     nullable: true
   dial:
     type: string
+    description: "A telephone number dialed when the button is clicked by\r\nthe receiver of the message"
     format: tel
     nullable: true
   openUrl:
     type: string
+    description: "A URL address that is opened on the browser of the receiver\r\nwhen the button is clicked"
     format: uri
     nullable: true
-  viewLocation:
-    $ref: .\ViewLocation.yaml
+  displayLocation:
+    $ref: .\DisplayLocation.yaml
   shareLocation:
     type: boolean
+    description: "When the button is clicked the device shares the current location\r\nof the receiver to the sender of the message"
     nullable: true
 additionalProperties: false
+description: A button content of a message

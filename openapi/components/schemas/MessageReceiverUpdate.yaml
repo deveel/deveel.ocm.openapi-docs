@@ -16,3 +16,4 @@ properties:
       type: string
     nullable: true
 additionalProperties: false
+description: A request to update the configurations of a message receiver

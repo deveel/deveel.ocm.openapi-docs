@@ -7,12 +7,18 @@ properties:
     $ref: .\ChannelStatus.yaml
   timeStamp:
     type: string
+    description: The exact time in which the channel acquired the status
     format: date-time
   actor:
     type: string
+    description: "The actor (a system or a person) that changed the state\r\nof the channel"
     nullable: true
   data:
     type: object
     additionalProperties: {}
+    description: >-
+      The metadata describing the context of the state (eg. environment, causes,
+      etc.)
     nullable: true
 additionalProperties: false
+description: Describes a single state of a channel instance

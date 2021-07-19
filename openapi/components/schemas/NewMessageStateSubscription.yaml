@@ -28,7 +28,7 @@ properties:
     nullable: true
   event:
     type: string
-    description: The type of message event subscribed
+    description: The type of message event to subscribe
   filter:
     type: string
     description: An optional filter that restricts the events to be notified

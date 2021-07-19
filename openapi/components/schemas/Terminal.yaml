@@ -2,13 +2,17 @@ type: object
 properties:
   email:
     type: string
+    description: The email address of the terminal
     format: email
     nullable: true
   displayName:
     type: string
+    description: An optional display name for an e-mail terminal
     nullable: true
   number:
     type: string
+    description: The telephone number (MSISDN) of the terminal
     format: tel
     nullable: true
 additionalProperties: false
+description: A terminal allows to send or receive messages through channels

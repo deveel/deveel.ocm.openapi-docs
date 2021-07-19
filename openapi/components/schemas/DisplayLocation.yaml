@@ -1,0 +1,20 @@
+required:
+  - lat
+  - lon
+type: object
+properties:
+  lon:
+    type: number
+    description: The longitude of the location point
+    format: double
+  lat:
+    type: number
+    description: The latitude of the location point
+    format: double
+  description:
+    minLength: 3
+    type: string
+    description: An optional description of the location to display
+    nullable: true
+additionalProperties: false
+description: "The specifications of the location to\r\ndisplay when a button is clicked"

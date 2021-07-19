@@ -4,6 +4,7 @@ type: object
 properties:
   number:
     type: string
+    description: The phone number (MSISDN) to send messages
     format: tel
   settings:
     type: object
@@ -12,3 +13,4 @@ properties:
   source:
     $ref: .\TerminalSource.yaml
 additionalProperties: false
+description: The request to create a new phone number sender
