@@ -1,13 +1,13 @@
 ---
+permalink: /api
+title: API Documentation
 layout: default
-title: Home
-nav_order: 1
-has_children: true
-has_toc: false
+nav_order: 30
 ---
 
-# Deveel Omni-Channel Messaging
+# API Documentation
 
-The interface provided by this system supports a unified messaging experience, allowing users to send or receive messages through multiple types of messaging channels (eg. _SMS_, _WhatsApp_, _E-mail_, etc.).
-
-Messages that go from a client application of Deveel OCM to an individual are named _outbound messages_, while the messages incoming from individuals to a client application (through webhook callbacks) are named _inbound messages_: it will be possible to find several time in these documents reference to such directions.  
+| API            | Version | Description                                 |   URL                                |
+|----------------|---------|---------------------------------------------|--------------------------------------|
+| Messaging API  | v1      | Outbound messaging from applications        | [/messaging/v1](/api/messaging/v1){:target="_blank"}   |
+| Management API | v1      | Management of resources used for messaging  | [/management/v1](/api/management/v1){:target="_blank"} |
