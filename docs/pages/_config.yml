@@ -1,8 +1,6 @@
-remote_theme: pmarsceill/just-the-docs
+theme: just-the-docs
 title: Deveel OCM
 logo: https://github.com/deveel/deveel.ocm.openapi-docs/raw/main/deveel-logo.png
-url: https://docs.ocm.deveel.net/
-baseurl: /
 
 # Enable or disable the site search
 # Supports true (default) or false
@@ -30,13 +28,14 @@ search:
   # Enable or disable the search button that appears in the bottom right corner of every page
   # Supports true or false (default)
   button: false
+
 # Enable or disable heading anchors
 heading_anchors: true
 
 # Aux links for the upper right navigation
 aux_links:
-  "API Documentation":
-    - "/"
+  "Deveel.com":
+    - "//deveel.com"
 
 # Makes Aux links open in a new tab. Default is false
 aux_links_new_tab: false

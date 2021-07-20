@@ -1,0 +1,2112 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Deveel Omni-Channel Messaging API",
+    "version": "v1",
+    "description": {
+      "$ref": "description.md"
+    },
+    "contact": {
+      "name": "Antonello Provenzano",
+      "email": "antonello@deveel.com"
+    },
+    "license": {
+      "name": "Deveel EULA",
+      "url": "https://docs.ocm.deveel.net/LICENSE.html"
+    },
+    "x-logo": {
+      "url": "https://github.com/deveel/deveel.ocm.openapi-docs/raw/main/deveel-logo.png"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.ocm.deveel.net"
+    }
+  ],
+  "paths": {
+    "/message/state/subscription": {
+      "post": {
+        "tags": [
+          "message"
+        ],
+        "summary": "Subscribes to Messages States",
+        "operationId": "message_subscribe",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewMessageStateSubscription"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewMessageStateSubscription"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewMessageStateSubscription"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewMessageStateSubscription"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NewMessageStateSubscription"
+              }
+            },
+            "text/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NewMessageStateSubscription"
+              }
+            },
+            "application/*+xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NewMessageStateSubscription"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "The subscription was created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageStateSubscription"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageStateSubscription"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageStateSubscription"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageStateSubscription"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The contents of the request is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The channel was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/message/state/subscription/{id}": {
+      "get": {
+        "tags": [
+          "message"
+        ],
+        "summary": "Gets a Subscription to Messages States",
+        "operationId": "message_getSubscription",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The subscription was found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageStateSubscription"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageStateSubscription"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageStateSubscription"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageStateSubscription"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The subscription was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "send:message"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "message"
+        ],
+        "summary": "Unsubscribes from Message States",
+        "operationId": "message_unsubscribe",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The subscription was deleted"
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "None subscription with the given ID was found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "send:message"
+            ]
+          }
+        ]
+      }
+    },
+    "/message/receiver/tenant/{tenantId}": {
+      "post": {
+        "tags": [
+          "receiver"
+        ],
+        "summary": "Creates a new Receiver of Incoming Messages",
+        "operationId": "receiver_create",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewMessageReceiver"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewMessageReceiver"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewMessageReceiver"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewMessageReceiver"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "The receiver was created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageReceiver"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageReceiver"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The channel was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "The channel does not support inbound messaging",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occurred"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "receive:message"
+            ]
+          }
+        ]
+      }
+    },
+    "/message/receiver/tenant/{tenantId}/{id}": {
+      "get": {
+        "tags": [
+          "receiver"
+        ],
+        "summary": "Gets a Receiver of Incoming Messages",
+        "operationId": "receiver_get",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A receiveridentified by the given is returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageReceiver"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageReceiver"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No receiver was found with the given ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occurred"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "receive:message"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "receiver"
+        ],
+        "summary": "Deletes a given Message Receiver",
+        "operationId": "receiver_delete",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The receiver was successfully deleted"
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "None receiver was found with the given ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occurred"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "receive:message"
+            ]
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "message",
+          "receiver"
+        ],
+        "summary": "Updates the information of a Message Receiver",
+        "operationId": "receiver_update",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageReceiverUpdate"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageReceiverUpdate"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageReceiverUpdate"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageReceiverUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The updated version of the receiver",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageReceiver"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageReceiver"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "The update request did not cause any changes"
+          },
+          "304": {
+            "description": "No changes were made to the receiver"
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "None receiver was found with the given ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occurred"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "receive:message"
+            ]
+          }
+        ]
+      }
+    },
+    "/message/receiver/tenant/{tenantId}/page": {
+      "get": {
+        "tags": [
+          "receiver"
+        ],
+        "summary": "Gets a page of Message Receivers",
+        "operationId": "receiver_getPage",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "number",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The page was successfully returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResultOfMessageReceiver"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResultOfMessageReceiver"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occurred"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "receive:message"
+            ]
+          }
+        ]
+      }
+    },
+    "/channel/{channelId}": {
+      "get": {
+        "tags": [
+          "channel"
+        ],
+        "summary": "Gets a Channel",
+        "operationId": "channel_get",
+        "parameters": [
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The channel with the given ID is returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Channel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Channel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No channel with the given ID was found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "read:channel"
+            ]
+          }
+        ]
+      }
+    },
+    "/channel/": {
+      "get": {
+        "tags": [
+          "channel"
+        ],
+        "summary": "Gets all Channels",
+        "operationId": "channel_getAll",
+        "responses": {
+          "200": {
+            "description": "The list of channels of the current tenant",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Channel"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Channel"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "read:channel"
+            ]
+          }
+        ]
+      }
+    },
+    "/terminal/phone": {
+      "post": {
+        "tags": [
+          "phone"
+        ],
+        "summary": "Creates a new Phone Number",
+        "operationId": "phoneNumber_create",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewServerPhoneNumber"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewServerPhoneNumber"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewServerPhoneNumber"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewServerPhoneNumber"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "The number was added to the tenant"
+          },
+          "400": {
+            "description": "The request is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A phone with the same number already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "create:phone"
+            ]
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "phone"
+        ],
+        "summary": "Gets a page of Phone Numbers",
+        "operationId": "phoneNumber_getPage",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A page of phone numbers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResultOfServerPhoneNumber"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResultOfServerPhoneNumber"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "read:phone"
+            ]
+          }
+        ]
+      }
+    },
+    "/terminal/phone/{id}": {
+      "get": {
+        "tags": [
+          "phone"
+        ],
+        "summary": "Gets a Phone Number",
+        "operationId": "phoneNumber_get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The number was found and returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerPhoneNumber"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerPhoneNumber"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "None number with the given ID was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "read:phone"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "NewMessageStateSubscription": {
+        "required": [
+          "channel",
+          "destinationUrl",
+          "event",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "A descriptive custom name of the subscription"
+          },
+          "destinationUrl": {
+            "type": "string",
+            "description": "The URL where the webhooks should be delivered",
+            "format": "uri"
+          },
+          "secret": {
+            "type": "string",
+            "description": "An optional secret word that is used to sign the webhooks to secure them",
+            "nullable": true
+          },
+          "channel": {
+            "minLength": 3,
+            "type": "string",
+            "description": "The name of the channel subscribed"
+          },
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "A set of optional headers that are attached to the webhook\r\nrequest (for correlation)",
+            "nullable": true
+          },
+          "event": {
+            "type": "string",
+            "description": "The type of message event to subscribe"
+          },
+          "filter": {
+            "type": "string",
+            "description": "An optional filter that restricts the events to be notified",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "New subscription to the notification of status changes of messages\r\nsent through the system"
+      },
+      "MessageStateSubscription": {
+        "required": [
+          "channel",
+          "destinationUrl",
+          "event",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "channel": {
+            "pattern": "^[a-zA-Z0-9_.-]+$",
+            "type": "string",
+            "description": "The name of the channel where the events\r\nare listened to"
+          },
+          "destinationUrl": {
+            "type": "string",
+            "description": "The HTTP URL address where the notifications (webhooks)\r\nare routed",
+            "format": "uri"
+          },
+          "secret": {
+            "type": "string",
+            "description": "An optional secret word used to sign the webhooks\r\ndelivered to the subscriber",
+            "nullable": true
+          },
+          "filter": {
+            "type": "string",
+            "description": "An optiona additional filter to limit the notifications",
+            "nullable": true
+          },
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "A set of additional headers attached to the HTTP request\r\nfired towards the destination URL (typically used for context)",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identider of the subscription"
+          },
+          "event": {
+            "type": "string",
+            "description": "The type of message event to subscribe to"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The specification of a subscription to changes of\r\nstate of messages sent through a channel"
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": {}
+      },
+      "Terminal": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "The email address of the terminal",
+            "format": "email",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "description": "An optional display name for an e-mail terminal",
+            "nullable": true
+          },
+          "number": {
+            "type": "string",
+            "description": "The telephone number (MSISDN) of the terminal",
+            "format": "tel",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A terminal allows to send or receive messages through channels"
+      },
+      "NewMessageReceiver": {
+        "required": [
+          "channel",
+          "destinationUrl",
+          "to"
+        ],
+        "type": "object",
+        "properties": {
+          "channel": {
+            "type": "string",
+            "description": "The name of the channel transporting the incoming messages"
+          },
+          "destinationUrl": {
+            "type": "string",
+            "description": "The URL where to deliver the incoming messages",
+            "format": "uri"
+          },
+          "secret": {
+            "type": "string",
+            "description": "An optional secret word used to sign the webhook",
+            "nullable": true
+          },
+          "filter": {
+            "type": "string",
+            "description": "An optional additional filter used to retrict the messages \r\nto be delivered",
+            "nullable": true
+          },
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "An optional set of headers attached to the delivery\r\nrequest (used for correlation)",
+            "nullable": true
+          },
+          "to": {
+            "$ref": "#/components/schemas/Terminal"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The request to create a new receiver of messages"
+      },
+      "MessageReceiver": {
+        "required": [
+          "channel",
+          "destinationUrl",
+          "id",
+          "to"
+        ],
+        "type": "object",
+        "properties": {
+          "channel": {
+            "type": "string",
+            "description": "The name of the channel transporting the incoming messages"
+          },
+          "destinationUrl": {
+            "type": "string",
+            "description": "The URL where to deliver the incoming messages",
+            "format": "uri"
+          },
+          "secret": {
+            "type": "string",
+            "description": "An optional secret word used to sign the webhook",
+            "nullable": true
+          },
+          "filter": {
+            "type": "string",
+            "description": "An optional additional filter used to retrict the messages \r\nto be delivered",
+            "nullable": true
+          },
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "An optional set of headers attached to the delivery\r\nrequest (used for correlation)",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the receiver"
+          },
+          "to": {
+            "$ref": "#/components/schemas/Terminal"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A subscription to incoming messages (delivered as webhooks)"
+      },
+      "MessageReceiverUpdate": {
+        "type": "object",
+        "properties": {
+          "destinationUrl": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "secret": {
+            "type": "string",
+            "nullable": true
+          },
+          "filter": {
+            "type": "string",
+            "nullable": true
+          },
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A request to update the configurations of a message receiver"
+      },
+      "PageSortDirection": {
+        "enum": [
+          "default",
+          "asc",
+          "desc"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "PageSortDirection",
+          "modelAsString": true
+        }
+      },
+      "PageSort": {
+        "required": [
+          "field"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "direction": {
+            "$ref": "#/components/schemas/PageSortDirection"
+          },
+          "ascending": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PageRequest": {
+        "required": [
+          "page",
+          "size"
+        ],
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sortBy": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PageSort"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PageResultOfMessageReceiver": {
+        "required": [
+          "request",
+          "totalPages",
+          "totalResults"
+        ],
+        "type": "object",
+        "properties": {
+          "request": {
+            "$ref": "#/components/schemas/PageRequest"
+          },
+          "totalResults": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MessageReceiver"
+            },
+            "nullable": true
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "self": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "first": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "next": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "previous": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "last": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChannelType": {
+        "enum": [
+          "unknown",
+          "sms",
+          "messenger",
+          "whatsapp",
+          "email",
+          "viber",
+          "rcs",
+          "push",
+          "sandbox"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ChannelType",
+          "modelAsString": true
+        }
+      },
+      "ChannelDirections": {
+        "enum": [
+          "outbound",
+          "inbound",
+          "inboundOutbound"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ChannelDirections",
+          "modelAsString": true
+        }
+      },
+      "ChannelSource": {
+        "enum": [
+          "unknown",
+          "inventory",
+          "customer"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ChannelSource",
+          "modelAsString": true
+        }
+      },
+      "ChannelQuotaPeriod": {
+        "enum": [
+          "none",
+          "day",
+          "month",
+          "year"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ChannelQuotaPeriod",
+          "modelAsString": true
+        }
+      },
+      "ChannelQuota": {
+        "required": [
+          "limit",
+          "metricType"
+        ],
+        "type": "object",
+        "properties": {
+          "metricType": {
+            "type": "string",
+            "description": "The type of metric provisioned (eg. \"messages.outbound\", \"messages.fallbacks\")"
+          },
+          "period": {
+            "$ref": "#/components/schemas/ChannelQuotaPeriod"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The provisioned upper limit of the quota",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A provisioned usage quota of a channel capability"
+      },
+      "Channel": {
+        "required": [
+          "contentTypes",
+          "name",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the channel instance"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ChannelType"
+          },
+          "directions": {
+            "$ref": "#/components/schemas/ChannelDirections"
+          },
+          "source": {
+            "$ref": "#/components/schemas/ChannelSource"
+          },
+          "settings": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "A collection of settings of the channel instance (Note: the\r\ntypes of settings depend on the type of channel)",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the channel instance",
+            "nullable": true
+          },
+          "contentTypes": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of message content types that are supported\r\nby the channel (either because of configuration or because\r\nof native capabilities of the channel)"
+          },
+          "quotas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChannelQuota"
+            },
+            "description": "A list of provisioned messaging quotas (limits)\r\nto the usage of the channel instance",
+            "nullable": true
+          },
+          "active": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The specifications of a channel instance provided to a tenant"
+      },
+      "TerminalSource": {
+        "enum": [
+          "customer",
+          "inventory"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "TerminalSource",
+          "modelAsString": true
+        }
+      },
+      "NewServerPhoneNumber": {
+        "required": [
+          "number"
+        ],
+        "type": "object",
+        "properties": {
+          "number": {
+            "type": "string",
+            "description": "The phone number (MSISDN) to send messages",
+            "format": "tel"
+          },
+          "settings": {
+            "type": "object",
+            "additionalProperties": {},
+            "nullable": true
+          },
+          "source": {
+            "$ref": "#/components/schemas/TerminalSource"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The request to create a new phone number sender"
+      },
+      "TerminalStatus": {
+        "enum": [
+          "none",
+          "requested",
+          "validated",
+          "active",
+          "reported",
+          "blocked"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "TerminalStatus",
+          "modelAsString": true
+        }
+      },
+      "ServerTerminalState": {
+        "required": [
+          "actor",
+          "status",
+          "timeStamp"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/TerminalStatus"
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "actor": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": {},
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ServerPhoneNumber": {
+        "required": [
+          "number"
+        ],
+        "type": "object",
+        "properties": {
+          "number": {
+            "type": "string",
+            "format": "tel"
+          },
+          "states": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServerTerminalState"
+            },
+            "nullable": true
+          },
+          "settings": {
+            "type": "object",
+            "additionalProperties": {},
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "source": {
+            "$ref": "#/components/schemas/TerminalSource"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PageResultOfServerPhoneNumber": {
+        "required": [
+          "request",
+          "totalPages",
+          "totalResults"
+        ],
+        "type": "object",
+        "properties": {
+          "request": {
+            "$ref": "#/components/schemas/PageRequest"
+          },
+          "totalResults": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServerPhoneNumber"
+            },
+            "nullable": true
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "self": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "first": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "next": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "previous": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "last": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "https://deveel.eu.auth0.com/oauth/token",
+            "scopes": {
+              "send:message": "Send messages or batch of messages to individuals",
+              "receive:message": "Receive messages from individuals",
+              "read:channel": "Read-only access to user Channels",
+              "create:channel": "Create new user Channels",
+              "update:channel": "Update settings of existing user Channels",
+              "delete:channel": "Delete existing user Channels",
+              "read:phone": "Read-only access to server phone numbers",
+              "create:phone": "Request the registration of server phone numbers",
+              "update:phone": "Update the status and settings of server phone numbers",
+              "delete:phone": "Delete a server phone numbers",
+              "read:email": "Read-only access to server email addresses",
+              "create:email": "Request the registration of server email addresses",
+              "update:email": "Update the status and settings of server email addresses",
+              "delete:email": "Delete a server phone number",
+              "read:label": "Read-only access to server alpha-numeric labels",
+              "create:label": "Request the registration of server alpha-numeric labels",
+              "update:label": "Update the status and settings of server alpha-numeric labels",
+              "delete:label": "Delete a server alpha-numeric labels"
+            }
+          },
+          "authorizationCode": {
+            "authorizationUrl": "https://deveel.eu.auth0.com/authorize",
+            "tokenUrl": "https://deveel.eu.auth0.com/oauth/token",
+            "scopes": {
+              "send:message": "Send messages or batch of messages to individuals",
+              "receive:message": "Receive messages from individuals",
+              "read:channel": "Read-only access to user Channels",
+              "create:channel": "Create new user Channels",
+              "update:channel": "Update settings of existing user Channels",
+              "delete:channel": "Delete existing user Channels",
+              "read:phone": "Read-only access to server phone numbers",
+              "create:phone": "Request the registration of server phone numbers",
+              "update:phone": "Update the status and settings of server phone numbers",
+              "delete:phone": "Delete a server phone numbers",
+              "read:email": "Read-only access to server email addresses",
+              "create:email": "Request the registration of server email addresses",
+              "update:email": "Update the status and settings of server email addresses",
+              "delete:email": "Delete a server phone number",
+              "read:label": "Read-only access to server alpha-numeric labels",
+              "create:label": "Request the registration of server alpha-numeric labels",
+              "update:label": "Update the status and settings of server alpha-numeric labels",
+              "delete:label": "Delete a server alpha-numeric labels"
+            }
+          }
+        }
+      }
+    }
+  }
+}
