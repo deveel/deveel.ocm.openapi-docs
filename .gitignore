@@ -7,14 +7,8 @@ package-lock.json
 openapi-base.json
 openapi-merge.json
 
-dist.yaml
-redoc/index.html
 build-redoc.ps1
 bundle-redoc.ps1
 _site
 .jekyll-cache
 .jekyll-metadata
-Gemfile
-/Gemfile.lock
-api/management/*
-api/messaging/*
