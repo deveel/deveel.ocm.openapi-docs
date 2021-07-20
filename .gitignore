@@ -11,10 +11,10 @@ dist.yaml
 redoc/index.html
 build-redoc.ps1
 bundle-redoc.ps1
-docs/pages/_site
-docs/pages/.jekyll-cache
-docs/pages/.jekyll-metadata
-docs/pages/Gemfile
-docs/pages/Gemfile.lock
-docs/pages/api/management/*
-docs/pages/api/messaging/*
+_site
+.jekyll-cache
+.jekyll-metadata
+Gemfile
+/Gemfile.lock
+api/management/*
+api/messaging/*
