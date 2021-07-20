@@ -1,0 +1,32 @@
+{
+    "inputs": [
+        {
+            "inputFile": "./openapi-base.json"
+        },
+        {
+            "inputURL": "http://ocm-msg-api.azurewebsites.net/swagger/msg-v1/swagger.json",
+            "pathModification": {
+				"prepend": "/message"
+			}
+        },
+        {
+            "inputURL": "http://ocm-receiver-api.azurewebsites.net/swagger/msg-v1/swagger.json",
+            "pathModification": {
+				"prepend": "/message/receiver"
+			}
+        },
+        {
+            "inputURL": "http://ocm-channel-api.azurewebsites.net/swagger/msg-v1/swagger.json",
+            "pathModification": {
+				"prepend": "/channel"
+			}
+        },
+        {
+            "inputURL": "http://ocm-terminal-api.azurewebsites.net/swagger/msg-v1/swagger.json",
+            "pathModification": {
+				"prepend": "/terminal"
+			}
+        }
+    ], 
+    "output": "./ocm-msg-api-v1.json"
+  }

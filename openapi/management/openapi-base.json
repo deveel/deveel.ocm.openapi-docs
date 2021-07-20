@@ -1,0 +1,31 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+      "title": "Deveel Omni-Channel Messaging API",
+      "version": "v1",
+      "description": {
+        "$ref": "description.md"
+      },
+      "contact": {
+        "name": "Antonello Provenzano",
+        "email": "antonello@deveel.com"
+      },
+      "license": {
+        "name": "Deveel EULA",
+        "url": "https://docs.ocm.deveel.net/LICENSE.html"
+      },
+      "x-logo": {
+        "url": "https://github.com/deveel/deveel.ocm.openapi-docs/raw/main/deveel-logo.png"
+      }
+    },
+    "servers": [
+      {
+        "url": "https://api.ocm.deveel.net"
+      }
+    ],
+    "paths": {
+    },
+    "components": {
+
+    }
+}
