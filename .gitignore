@@ -6,6 +6,8 @@ ocm-api-v1.json
 package-lock.json
 openapi-base.json
 openapi-merge.json
+Gemfile
+Gemfile.lock
 
 build-redoc.ps1
 bundle-redoc.ps1

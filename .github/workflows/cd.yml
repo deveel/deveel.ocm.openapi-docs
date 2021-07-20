@@ -1,10 +1,10 @@
 name: Node.js CI
 
 on:
-#  push:
-#    branches: [ main ]
-#  pull_request:
-#    branches: [ main ]
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
   workflow_dispatch:
 
@@ -26,11 +26,11 @@ jobs:
       - name: Bundle ReDoc
         run: |
           npm run build
-          npx redoc-cli bundle --output ./api/messaging/v1/index.html --cdn -t ./.redoc/template.hbs ./openapi/messaging/ocm-msg-api-v1.json
-          npx redoc-cli bundle --output ./api/management/v1/index.html --cdn -t ./.redoc/template.hbs ./openapi/management/ocm-mgmt-api-v1.json
+          npx redoc-cli bundle --output ./docs/api/messaging/v1/index.html --cdn -t ./.redoc/template.hbs ./openapi/messaging/ocm-msg-api-v1.json
+          npx redoc-cli bundle --output ./docs/api/management/v1/index.html --cdn -t ./.redoc/template.hbs ./openapi/management/ocm-mgmt-api-v1.json
       
       - name: GitHub Pages v3
         uses: peaceiris/actions-github-pages@v3.1.12
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
+          publish_dir: ./docs
