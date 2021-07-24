@@ -2,7 +2,7 @@
 layout: default
 title: Inbound Messaging
 has_children: true
-nav_sort: 4
+nav_order: 3
 ---
 
 # Inbound Messaging

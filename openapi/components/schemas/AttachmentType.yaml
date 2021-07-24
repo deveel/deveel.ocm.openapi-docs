@@ -1,7 +1,0 @@
-enum:
-  - inline
-  - file
-type: string
-x-ms-enum:
-  name: AttachmentType
-  modelAsString: true

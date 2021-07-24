@@ -1,7 +1,0 @@
-enum:
-  - customer
-  - inventory
-type: string
-x-ms-enum:
-  name: TerminalSource
-  modelAsString: true

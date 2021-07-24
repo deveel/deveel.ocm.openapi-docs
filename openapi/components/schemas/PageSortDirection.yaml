@@ -1,8 +1,0 @@
-enum:
-  - default
-  - asc
-  - desc
-type: string
-x-ms-enum:
-  name: PageSortDirection
-  modelAsString: true

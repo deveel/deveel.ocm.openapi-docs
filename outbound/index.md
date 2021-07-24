@@ -1,6 +1,6 @@
 ---
 layout: default
-nav_sort: 1
+nav_order: 2
 title: Outbound Messaging
 has_children: true
 ---

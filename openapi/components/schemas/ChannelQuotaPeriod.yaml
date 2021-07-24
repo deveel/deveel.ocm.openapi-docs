@@ -1,9 +1,0 @@
-enum:
-  - none
-  - day
-  - month
-  - year
-type: string
-x-ms-enum:
-  name: ChannelQuotaPeriod
-  modelAsString: true
