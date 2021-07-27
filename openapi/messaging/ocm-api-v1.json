@@ -910,12 +910,12 @@
       },
       "MediaContent": {
         "required": [
-          "mediaType",
-          "source"
+          "source",
+          "type"
         ],
         "type": "object",
         "properties": {
-          "mediaType": {
+          "type": {
             "$ref": "#/components/schemas/MediaType"
           },
           "contentType": {

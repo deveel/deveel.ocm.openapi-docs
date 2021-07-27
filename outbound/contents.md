@@ -2,7 +2,7 @@
 layout: default
 title: Message Contents
 parent: Outbound Messaging
-nav_sort: 2
+nav_order: 2
 permalink: /outbound/contents
 ---
 
