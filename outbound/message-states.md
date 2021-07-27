@@ -2,6 +2,7 @@
 layout: default
 nav_order: 3
 title: Message States
+parent: Outbound Messaging
 ---
 
 ## Message State Changes

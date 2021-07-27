@@ -6,3 +6,5 @@ vendor
 build-redoc.ps1
 bundle-redoc.ps1
 package.json
+
+openapi/description.md
