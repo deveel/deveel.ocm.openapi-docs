@@ -296,86 +296,70 @@
         ]
       }
     },
-    "/terminal/email": {
-      "post": {
+    "/channel/{channelId}/credentials": {
+      "put": {
         "tags": [
-          "email"
+          "channel"
         ],
-        "summary": "Requests a new E-mail",
-        "operationId": "emailAddress_request",
+        "summary": "Updates the Channel Credentials",
+        "operationId": "channel_updateCredentials",
+        "parameters": [
+          {
+            "name": "channelId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/NewServerEmail"
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SecureChannelCredentials"
+                }
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewServerEmail"
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SecureChannelCredentials"
+                }
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewServerEmail"
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SecureChannelCredentials"
+                }
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/NewServerEmail"
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SecureChannelCredentials"
+                }
               }
             }
           },
           "required": true
         },
         "responses": {
-          "201": {
-            "description": "The email was added to the tenant",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServerEmail"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServerEmail"
-                }
-              }
-            }
+          "204": {
+            "description": "The credentials were updated successfully"
           },
           "400": {
-            "description": "The request is invalid",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request is unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "The requested action is forbidden",
+            "description": "The request contained some invalid elements",
             "content": {
               "application/json": {
                 "schema": {
@@ -390,22 +374,7 @@
             }
           },
           "404": {
-            "description": "The source e-mail address was not found in the inventory",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "An email with the same address already exists",
+            "description": "The channel was not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -419,96 +388,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "oauth2": [
-              "create:email"
-            ]
-          }
-        ]
-      },
-      "get": {
-        "tags": [
-          "email"
-        ],
-        "summary": "Gets a page of E-Mails",
-        "operationId": "emailAddress_getPage",
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "schema": {
-              "minimum": 1,
-              "type": "integer",
-              "format": "int32",
-              "default": 1
-            }
-          },
-          {
-            "name": "size",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 10
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A page of e-mail addresses",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageResultOfServerEmail"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageResultOfServerEmail"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request is unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "The requested action is forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": [
-              "read:email"
-            ]
-          }
-        ]
+        }
       }
     },
     "/terminal/email/{id}": {
@@ -594,150 +474,19 @@
         "security": [
           {
             "oauth2": [
-              "read:email"
+              "read:terminal"
             ]
           }
         ]
       }
     },
-    "/terminal/phone": {
-      "post": {
-        "tags": [
-          "phone"
-        ],
-        "summary": "Requests a new Phone Number",
-        "operationId": "phoneNumber_request",
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewServerPhoneNumber"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewServerPhoneNumber"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewServerPhoneNumber"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewServerPhoneNumber"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "The number was added to the tenant",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServerPhoneNumber"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServerPhoneNumber"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "The request is invalid",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request is unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "The requested action is forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "The source phone number was not found in the inventory",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "A phone with the same number already exists",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": [
-              "create:phone"
-            ]
-          }
-        ]
-      },
+    "/terminal/email": {
       "get": {
         "tags": [
-          "phone"
+          "email"
         ],
-        "summary": "Gets a page of Phone Numbers",
-        "operationId": "phoneNumber_getPage",
+        "summary": "Gets a page of E-Mails",
+        "operationId": "emailAddress_getPage",
         "parameters": [
           {
             "name": "page",
@@ -761,16 +510,16 @@
         ],
         "responses": {
           "200": {
-            "description": "A page of phone numbers",
+            "description": "A page of e-mail addresses",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PageResultOfServerPhoneNumber"
+                  "$ref": "#/components/schemas/PageResultOfServerEmail"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PageResultOfServerPhoneNumber"
+                  "$ref": "#/components/schemas/PageResultOfServerEmail"
                 }
               }
             }
@@ -809,7 +558,7 @@
         "security": [
           {
             "oauth2": [
-              "read:phone"
+              "read:terminal"
             ]
           }
         ]
@@ -898,7 +647,313 @@
         "security": [
           {
             "oauth2": [
-              "read:phone"
+              "read:terminal"
+            ]
+          }
+        ]
+      }
+    },
+    "/terminal/phone": {
+      "get": {
+        "tags": [
+          "phone"
+        ],
+        "summary": "Gets a page of Phone Numbers",
+        "operationId": "phoneNumber_getPage",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A page of phone numbers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResultOfServerPhoneNumber"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResultOfServerPhoneNumber"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "read:terminal"
+            ]
+          }
+        ]
+      }
+    },
+    "/terminal/": {
+      "post": {
+        "tags": [
+          "terminal"
+        ],
+        "summary": "Requests a Terminal",
+        "operationId": "terminal_request",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServerTerminalRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServerTerminalRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServerTerminalRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServerTerminalRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "The terminal was successfully requested",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerTerminal"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerTerminal"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request contains invalid elements",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The source terminal from the inventory was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A terminal with the same address already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "request:terminal"
+            ]
+          }
+        ]
+      }
+    },
+    "/terminal/{id}": {
+      "get": {
+        "tags": [
+          "terminal"
+        ],
+        "summary": "Gets a Terminal",
+        "operationId": "terminal_get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The terminal was found and returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerTerminal"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerTerminal"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The terminal was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "read:terminal"
             ]
           }
         ]
@@ -1929,18 +1984,11 @@
               "create:channel": "Create new user Channels",
               "update:channel": "Update settings of existing user Channels",
               "delete:channel": "Delete existing user Channels",
-              "read:phone": "Read-only access to server phone numbers",
-              "create:phone": "Request the registration of server phone numbers",
-              "update:phone": "Update the status and settings of server phone numbers",
-              "delete:phone": "Delete a server phone numbers",
-              "read:email": "Read-only access to server email addresses",
-              "create:email": "Request the registration of server email addresses",
-              "update:email": "Update the status and settings of server email addresses",
-              "delete:email": "Delete a server phone number",
-              "read:label": "Read-only access to server alpha-numeric labels",
-              "create:label": "Request the registration of server alpha-numeric labels",
-              "update:label": "Update the status and settings of server alpha-numeric labels",
-              "delete:label": "Delete a server alpha-numeric labels"
+              "request:terminal": "Request the assignment of existing or new terminals",
+              "delete:terminal": "Delete existing terminals",
+              "read:terminal": "Read access to the terminals",
+              "send:message": "Configure notifications of message state changes",
+              "receive:message": "Configure routing of incoming messages"
             }
           },
           "authorizationCode": {
@@ -1951,18 +1999,11 @@
               "create:channel": "Create new user Channels",
               "update:channel": "Update settings of existing user Channels",
               "delete:channel": "Delete existing user Channels",
-              "read:phone": "Read-only access to server phone numbers",
-              "create:phone": "Request the registration of server phone numbers",
-              "update:phone": "Update the status and settings of server phone numbers",
-              "delete:phone": "Delete a server phone numbers",
-              "read:email": "Read-only access to server email addresses",
-              "create:email": "Request the registration of server email addresses",
-              "update:email": "Update the status and settings of server email addresses",
-              "delete:email": "Delete a server phone number",
-              "read:label": "Read-only access to server alpha-numeric labels",
-              "create:label": "Request the registration of server alpha-numeric labels",
-              "update:label": "Update the status and settings of server alpha-numeric labels",
-              "delete:label": "Delete a server alpha-numeric labels"
+              "request:terminal": "Request the assignment of existing or new terminals",
+              "delete:terminal": "Delete existing terminals",
+              "read:terminal": "Read access to the terminals",
+              "send:message": "Configure notifications of message state changes",
+              "receive:message": "Configure routing of incoming messages"
             }
           }
         }
@@ -2174,10 +2215,25 @@
         "additionalProperties": false,
         "description": "A provisioned usage quota of a channel capability"
       },
+      "ChannelStatus": {
+        "enum": [
+          "none",
+          "requested",
+          "active",
+          "suspended",
+          "denied"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ChannelStatus",
+          "modelAsString": true
+        }
+      },
       "Channel": {
         "required": [
           "contentTypes",
           "name",
+          "status",
           "type"
         ],
         "type": "object",
@@ -2222,8 +2278,13 @@
             "description": "A list of provisioned messaging quotas (limits)\r\nto the usage of the channel instance",
             "nullable": true
           },
-          "active": {
-            "type": "boolean"
+          "status": {
+            "$ref": "#/components/schemas/ChannelStatus"
+          },
+          "lastChanged": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -2268,39 +2329,6 @@
           "modelAsString": true
         }
       },
-      "NewServerEmail": {
-        "required": [
-          "address",
-          "source"
-        ],
-        "type": "object",
-        "properties": {
-          "displayName": {
-            "type": "string",
-            "description": "An optional display name of the sender",
-            "nullable": true
-          },
-          "address": {
-            "type": "string",
-            "description": "The address of the e-mail sending messages",
-            "format": "email"
-          },
-          "settings": {
-            "type": "object",
-            "additionalProperties": {},
-            "nullable": true
-          },
-          "source": {
-            "$ref": "#/components/schemas/TerminalSource"
-          },
-          "sourceId": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "The request to create a new e-mail address used to send messages"
-      },
       "TerminalStatus": {
         "enum": [
           "none",
@@ -2320,6 +2348,7 @@
         "required": [
           "address",
           "id",
+          "lastChanged",
           "source",
           "status"
         ],
@@ -2334,14 +2363,6 @@
             "type": "string",
             "description": "An optional display name of the sender",
             "nullable": true
-          },
-          "status": {
-            "$ref": "#/components/schemas/TerminalStatus"
-          },
-          "lastChanged": {
-            "type": "string",
-            "description": "The date in which the last status was reported",
-            "format": "date-time"
           },
           "settings": {
             "type": "object",
@@ -2359,6 +2380,13 @@
           },
           "source": {
             "$ref": "#/components/schemas/TerminalSource"
+          },
+          "status": {
+            "$ref": "#/components/schemas/TerminalStatus"
+          },
+          "lastChanged": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false,
@@ -2475,37 +2503,10 @@
         },
         "additionalProperties": false
       },
-      "NewServerPhoneNumber": {
-        "required": [
-          "number",
-          "source"
-        ],
-        "type": "object",
-        "properties": {
-          "number": {
-            "type": "string",
-            "description": "The phone number (MSISDN) to send messages",
-            "format": "tel"
-          },
-          "settings": {
-            "type": "object",
-            "additionalProperties": {},
-            "nullable": true
-          },
-          "source": {
-            "$ref": "#/components/schemas/TerminalSource"
-          },
-          "sourceId": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "The request to create a new phone number sender"
-      },
       "ServerPhoneNumber": {
         "required": [
           "id",
+          "lastChanged",
           "number",
           "source",
           "status"
@@ -2516,14 +2517,6 @@
             "type": "string",
             "description": "The number used by applications to send messages",
             "format": "tel"
-          },
-          "status": {
-            "$ref": "#/components/schemas/TerminalStatus"
-          },
-          "lastChanged": {
-            "type": "string",
-            "description": "The date in which the last status was reported",
-            "format": "date-time"
           },
           "settings": {
             "type": "object",
@@ -2541,6 +2534,13 @@
           },
           "source": {
             "$ref": "#/components/schemas/TerminalSource"
+          },
+          "status": {
+            "$ref": "#/components/schemas/TerminalStatus"
+          },
+          "lastChanged": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false,
@@ -2600,6 +2600,113 @@
           }
         },
         "additionalProperties": false
+      },
+      "EmailAddress": {
+        "required": [
+          "address"
+        ],
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "format": "email"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ServerTerminalRequest": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "minLength": 2,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]*$",
+            "type": "string",
+            "description": "The sender is an alpha-numeric label",
+            "nullable": true
+          },
+          "email": {
+            "$ref": "#/components/schemas/EmailAddress"
+          },
+          "number": {
+            "minLength": 6,
+            "type": "string",
+            "format": "tel",
+            "nullable": true
+          },
+          "terminalId": {
+            "type": "string",
+            "nullable": true
+          },
+          "settings": {
+            "type": "object",
+            "additionalProperties": {},
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ServerTerminal": {
+        "required": [
+          "source",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/TerminalStatus"
+          },
+          "label": {
+            "minLength": 2,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]*$",
+            "type": "string",
+            "description": "The sender is an alpha-numeric label",
+            "nullable": true
+          },
+          "lastChanged": {
+            "type": "string",
+            "description": "The date in which the last status was reported",
+            "format": "date-time"
+          },
+          "source": {
+            "$ref": "#/components/schemas/TerminalSource"
+          },
+          "sourceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "settings": {
+            "type": "object",
+            "additionalProperties": {},
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "description": "The email address of the terminal",
+            "format": "email",
+            "nullable": true
+          },
+          "displayName": {
+            "type": "string",
+            "description": "An optional display name for an e-mail terminal",
+            "nullable": true
+          },
+          "number": {
+            "type": "string",
+            "description": "The telephone number (MSISDN) of the terminal",
+            "format": "tel",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A terminal provisioned to the customer that can be used to \r\nsend messages from server applications"
       },
       "Terminal": {
         "type": "object",
