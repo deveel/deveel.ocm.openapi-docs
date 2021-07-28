@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Webhooks
-nav_sort: 4
+nav_order: 4
 permalink: /webhooks
 has_children: true
 ---
