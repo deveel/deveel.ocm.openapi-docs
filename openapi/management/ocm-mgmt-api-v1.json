@@ -2012,7 +2012,6 @@
     "schemas": {
       "ChannelType": {
         "enum": [
-          "unknown",
           "sms",
           "messenger",
           "whatsapp",
@@ -2687,16 +2686,14 @@
             "type": "string",
             "nullable": true
           },
-          "email": {
+          "emailAddress": {
             "type": "string",
             "description": "The email address of the terminal",
             "format": "email",
             "nullable": true
           },
-          "displayName": {
-            "type": "string",
-            "description": "An optional display name for an e-mail terminal",
-            "nullable": true
+          "email": {
+            "$ref": "#/components/schemas/EmailAddress"
           },
           "number": {
             "type": "string",
@@ -2711,16 +2708,14 @@
       "Terminal": {
         "type": "object",
         "properties": {
-          "email": {
+          "emailAddress": {
             "type": "string",
             "description": "The email address of the terminal",
             "format": "email",
             "nullable": true
           },
-          "displayName": {
-            "type": "string",
-            "description": "An optional display name for an e-mail terminal",
-            "nullable": true
+          "email": {
+            "$ref": "#/components/schemas/EmailAddress"
           },
           "number": {
             "type": "string",
@@ -2774,6 +2769,59 @@
         "additionalProperties": false,
         "description": "The request to create a new receiver of messages"
       },
+      "WebFilterOperator": {
+        "enum": [
+          "eq",
+          "ne",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "contains",
+          "startsWith",
+          "endsWith",
+          "between"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "WebFilterOperator",
+          "modelAsString": true
+        }
+      },
+      "BinaryFilter": {
+        "required": [
+          "field",
+          "op"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "minLength": 3,
+            "type": "string"
+          },
+          "op": {
+            "$ref": "#/components/schemas/WebFilterOperator"
+          },
+          "string": {
+            "minLength": 1,
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
+            "type": "number",
+            "format": "double"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "int": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
       "MessageReceiver": {
         "required": [
           "channel",
@@ -2797,8 +2845,11 @@
             "description": "An optional secret word used to sign the webhook",
             "nullable": true
           },
-          "filter": {
-            "type": "string",
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BinaryFilter"
+            },
             "description": "An optional additional filter used to retrict the messages \r\nto be delivered",
             "nullable": true
           },

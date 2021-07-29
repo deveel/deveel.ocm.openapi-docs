@@ -791,6 +791,23 @@
       }
     },
     "schemas": {
+      "EmailAddress": {
+        "required": [
+          "address"
+        ],
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "format": "email"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "SenderTerminal": {
         "type": "object",
         "properties": {
@@ -806,16 +823,14 @@
             "description": "The identifier of a terminal provisioned to the tenant",
             "nullable": true
           },
-          "email": {
+          "emailAddress": {
             "type": "string",
             "description": "The email address of the terminal",
             "format": "email",
             "nullable": true
           },
-          "displayName": {
-            "type": "string",
-            "description": "An optional display name for an e-mail terminal",
-            "nullable": true
+          "email": {
+            "$ref": "#/components/schemas/EmailAddress"
           },
           "number": {
             "type": "string",
@@ -830,16 +845,14 @@
       "Terminal": {
         "type": "object",
         "properties": {
-          "email": {
+          "emailAddress": {
             "type": "string",
             "description": "The email address of the terminal",
             "format": "email",
             "nullable": true
           },
-          "displayName": {
-            "type": "string",
-            "description": "An optional display name for an e-mail terminal",
-            "nullable": true
+          "email": {
+            "$ref": "#/components/schemas/EmailAddress"
           },
           "number": {
             "type": "string",
@@ -1296,7 +1309,6 @@
       },
       "ChannelType": {
         "enum": [
-          "unknown",
           "sms",
           "messenger",
           "whatsapp",

@@ -3,6 +3,7 @@ layout: default
 title: Message States
 parent: Webhooks
 nav_sort: 1
+permalink: /webhooks/message-states
 ---
 
 ## Message State Changes
@@ -11,14 +12,16 @@ The system produces a set of HTTP callbacks (_webhooks_), to inform subscribing 
 
 The payload of the callback (an HTTP request) is typically composed of the following elements:
 
-| Property    | Description                                                         |
-|-------------|---------------------------------------------------------------------|
-| id          | A globally unique identifier of the event                           |
-| messageId   | The unique identifier provided as response from the messaging APIs  |
-| statusCode  | Indiates the status of the message (see the list below)             |
-| channelName | The name of the channel instance used to transport the message      |
-| context     | A dictionary of contextual data set to the original message         |
-| timeStamp   | The exact time-stamp of the event (as on the server side)           |
+| Property     | Description                                                                 |
+|--------------|-----------------------------------------------------------------------------|
+| id           | A globally unique identifier of the event                                   |
+| messageId    | The unique identifier provided as response from the messaging APIs          |
+| status       | Indiates the status of the message (see the list below)                     |
+| channel.name | The name of the channel instance used to transport the message              |
+| channel.id   | The unique identifier of the channel instance                               |
+| channel.type | The [type of channel](/channels) (eg. _sms_, _email_, _whatsapp_ etc.)      |
+| context      | A dictionary of contextual data set to the original message                 |
+| timeStamp    | The exact time-stamp of the event (as on the server side)                   |
 
 Additionally to the above ones, other event-specific fields are present, at the same level: see the list below to learn about them.
 
@@ -29,17 +32,19 @@ Error events (_delivery retried_ and _delivery failed_) include some additional 
 | errorCode    | A well-known code that hints the user on the kind of error         |
 | errorMessage | A message that is describing in more details the error             |
 
-The _statusCode_ field in the payload of the event can have one of the following values:
+When the message failed to be delivered, and a fallback was configured, the state will include a `fallbackTo` field, that specifies the unique identifier of the message triggered
+
+The _status_ field in the payload of the event can have one of the following values:
 
 | **Code**             | Description                                                        |
 |----------------------|--------------------------------------------------------------------|
-| _QUEUED_             | The system queued the message                                      |
-| _SENT_               | The message was actually sent to the provider                      |
-| _DELIVERED_          | The message was successfully delivered to the receiver             |
-| _DELIVERY_RETRIED_   | An attept to deliver the message failed for any reason             |
-| _DELIVERY_FAILED_    | It was not possible to deliver the message after a number of tries |
-| _READ_               | The receiver read the message (not supported by all channels)      |
-| _DELETED_            | The receiver deleted the message (not supported by all channels)   |
+| `queued`             | The system queued the message                                      |
+| `sent`               | The message was actually sent to the provider                      |
+| `delivered`          | The message was successfully delivered to the receiver             |
+| `deliveryRetried`    | An attept to deliver the message failed for any reason             |
+| `deliveryFailed`     | It was not possible to deliver the message after a number of tries |
+| `read`               | The receiver read the message (not supported by all channels)      |
+| `deleted`            | The receiver deleted the message (not supported by all channels)   |
 
 **Note**: Request to send a message or a batch of messages through the APIs provided by this service might not immediately return any error, since the only handling at that level is the check of the format of the request: listening to the status updates would inform on the real status of the message delivery and if any error occurred during its transportation to the receiver.
 
@@ -50,9 +55,13 @@ This callback notifies the listening application that a message was queued and i
 ```json
 {
     "id": "9d0918f6d23c4d40bfe2ee579cb9d81d",
-    "statusCode": "QUEUED",
+    "status": "queued",
     "messageId": "a28fe2bb188642c8b175f816fa32aa0e",
-    "channelName": "channel-1",
+    "channel":{
+        "name": "channel-1",
+        "type": "sms",
+        "id": "76eaa6406bc94c2db3c41c25e641aab8" 
+    },
     "context": {
         "prop1": "value1",
         "prop2": 33,
@@ -69,9 +78,13 @@ This callback notifies that the given message was sent through the channel and w
 ```json
 {
     "id": "6b3900f233484cfc8c82e4f629e894bb",
-    "statusCode": "SENT",
+    "status": "sent",
     "messageId": "a28fe2bb188642c8b175f816fa32aa0e",
-    "channelName": "channel-1",
+    "channel": {
+        "name": "channel-1",
+        "type": "sms",
+        "id": "76eaa6406bc94c2db3c41c25e641aab8"
+    },
     "context": {
         "prop1": "value",
         ...
@@ -89,9 +102,14 @@ If subscribed, this event is notified to the user (as a webhook) each time the a
 ```json
 {
     "id": "c65671e1d9fd4a448e3805cb200868ff",
-    "statusCode": "DELIVERY_RETRIED",
+    "status": "deliveryRetried",
     "messageId": "a28fe2bb188642c8b175f816fa32aa0e",
-    "channelName": "channel-1",
+    "channel": {
+        "name": "channel-1",
+        "type": "sms",
+        "id": "76eaa6406bc94c2db3c41c25e641aab8"
+    },
+    "attemptCount": 2,
     "errorCode": "CHANNEL_UNKNOWN_ERROR",
     "errorMessage": "The channel suffered an internal error",
     "context": {
@@ -111,9 +129,14 @@ If the message failed to be delivered had a fallback message configuration  then
 ```json
 {
     "id": "57721f483fa946ff9176ba86956057f0",
-    "statusCode": "DELIVERY_FAILED",
+    "status": "deliveryFailed",
     "messageId": "a28fe2bb188642c8b175f816fa32aa0e",
-    "channelName": "channel-1",
+    "channel": {
+        "name": "channel-1",
+        "type": "sms",
+        "id": "76eaa6406bc94c2db3c41c25e641aab8"
+    },
+    "attemptCount": 3,
     "errorCode": "REJECTED_BY_CHANNEL",
     "errorMessage": "The channel actively rejected the delivery of the message",
     "fallbackTo": "4094c9a0dd1e4413b41ae3f35a465dae",
@@ -134,9 +157,13 @@ If a message is successfully delivered to the receiver, no futher attempts are d
 ``` json
 {
     "id": "44c32607b09049f88e891d066ed57511",
-    "statusCode": "DELIVERED",
+    "status": "delivered",
     "messageId": "a28fe2bb188642c8b175f816fa32aa0e",
-    "channelName": "channel-1",
+    "channel": {
+        "name": "channel-1",
+        "type": "sms",
+        "id": "76eaa6406bc94c2db3c41c25e641aab8"
+    },
     "context": {
         "prop1": "value",
         ...
@@ -154,9 +181,13 @@ This feature is typically offered by _Over-the-Top_ (OTT) channels (like _WhatsA
 ``` json
 {
     "id": "2a3a51bb5e9c45fd8a60c01c39becb0e",
-    "statusCode": "READ",
+    "status": "read",
     "messageId": "a28fe2bb188642c8b175f816fa32aa0e",
-    "channelName": "channel-1",
+    "channel": {
+        "name": "channel-1",
+        "type": "sms",
+        "id": "76eaa6406bc94c2db3c41c25e641aab8"
+    },
     "context": {
         "prop1": "value",
         ...
@@ -179,9 +210,13 @@ It is possible to receive some environment information, when the channels suppor
 ```json
 {
     "id": "57721f483fa946ff9176ba86956057f0",
-    "statusCode": "DELETED",
+    "status": "deleted",
     "messageId": "a28fe2bb188642c8b175f816fa32aa0e",
-    "channelName": "channel-1",
+    "channel": {
+        "name": "channel-1",
+        "type": "sms",
+        "id": "76eaa6406bc94c2db3c41c25e641aab8"
+    },
     "context": {
         "prop1": "value",
         ...
