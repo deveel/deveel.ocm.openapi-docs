@@ -636,22 +636,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReceivedMessage"
+                  "$ref": "#/components/schemas/InboundMessage"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReceivedMessage"
+                  "$ref": "#/components/schemas/InboundMessage"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReceivedMessage"
+                  "$ref": "#/components/schemas/InboundMessage"
                 }
               },
               "text/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReceivedMessage"
+                  "$ref": "#/components/schemas/InboundMessage"
                 }
               }
             }
@@ -1418,7 +1418,7 @@
         "additionalProperties": false,
         "description": "Describes the change of state of an outbound message"
       },
-      "ReceivedMessage": {
+      "InboundMessage": {
         "required": [
           "content",
           "receiver",

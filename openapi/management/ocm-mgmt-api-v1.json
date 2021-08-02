@@ -33,22 +33,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/NewCustomerChannel"
+                "$ref": "#/components/schemas/UserChannelRequest"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewCustomerChannel"
+                "$ref": "#/components/schemas/UserChannelRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewCustomerChannel"
+                "$ref": "#/components/schemas/UserChannelRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/NewCustomerChannel"
+                "$ref": "#/components/schemas/UserChannelRequest"
               }
             }
           },
@@ -959,33 +959,151 @@
         ]
       }
     },
-    "/message/receiver/": {
+    "/terminal/lookup": {
       "post": {
         "tags": [
-          "receiver"
+          "terminal"
         ],
-        "summary": "Creates a new Receiver of Incoming Messages",
-        "operationId": "receiver_create",
+        "summary": "Looks up a Terminal",
+        "operationId": "terminal_lookup",
         "requestBody": {
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/NewMessageReceiver"
+                "$ref": "#/components/schemas/TerminalLookup"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewMessageReceiver"
+                "$ref": "#/components/schemas/TerminalLookup"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewMessageReceiver"
+                "$ref": "#/components/schemas/TerminalLookup"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/NewMessageReceiver"
+                "$ref": "#/components/schemas/TerminalLookup"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The terminal was found and returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerTerminal"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerTerminal"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The content of the request is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The terminal was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "read:terminal"
+            ]
+          }
+        ]
+      }
+    },
+    "/route/": {
+      "post": {
+        "tags": [
+          "route"
+        ],
+        "summary": "Creates a new Route of Incoming Messages",
+        "operationId": "route_create",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewMessageRoute"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewMessageRoute"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewMessageRoute"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewMessageRoute"
               }
             }
           },
@@ -993,16 +1111,16 @@
         },
         "responses": {
           "201": {
-            "description": "The receiver was created",
+            "description": "The route was created",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MessageReceiver"
+                  "$ref": "#/components/schemas/MessageRoute"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MessageReceiver"
+                  "$ref": "#/components/schemas/MessageRoute"
                 }
               }
             }
@@ -1095,13 +1213,13 @@
         ]
       }
     },
-    "/message/receiver/{id}": {
+    "/route/{id}": {
       "get": {
         "tags": [
-          "receiver"
+          "route"
         ],
-        "summary": "Gets a Receiver of Incoming Messages",
-        "operationId": "receiver_get",
+        "summary": "Gets a Route of Incoming Messages",
+        "operationId": "route_get",
         "parameters": [
           {
             "name": "id",
@@ -1115,16 +1233,16 @@
         ],
         "responses": {
           "200": {
-            "description": "The receiver with the given ID was found",
+            "description": "The route with the given ID was found",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MessageReceiver"
+                  "$ref": "#/components/schemas/MessageRoute"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MessageReceiver"
+                  "$ref": "#/components/schemas/MessageRoute"
                 }
               }
             }
@@ -1160,7 +1278,7 @@
             }
           },
           "404": {
-            "description": "No receiver was found with the given ID",
+            "description": "No route was found with the given ID",
             "content": {
               "application/json": {
                 "schema": {
@@ -1188,10 +1306,10 @@
       },
       "delete": {
         "tags": [
-          "receiver"
+          "route"
         ],
-        "summary": "Deletes a given Message Receiver",
-        "operationId": "receiver_delete",
+        "summary": "Deletes a given Message Route",
+        "operationId": "route_delete",
         "parameters": [
           {
             "name": "id",
@@ -1205,7 +1323,7 @@
         ],
         "responses": {
           "204": {
-            "description": "The receiver was successfully deleted"
+            "description": "The route was successfully deleted"
           },
           "401": {
             "description": "The request is unauthorized",
@@ -1238,7 +1356,7 @@
             }
           },
           "404": {
-            "description": "None receiver was found with the given ID",
+            "description": "None route was found with the given ID",
             "content": {
               "application/json": {
                 "schema": {
@@ -1266,10 +1384,10 @@
       },
       "put": {
         "tags": [
-          "receiver"
+          "route"
         ],
-        "summary": "Updates the information of a Message Receiver",
-        "operationId": "receiver_update",
+        "summary": "Updates the information of a Message Route",
+        "operationId": "route_update",
         "parameters": [
           {
             "name": "id",
@@ -1285,22 +1403,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/MessageReceiverUpdate"
+                "$ref": "#/components/schemas/MessageRouteUpdate"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/MessageReceiverUpdate"
+                "$ref": "#/components/schemas/MessageRouteUpdate"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/MessageReceiverUpdate"
+                "$ref": "#/components/schemas/MessageRouteUpdate"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/MessageReceiverUpdate"
+                "$ref": "#/components/schemas/MessageRouteUpdate"
               }
             }
           },
@@ -1308,16 +1426,16 @@
         },
         "responses": {
           "200": {
-            "description": "The updated version of the receiver",
+            "description": "The updated version of the route",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MessageReceiver"
+                  "$ref": "#/components/schemas/MessageRoute"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MessageReceiver"
+                  "$ref": "#/components/schemas/MessageRoute"
                 }
               }
             }
@@ -1326,7 +1444,7 @@
             "description": "The update request did not cause any changes"
           },
           "304": {
-            "description": "No changes were made to the receiver"
+            "description": "No changes were made to the route"
           },
           "401": {
             "description": "The request is unauthorized",
@@ -1359,7 +1477,7 @@
             }
           },
           "404": {
-            "description": "None receiver was found with the given ID",
+            "description": "None route was found with the given ID",
             "content": {
               "application/json": {
                 "schema": {
@@ -1386,13 +1504,13 @@
         ]
       }
     },
-    "/message/receiver/page": {
+    "/route/page": {
       "get": {
         "tags": [
-          "receiver"
+          "route"
         ],
-        "summary": "Gets a page of Message Receivers",
-        "operationId": "receiver_getPage",
+        "summary": "Gets a page of Message Routes",
+        "operationId": "route_getPage",
         "parameters": [
           {
             "name": "number",
@@ -1419,12 +1537,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PageResultOfMessageReceiver"
+                  "$ref": "#/components/schemas/PageResultOfMessageRoute"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PageResultOfMessageReceiver"
+                  "$ref": "#/components/schemas/PageResultOfMessageRoute"
                 }
               }
             }
@@ -2010,35 +2128,6 @@
       }
     },
     "schemas": {
-      "ChannelType": {
-        "enum": [
-          "sms",
-          "messenger",
-          "whatsapp",
-          "email",
-          "viber",
-          "rcs",
-          "push",
-          "sandbox"
-        ],
-        "type": "string",
-        "x-ms-enum": {
-          "name": "ChannelType",
-          "modelAsString": true
-        }
-      },
-      "ChannelDirections": {
-        "enum": [
-          "outbound",
-          "inbound",
-          "inboundOutbound"
-        ],
-        "type": "string",
-        "x-ms-enum": {
-          "name": "ChannelDirections",
-          "modelAsString": true
-        }
-      },
       "ApiKeyLocation": {
         "enum": [
           "default",
@@ -2115,9 +2204,39 @@
         },
         "additionalProperties": false
       },
-      "NewCustomerChannel": {
+      "ChannelType": {
+        "enum": [
+          "sms",
+          "messenger",
+          "whatsapp",
+          "email",
+          "viber",
+          "rcs",
+          "push",
+          "sandbox"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ChannelType",
+          "modelAsString": true
+        }
+      },
+      "ChannelDirections": {
+        "enum": [
+          "default",
+          "out",
+          "in",
+          "both"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ChannelDirections",
+          "modelAsString": true
+        }
+      },
+      "UserChannelRequest": {
         "required": [
-          "contentTypes",
+          "credentials",
           "directions",
           "name",
           "provider",
@@ -2125,6 +2244,23 @@
         ],
         "type": "object",
         "properties": {
+          "provider": {
+            "type": "string"
+          },
+          "credentials": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SecureChannelCredentials"
+            }
+          },
+          "contentTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
           "name": {
             "minLength": 3,
             "pattern": "^[a-zA-Z0-9_.-]+$",
@@ -2134,28 +2270,8 @@
           "type": {
             "$ref": "#/components/schemas/ChannelType"
           },
-          "provider": {
-            "type": "string",
-            "description": "The unique name of the provider of the channel"
-          },
           "directions": {
             "$ref": "#/components/schemas/ChannelDirections"
-          },
-          "credentials": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SecureChannelCredentials"
-            },
-            "description": "A list of credentials associated to the channel",
-            "nullable": true
-          },
-          "contentTypes": {
-            "minItems": 1,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "The list of message content types the channel should support"
           },
           "settings": {
             "type": "object",
@@ -2165,54 +2281,6 @@
           }
         },
         "additionalProperties": false
-      },
-      "ChannelSource": {
-        "enum": [
-          "unknown",
-          "inventory",
-          "customer"
-        ],
-        "type": "string",
-        "x-ms-enum": {
-          "name": "ChannelSource",
-          "modelAsString": true
-        }
-      },
-      "ChannelQuotaPeriod": {
-        "enum": [
-          "none",
-          "day",
-          "month",
-          "year"
-        ],
-        "type": "string",
-        "x-ms-enum": {
-          "name": "ChannelQuotaPeriod",
-          "modelAsString": true
-        }
-      },
-      "ChannelQuota": {
-        "required": [
-          "limit",
-          "metricType"
-        ],
-        "type": "object",
-        "properties": {
-          "metricType": {
-            "type": "string",
-            "description": "The type of metric provisioned (eg. \"messages.outbound\", \"messages.fallbacks\")"
-          },
-          "period": {
-            "$ref": "#/components/schemas/ChannelQuotaPeriod"
-          },
-          "limit": {
-            "type": "integer",
-            "description": "The provisioned upper limit of the quota",
-            "format": "int64"
-          }
-        },
-        "additionalProperties": false,
-        "description": "A provisioned usage quota of a channel capability"
       },
       "ChannelStatus": {
         "enum": [
@@ -2237,6 +2305,14 @@
         ],
         "type": "object",
         "properties": {
+          "status": {
+            "$ref": "#/components/schemas/ChannelStatus"
+          },
+          "lastChanged": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
           "name": {
             "type": "string",
             "description": "The name of the channel instance"
@@ -2246,9 +2322,6 @@
           },
           "directions": {
             "$ref": "#/components/schemas/ChannelDirections"
-          },
-          "source": {
-            "$ref": "#/components/schemas/ChannelSource"
           },
           "settings": {
             "type": "object",
@@ -2268,22 +2341,6 @@
               "type": "string"
             },
             "description": "A list of message content types that are supported\r\nby the channel (either because of configuration or because\r\nof native capabilities of the channel)"
-          },
-          "quotas": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ChannelQuota"
-            },
-            "description": "A list of provisioned messaging quotas (limits)\r\nto the usage of the channel instance",
-            "nullable": true
-          },
-          "status": {
-            "$ref": "#/components/schemas/ChannelStatus"
-          },
-          "lastChanged": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -2705,69 +2762,21 @@
         "additionalProperties": false,
         "description": "A terminal provisioned to the customer that can be used to \r\nsend messages from server applications"
       },
-      "Terminal": {
-        "type": "object",
-        "properties": {
-          "emailAddress": {
-            "type": "string",
-            "description": "The email address of the terminal",
-            "format": "email",
-            "nullable": true
-          },
-          "email": {
-            "$ref": "#/components/schemas/EmailAddress"
-          },
-          "number": {
-            "type": "string",
-            "description": "The telephone number (MSISDN) of the terminal",
-            "format": "tel",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "A terminal allows to send or receive messages through channels"
-      },
-      "NewMessageReceiver": {
+      "TerminalLookup": {
         "required": [
-          "channel",
-          "destinationUrl",
-          "to"
+          "address",
+          "type"
         ],
         "type": "object",
         "properties": {
-          "channel": {
-            "type": "string",
-            "description": "The name of the channel transporting the incoming messages"
+          "type": {
+            "type": "string"
           },
-          "destinationUrl": {
-            "type": "string",
-            "description": "The URL where to deliver the incoming messages",
-            "format": "uri"
-          },
-          "secret": {
-            "type": "string",
-            "description": "An optional secret word used to sign the webhook",
-            "nullable": true
-          },
-          "filter": {
-            "type": "string",
-            "description": "An optional additional filter used to retrict the messages \r\nto be delivered",
-            "nullable": true
-          },
-          "headers": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "An optional set of headers attached to the delivery\r\nrequest (used for correlation)",
-            "nullable": true
-          },
-          "to": {
-            "$ref": "#/components/schemas/Terminal"
+          "address": {
+            "type": "string"
           }
         },
-        "additionalProperties": false,
-        "description": "The request to create a new receiver of messages"
+        "additionalProperties": false
       },
       "WebFilterOperator": {
         "enum": [
@@ -2822,7 +2831,73 @@
         },
         "additionalProperties": false
       },
-      "MessageReceiver": {
+      "Terminal": {
+        "type": "object",
+        "properties": {
+          "emailAddress": {
+            "type": "string",
+            "description": "The email address of the terminal",
+            "format": "email",
+            "nullable": true
+          },
+          "email": {
+            "$ref": "#/components/schemas/EmailAddress"
+          },
+          "number": {
+            "type": "string",
+            "description": "The telephone number (MSISDN) of the terminal",
+            "format": "tel",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A terminal allows to send or receive messages through channels"
+      },
+      "NewMessageRoute": {
+        "required": [
+          "channel",
+          "destinationUrl",
+          "to"
+        ],
+        "type": "object",
+        "properties": {
+          "channel": {
+            "type": "string",
+            "description": "The name of the channel transporting the incoming messages"
+          },
+          "destinationUrl": {
+            "type": "string",
+            "description": "The URL where to deliver the incoming messages",
+            "format": "uri"
+          },
+          "secret": {
+            "type": "string",
+            "description": "An optional secret word used to sign the webhook",
+            "nullable": true
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BinaryFilter"
+            },
+            "nullable": true
+          },
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "An optional set of headers attached to the delivery\r\nrequest (used for correlation)",
+            "nullable": true
+          },
+          "to": {
+            "$ref": "#/components/schemas/Terminal"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The request to create a new route to receive inbound messages"
+      },
+      "MessageRoute": {
         "required": [
           "channel",
           "destinationUrl",
@@ -2872,7 +2947,7 @@
         "additionalProperties": false,
         "description": "A subscription to incoming messages (delivered as webhooks)"
       },
-      "MessageReceiverUpdate": {
+      "MessageRouteUpdate": {
         "type": "object",
         "properties": {
           "destinationUrl": {
@@ -2899,7 +2974,7 @@
         "additionalProperties": false,
         "description": "A request to update the configurations of a message receiver"
       },
-      "PageResultOfMessageReceiver": {
+      "PageResultOfMessageRoute": {
         "required": [
           "request",
           "totalPages",
@@ -2917,7 +2992,7 @@
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/MessageReceiver"
+              "$ref": "#/components/schemas/MessageRoute"
             },
             "nullable": true
           },
