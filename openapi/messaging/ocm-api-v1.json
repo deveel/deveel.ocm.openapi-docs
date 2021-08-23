@@ -1454,7 +1454,7 @@
             "nullable": true
           }
         },
-        "additionalProperties": false,
+        "additionalProperties": {},
         "description": "An inbound message sent from an individual"
       }
     }

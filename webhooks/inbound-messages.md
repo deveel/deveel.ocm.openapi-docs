@@ -9,7 +9,7 @@ nav_sort: 2
 
 The system allows to subscribe to the routing of messages sent from individuals to a **Terminal** (eg. a _telephone number_ or an _email address_) that is registered by a tenant (see the paragraph below).
 
-These messages are transported to the consumer through a _webhook_ of a specific kind, named **Message Receiver**: this can be configured by the users of the customers ahead of time (see the paragraph below).
+These messages are transported to the consumer through a _webhook_ of a specific kind, named **Message Route**: users of the customers can subscribe to such delivert ahead of time (see the paragraph below).
 
 The payload of such events are typically specifying the following properties:
 
@@ -31,7 +31,7 @@ To be able to subscribe to the notification of incoming messages, a user must ha
 
 The system is capable of tracing back the terminal of the user back to all the subscriptions for the notifications, activating the transfer of the messages to the destination points
 
-**Note**: Remember that in this context the _sender_ of the message identifies the individual that is writing to the customer, while the _receiver_ is a terminal that identifies the customer (or a system that is configured to handle the incoming messages)
+**Note**: Remember that in this context the _sender_ identifies the individual that is sending the message to the customer, while the _receiver_ is a registered terminal of the customer that is the destination of the message
 
 ## Examples
 

@@ -868,6 +868,89 @@
             ]
           }
         ]
+      },
+      "get": {
+        "tags": [
+          "terminal"
+        ],
+        "summary": "Gets a page of Terminals",
+        "operationId": "terminal_getPage",
+        "parameters": [
+          {
+            "name": "number",
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "maximum": 50,
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The terminals page was found and returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResultOfServerTerminal"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResultOfServerTerminal"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "read:terminal"
+            ]
+          }
+        ]
       }
     },
     "/terminal/{id}": {
@@ -2128,6 +2211,53 @@
       }
     },
     "schemas": {
+      "ChannelProvider": {
+        "enum": [
+          "other",
+          "twilio",
+          "sendgrid",
+          "sendinblue",
+          "facebook",
+          "deveel",
+          "linkmobility",
+          "mailjet"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ChannelProvider",
+          "modelAsString": true
+        }
+      },
+      "ChannelType": {
+        "enum": [
+          "sms",
+          "messenger",
+          "whatsapp",
+          "email",
+          "viber",
+          "rcs",
+          "push",
+          "sandbox"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ChannelType",
+          "modelAsString": true
+        }
+      },
+      "ChannelDirections": {
+        "enum": [
+          "default",
+          "out",
+          "in",
+          "both"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ChannelDirections",
+          "modelAsString": true
+        }
+      },
       "ApiKeyLocation": {
         "enum": [
           "default",
@@ -2204,39 +2334,8 @@
         },
         "additionalProperties": false
       },
-      "ChannelType": {
-        "enum": [
-          "sms",
-          "messenger",
-          "whatsapp",
-          "email",
-          "viber",
-          "rcs",
-          "push",
-          "sandbox"
-        ],
-        "type": "string",
-        "x-ms-enum": {
-          "name": "ChannelType",
-          "modelAsString": true
-        }
-      },
-      "ChannelDirections": {
-        "enum": [
-          "default",
-          "out",
-          "in",
-          "both"
-        ],
-        "type": "string",
-        "x-ms-enum": {
-          "name": "ChannelDirections",
-          "modelAsString": true
-        }
-      },
       "UserChannelRequest": {
         "required": [
-          "credentials",
           "directions",
           "name",
           "provider",
@@ -2245,14 +2344,7 @@
         "type": "object",
         "properties": {
           "provider": {
-            "type": "string"
-          },
-          "credentials": {
-            "minItems": 1,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SecureChannelCredentials"
-            }
+            "$ref": "#/components/schemas/ChannelProvider"
           },
           "contentTypes": {
             "type": "array",
@@ -2272,6 +2364,14 @@
           },
           "directions": {
             "$ref": "#/components/schemas/ChannelDirections"
+          },
+          "credentials": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SecureChannelCredentials"
+            },
+            "description": "A list of credentials associated to the channel",
+            "nullable": true
           },
           "settings": {
             "type": "object",
@@ -2479,6 +2579,474 @@
         },
         "additionalProperties": false
       },
+      "LogicalOperator": {
+        "enum": [
+          "and",
+          "or"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "LogicalOperator",
+          "modelAsString": true
+        }
+      },
+      "LogicalFilter": {
+        "required": [
+          "filters",
+          "op"
+        ],
+        "type": "object",
+        "properties": {
+          "op": {
+            "$ref": "#/components/schemas/LogicalOperator"
+          },
+          "filters": {
+            "minItems": 2,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "AndFilter": {
+        "required": [
+          "filters"
+        ],
+        "type": "object",
+        "properties": {
+          "filters": {
+            "minItems": 2,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrFilter": {
+        "required": [
+          "filters"
+        ],
+        "type": "object",
+        "properties": {
+          "filters": {
+            "minItems": 2,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "WebFilterOperator": {
+        "enum": [
+          "eq",
+          "ne",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "between",
+          "contains",
+          "startsWith",
+          "endsWith"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "WebFilterOperator",
+          "modelAsString": true
+        }
+      },
+      "GeoPoint": {
+        "required": [
+          "lat",
+          "lon"
+        ],
+        "type": "object",
+        "properties": {
+          "lon": {
+            "type": "number",
+            "format": "double"
+          },
+          "lat": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FilterValue": {
+        "type": "object",
+        "properties": {
+          "string": {
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "integer": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "boolean": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "point": {
+            "$ref": "#/components/schemas/GeoPoint"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Range": {
+        "type": "object",
+        "properties": {
+          "lower": {
+            "$ref": "#/components/schemas/FilterValue"
+          },
+          "upper": {
+            "$ref": "#/components/schemas/FilterValue"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BinaryFilter": {
+        "required": [
+          "field",
+          "op"
+        ],
+        "type": "object",
+        "properties": {
+          "op": {
+            "$ref": "#/components/schemas/WebFilterOperator"
+          },
+          "range": {
+            "$ref": "#/components/schemas/Range"
+          },
+          "field": {
+            "type": "string"
+          },
+          "string": {
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "integer": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "boolean": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "point": {
+            "$ref": "#/components/schemas/GeoPoint"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EqualFilter": {
+        "required": [
+          "field"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "string": {
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "integer": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "boolean": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "point": {
+            "$ref": "#/components/schemas/GeoPoint"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NotEqualFilter": {
+        "required": [
+          "field"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "string": {
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "integer": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "boolean": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "point": {
+            "$ref": "#/components/schemas/GeoPoint"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GreaterThanFilter": {
+        "required": [
+          "field"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "string": {
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "integer": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "boolean": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "point": {
+            "$ref": "#/components/schemas/GeoPoint"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GreaterThanOrEqualFilter": {
+        "required": [
+          "field"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "string": {
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "integer": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "boolean": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "point": {
+            "$ref": "#/components/schemas/GeoPoint"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LesserThanFilter": {
+        "required": [
+          "field"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "string": {
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "integer": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "boolean": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "point": {
+            "$ref": "#/components/schemas/GeoPoint"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LesserThanOrEqualFilter": {
+        "required": [
+          "field"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "string": {
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "integer": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "boolean": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "point": {
+            "$ref": "#/components/schemas/GeoPoint"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NotFilter": {
+        "required": [
+          "filter"
+        ],
+        "type": "object",
+        "properties": {
+          "filter": {
+            "$ref": "#/components/schemas/Filter"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Filter": {
+        "type": "object",
+        "properties": {
+          "logical": {
+            "$ref": "#/components/schemas/LogicalFilter"
+          },
+          "and": {
+            "$ref": "#/components/schemas/AndFilter"
+          },
+          "or": {
+            "$ref": "#/components/schemas/OrFilter"
+          },
+          "binary": {
+            "$ref": "#/components/schemas/BinaryFilter"
+          },
+          "eq": {
+            "$ref": "#/components/schemas/EqualFilter"
+          },
+          "ne": {
+            "$ref": "#/components/schemas/NotEqualFilter"
+          },
+          "gt": {
+            "$ref": "#/components/schemas/GreaterThanFilter"
+          },
+          "gte": {
+            "$ref": "#/components/schemas/GreaterThanOrEqualFilter"
+          },
+          "lt": {
+            "$ref": "#/components/schemas/LesserThanFilter"
+          },
+          "lte": {
+            "$ref": "#/components/schemas/LesserThanOrEqualFilter"
+          },
+          "not": {
+            "$ref": "#/components/schemas/NotFilter"
+          }
+        },
+        "additionalProperties": false
+      },
       "PageRequest": {
         "required": [
           "page",
@@ -2500,6 +3068,13 @@
               "$ref": "#/components/schemas/PageSort"
             },
             "nullable": true
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2507,8 +3082,8 @@
       "PageResultOfServerEmail": {
         "required": [
           "request",
-          "totalPages",
-          "totalResults"
+          "totalItems",
+          "totalPages"
         ],
         "type": "object",
         "properties": {
@@ -2516,6 +3091,11 @@
             "$ref": "#/components/schemas/PageRequest"
           },
           "totalResults": {
+            "type": "integer",
+            "format": "int32",
+            "deprecated": true
+          },
+          "totalItems": {
             "type": "integer",
             "format": "int32"
           },
@@ -2605,8 +3185,8 @@
       "PageResultOfServerPhoneNumber": {
         "required": [
           "request",
-          "totalPages",
-          "totalResults"
+          "totalItems",
+          "totalPages"
         ],
         "type": "object",
         "properties": {
@@ -2614,6 +3194,11 @@
             "$ref": "#/components/schemas/PageRequest"
           },
           "totalResults": {
+            "type": "integer",
+            "format": "int32",
+            "deprecated": true
+          },
+          "totalItems": {
             "type": "integer",
             "format": "int32"
           },
@@ -2697,6 +3282,10 @@
             "type": "string",
             "nullable": true
           },
+          "provider": {
+            "type": "string",
+            "nullable": true
+          },
           "settings": {
             "type": "object",
             "additionalProperties": {},
@@ -2762,6 +3351,66 @@
         "additionalProperties": false,
         "description": "A terminal provisioned to the customer that can be used to \r\nsend messages from server applications"
       },
+      "PageResultOfServerTerminal": {
+        "required": [
+          "request",
+          "totalItems",
+          "totalPages"
+        ],
+        "type": "object",
+        "properties": {
+          "request": {
+            "$ref": "#/components/schemas/PageRequest"
+          },
+          "totalResults": {
+            "type": "integer",
+            "format": "int32",
+            "deprecated": true
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServerTerminal"
+            },
+            "nullable": true
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "self": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "first": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "next": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "previous": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "last": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "TerminalLookup": {
         "required": [
           "address",
@@ -2774,59 +3423,6 @@
           },
           "address": {
             "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "WebFilterOperator": {
-        "enum": [
-          "eq",
-          "ne",
-          "gt",
-          "gte",
-          "lt",
-          "lte",
-          "contains",
-          "startsWith",
-          "endsWith",
-          "between"
-        ],
-        "type": "string",
-        "x-ms-enum": {
-          "name": "WebFilterOperator",
-          "modelAsString": true
-        }
-      },
-      "BinaryFilter": {
-        "required": [
-          "field",
-          "op"
-        ],
-        "type": "object",
-        "properties": {
-          "field": {
-            "minLength": 3,
-            "type": "string"
-          },
-          "op": {
-            "$ref": "#/components/schemas/WebFilterOperator"
-          },
-          "string": {
-            "minLength": 1,
-            "type": "string",
-            "nullable": true
-          },
-          "number": {
-            "type": "number",
-            "format": "double"
-          },
-          "date": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "int": {
-            "type": "integer",
-            "format": "int64"
           }
         },
         "additionalProperties": false
@@ -2977,8 +3573,8 @@
       "PageResultOfMessageRoute": {
         "required": [
           "request",
-          "totalPages",
-          "totalResults"
+          "totalItems",
+          "totalPages"
         ],
         "type": "object",
         "properties": {
@@ -2986,6 +3582,11 @@
             "$ref": "#/components/schemas/PageRequest"
           },
           "totalResults": {
+            "type": "integer",
+            "format": "int32",
+            "deprecated": true
+          },
+          "totalItems": {
             "type": "integer",
             "format": "int32"
           },
@@ -3130,8 +3731,8 @@
       "PageResultOfMessageStateSubscription": {
         "required": [
           "request",
-          "totalPages",
-          "totalResults"
+          "totalItems",
+          "totalPages"
         ],
         "type": "object",
         "properties": {
@@ -3139,6 +3740,11 @@
             "$ref": "#/components/schemas/PageRequest"
           },
           "totalResults": {
+            "type": "integer",
+            "format": "int32",
+            "deprecated": true
+          },
+          "totalItems": {
             "type": "integer",
             "format": "int32"
           },
