@@ -14,12 +14,12 @@ Developers who integrate the _Deveel Omni-Channel API_ should be aware of the ki
 
 Some channels support multiple more than one content type (even within the same message, as a _multi-part_).
 
-| Channel Type | Text  | HTML | Media | Multi-Part |
-|--------------|-------|------|-------|------------|
-| sms          |   √   |   x  |   x   |      x     |
-| email        |   √   |   √  |   x   |      √     |
-| facebook     |   √   |   x  |   √   |      x     |
-| sanbox       |   √   |   √  |   √   |      √     |
+| Channel Type | Text    | HTML   | Media   | Multi-Part   |
+|--------------|:-------:|:------:|:-------:|:------------:|
+| sms          |    √    |    x   |    x    |       x      |
+| email        |    √    |    √   |    x    |       √      |
+| facebook     |    √    |    x   |    √    |       x      |
+| sanbox       |    √    |    √   |    √    |       √      |
 
 This is an example of a request to deliver a textual message through a SMS channel 
 
