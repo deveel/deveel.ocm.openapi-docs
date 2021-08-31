@@ -2335,8 +2335,7 @@
         "enum": [
           "phoneNumber",
           "email",
-          "alphaNumeric",
-          "id"
+          "alphaNumeric"
         ],
         "type": "string",
         "x-ms-enum": {
@@ -2449,6 +2448,11 @@
           },
           "type": {
             "$ref": "#/components/schemas/ChannelType"
+          },
+          "providerName": {
+            "type": "string",
+            "description": "If the provider is not in the list of the known ones,\r\nthis specifies its name",
+            "nullable": true
           },
           "directions": {
             "$ref": "#/components/schemas/ChannelDirections"
@@ -2745,38 +2749,6 @@
         },
         "additionalProperties": false
       },
-      "AndFilter": {
-        "required": [
-          "filters"
-        ],
-        "type": "object",
-        "properties": {
-          "filters": {
-            "minItems": 2,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Filter"
-            }
-          }
-        },
-        "additionalProperties": false
-      },
-      "OrFilter": {
-        "required": [
-          "filters"
-        ],
-        "type": "object",
-        "properties": {
-          "filters": {
-            "minItems": 2,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Filter"
-            }
-          }
-        },
-        "additionalProperties": false
-      },
       "WebFilterOperator": {
         "enum": [
           "eq",
@@ -3017,44 +2989,6 @@
         },
         "additionalProperties": false
       },
-      "GreaterThanOrEqualFilter": {
-        "required": [
-          "field"
-        ],
-        "type": "object",
-        "properties": {
-          "field": {
-            "type": "string"
-          },
-          "string": {
-            "type": "string",
-            "nullable": true
-          },
-          "number": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "date": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "integer": {
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "boolean": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "point": {
-            "$ref": "#/components/schemas/GeoPoint"
-          }
-        },
-        "additionalProperties": false
-      },
       "LesserThanFilter": {
         "required": [
           "field"
@@ -3131,14 +3065,71 @@
         },
         "additionalProperties": false
       },
-      "NotFilter": {
+      "StartsWithFilter": {
         "required": [
-          "filter"
+          "field",
+          "value"
         ],
         "type": "object",
         "properties": {
-          "filter": {
-            "$ref": "#/components/schemas/Filter"
+          "field": {
+            "type": "string"
+          },
+          "value": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EndsWithFilter": {
+        "required": [
+          "field",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "value": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContainsFilter": {
+        "required": [
+          "field",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "value": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RangeFilter": {
+        "required": [
+          "field"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "lower": {
+            "$ref": "#/components/schemas/FilterValue"
+          },
+          "upper": {
+            "$ref": "#/components/schemas/FilterValue"
           }
         },
         "additionalProperties": false
@@ -3150,10 +3141,18 @@
             "$ref": "#/components/schemas/LogicalFilter"
           },
           "and": {
-            "$ref": "#/components/schemas/AndFilter"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter"
+            },
+            "nullable": true
           },
           "or": {
-            "$ref": "#/components/schemas/OrFilter"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter"
+            },
+            "nullable": true
           },
           "binary": {
             "$ref": "#/components/schemas/BinaryFilter"
@@ -3168,7 +3167,7 @@
             "$ref": "#/components/schemas/GreaterThanFilter"
           },
           "gte": {
-            "$ref": "#/components/schemas/GreaterThanOrEqualFilter"
+            "$ref": "#/components/schemas/GreaterThanFilter"
           },
           "lt": {
             "$ref": "#/components/schemas/LesserThanFilter"
@@ -3176,8 +3175,20 @@
           "lte": {
             "$ref": "#/components/schemas/LesserThanOrEqualFilter"
           },
+          "startsWith": {
+            "$ref": "#/components/schemas/StartsWithFilter"
+          },
+          "endsWith": {
+            "$ref": "#/components/schemas/EndsWithFilter"
+          },
+          "contains": {
+            "$ref": "#/components/schemas/ContainsFilter"
+          },
+          "between": {
+            "$ref": "#/components/schemas/RangeFilter"
+          },
           "not": {
-            "$ref": "#/components/schemas/NotFilter"
+            "$ref": "#/components/schemas/Filter"
           }
         },
         "additionalProperties": false
@@ -3872,14 +3883,14 @@
         "required": [
           "channel",
           "destinationUrl",
-          "events",
-          "name"
+          "events"
         ],
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
-            "description": "A descriptive custom name of the subscription"
+            "description": "A descriptive custom name of the subscription",
+            "nullable": true
           },
           "destinationUrl": {
             "type": "string",
@@ -3913,9 +3924,12 @@
             },
             "description": "The type of message event to subscribe"
           },
-          "filter": {
-            "type": "string",
-            "description": "An optional filter that restricts the events to be notified",
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter"
+            },
+            "description": "An optional set of filters that restrict the events to be notified",
             "nullable": true
           },
           "retryCount": {

@@ -3,6 +3,16 @@ remote_theme: pmarsceill/just-the-docs
 title: Deveel OCM
 logo: https://github.com/deveel/deveel.ocm.openapi-docs/raw/main/deveel-logo.png
 
+collections:
+  errors:
+    permalink: '/:collection/:path'
+    output: true
+
+just_the_docs:
+  collections:
+    errors:
+      name: "Errors"
+
 # Enable or disable the site search
 # Supports true (default) or false
 search_enabled: true
