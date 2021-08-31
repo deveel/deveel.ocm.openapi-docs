@@ -116,7 +116,22 @@
             }
           },
           "409": {
-            "description": "Conflict",
+            "description": "A channel with the same name already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "The content type of the channel is not allowed",
             "content": {
               "application/json": {
                 "schema": {
@@ -145,6 +160,17 @@
         ],
         "summary": "Gets all Channels",
         "operationId": "channel_getAll",
+        "parameters": [
+          {
+            "name": "includeNotActive",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "nullable": true
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "The list of channels of the current tenant",
@@ -1465,7 +1491,7 @@
           }
         ]
       },
-      "put": {
+      "patch": {
         "tags": [
           "route"
         ],
@@ -2228,36 +2254,6 @@
           "modelAsString": true
         }
       },
-      "ChannelType": {
-        "enum": [
-          "sms",
-          "messenger",
-          "whatsapp",
-          "email",
-          "viber",
-          "rcs",
-          "push",
-          "sandbox"
-        ],
-        "type": "string",
-        "x-ms-enum": {
-          "name": "ChannelType",
-          "modelAsString": true
-        }
-      },
-      "ChannelDirections": {
-        "enum": [
-          "default",
-          "out",
-          "in",
-          "both"
-        ],
-        "type": "string",
-        "x-ms-enum": {
-          "name": "ChannelDirections",
-          "modelAsString": true
-        }
-      },
       "ApiKeyLocation": {
         "enum": [
           "default",
@@ -2287,7 +2283,7 @@
           "keyName": {
             "minLength": 3,
             "type": "string",
-            "description": "",
+            "description": "The name of the key (eg. the name of the header)",
             "nullable": true
           }
         },
@@ -2332,7 +2328,74 @@
             "$ref": "#/components/schemas/BasicAuthCredentials"
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "Specifies secure credentials for the authentication\r\nof channels towards providers"
+      },
+      "TerminalType": {
+        "enum": [
+          "phoneNumber",
+          "email",
+          "alphaNumeric",
+          "id"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "TerminalType",
+          "modelAsString": true
+        }
+      },
+      "ChannelType": {
+        "enum": [
+          "sms",
+          "messenger",
+          "whatsapp",
+          "email",
+          "viber",
+          "rcs",
+          "push",
+          "sandbox"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ChannelType",
+          "modelAsString": true
+        }
+      },
+      "ChannelDirections": {
+        "enum": [
+          "default",
+          "out",
+          "in",
+          "both"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ChannelDirections",
+          "modelAsString": true
+        }
+      },
+      "ChannelTerminal": {
+        "required": [
+          "address",
+          "id",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the terminal instance"
+          },
+          "type": {
+            "$ref": "#/components/schemas/TerminalType"
+          },
+          "address": {
+            "type": "string",
+            "description": "The address of the terminal"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A server terminal that is bound to a specific\r\nchannel instance"
       },
       "UserChannelRequest": {
         "required": [
@@ -2346,11 +2409,36 @@
           "provider": {
             "$ref": "#/components/schemas/ChannelProvider"
           },
+          "credentials": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SecureChannelCredentials"
+            },
+            "description": "A set of credentials used to authenticate the messaging requests\r\nagainst the provider",
+            "nullable": true
+          },
           "contentTypes": {
             "type": "array",
             "items": {
               "type": "string"
             },
+            "description": "The list of content types allowed by the channel",
+            "nullable": true
+          },
+          "senderTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TerminalType"
+            },
+            "description": "The list of terminal types allowed by the channel to be\r\nused as senders",
+            "nullable": true
+          },
+          "receiverTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TerminalType"
+            },
+            "description": "The list of terminal types allowed by the channel to be\r\nused as receivers",
             "nullable": true
           },
           "name": {
@@ -2365,22 +2453,23 @@
           "directions": {
             "$ref": "#/components/schemas/ChannelDirections"
           },
-          "credentials": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SecureChannelCredentials"
-            },
-            "description": "A list of credentials associated to the channel",
-            "nullable": true
-          },
           "settings": {
             "type": "object",
             "additionalProperties": {},
             "description": "A collection of channel-specific settings describing its behavior",
             "nullable": true
+          },
+          "terminals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChannelTerminal"
+            },
+            "description": "An optional list of Terminals to be bound to the channel (as senders or receivers)",
+            "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "The request of creation of channel"
       },
       "ChannelStatus": {
         "enum": [
@@ -2400,6 +2489,8 @@
         "required": [
           "contentTypes",
           "name",
+          "receiverTypes",
+          "senderTypes",
           "status",
           "type"
         ],
@@ -2410,6 +2501,7 @@
           },
           "lastChanged": {
             "type": "string",
+            "description": "The exact time-stamp of the last change to the\r\nsettings and states of the channel",
             "format": "date-time",
             "nullable": true
           },
@@ -2441,6 +2533,30 @@
               "type": "string"
             },
             "description": "A list of message content types that are supported\r\nby the channel (either because of configuration or because\r\nof native capabilities of the channel)"
+          },
+          "senderTypes": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TerminalType"
+            },
+            "description": "A list of terminal types allowed by the channel to send messages"
+          },
+          "receiverTypes": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TerminalType"
+            },
+            "description": "A list of terminal types allowed by the channel to receive messages"
+          },
+          "terminals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChannelTerminal"
+            },
+            "description": "A list of server terminals associated to the channel",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -2500,11 +2616,25 @@
           "modelAsString": true
         }
       },
+      "TerminalRoles": {
+        "enum": [
+          "default",
+          "sender",
+          "receiver",
+          "both"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "TerminalRoles",
+          "modelAsString": true
+        }
+      },
       "ServerEmail": {
         "required": [
           "address",
           "id",
           "lastChanged",
+          "role",
           "source",
           "status"
         ],
@@ -2532,6 +2662,7 @@
           },
           "sourceId": {
             "type": "string",
+            "description": "If the terminal is assigned from the inventory,\r\nthis is the unique identifier of the source terminal",
             "nullable": true
           },
           "source": {
@@ -2542,7 +2673,11 @@
           },
           "lastChanged": {
             "type": "string",
+            "description": "The exact time-stamp of the last change to\r\nthe settings or status of the terminal",
             "format": "date-time"
+          },
+          "role": {
+            "$ref": "#/components/schemas/TerminalRoles"
           }
         },
         "additionalProperties": false,
@@ -3144,6 +3279,7 @@
           "id",
           "lastChanged",
           "number",
+          "role",
           "source",
           "status"
         ],
@@ -3166,6 +3302,7 @@
           },
           "sourceId": {
             "type": "string",
+            "description": "If the terminal is assigned from the inventory,\r\nthis is the unique identifier of the source terminal",
             "nullable": true
           },
           "source": {
@@ -3176,7 +3313,11 @@
           },
           "lastChanged": {
             "type": "string",
+            "description": "The exact time-stamp of the last change to\r\nthe settings or status of the terminal",
             "format": "date-time"
+          },
+          "role": {
+            "$ref": "#/components/schemas/TerminalRoles"
           }
         },
         "additionalProperties": false,
@@ -3250,14 +3391,17 @@
         "properties": {
           "address": {
             "type": "string",
+            "description": "The address part of the e-mail",
             "format": "email"
           },
           "displayName": {
             "type": "string",
+            "description": "An optional name displayed to the receivers",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "Represents a full e-mail address terminal"
       },
       "ServerTerminalRequest": {
         "type": "object",
@@ -3266,7 +3410,7 @@
             "minLength": 2,
             "pattern": "^[a-zA-Z][a-zA-Z0-9]*$",
             "type": "string",
-            "description": "The sender is an alpha-numeric label",
+            "description": "The sender requested is an alpha-numeric label",
             "nullable": true
           },
           "email": {
@@ -3275,27 +3419,36 @@
           "number": {
             "minLength": 6,
             "type": "string",
+            "description": "The sender terminal requested is a phone number",
             "format": "tel",
             "nullable": true
           },
           "terminalId": {
             "type": "string",
+            "description": "The unique identifier of the terminal requested",
             "nullable": true
           },
           "provider": {
             "type": "string",
+            "description": "If the terminal is ported from other providers, \r\nthis specified the provider of messaging services owning the terminal",
             "nullable": true
+          },
+          "role": {
+            "$ref": "#/components/schemas/TerminalRoles"
           },
           "settings": {
             "type": "object",
             "additionalProperties": {},
+            "description": "Additional settings to be configured for the terminal (currently ignored by the system)",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "The request of assignment of a terminal from the inventory"
       },
       "ServerTerminal": {
         "required": [
+          "role",
           "source",
           "status"
         ],
@@ -3318,6 +3471,9 @@
           },
           "source": {
             "$ref": "#/components/schemas/TerminalSource"
+          },
+          "role": {
+            "$ref": "#/components/schemas/TerminalRoles"
           },
           "sourceId": {
             "type": "string",
@@ -3419,13 +3575,15 @@
         "type": "object",
         "properties": {
           "type": {
-            "type": "string"
+            "$ref": "#/components/schemas/TerminalType"
           },
           "address": {
-            "type": "string"
+            "type": "string",
+            "description": "The address of the terminal to lookup"
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "The request of lookup of a given terminal"
       },
       "Terminal": {
         "type": "object",
@@ -3458,24 +3616,36 @@
         "type": "object",
         "properties": {
           "channel": {
+            "pattern": "^[a-zA-Z0-9_.-]+$",
             "type": "string",
-            "description": "The name of the channel transporting the incoming messages"
+            "description": "The name of the channel transporting the inbound messages"
+          },
+          "name": {
+            "type": "string",
+            "description": "A descriptive name of the route (for display)",
+            "nullable": true
+          },
+          "retryCount": {
+            "type": "integer",
+            "description": "The number of attempts to perform when trying to\r\ndeliver an inbound message, before failing",
+            "format": "int32"
           },
           "destinationUrl": {
             "type": "string",
-            "description": "The URL where to deliver the incoming messages",
+            "description": "The URL where to deliver the inbound messages",
             "format": "uri"
           },
           "secret": {
             "type": "string",
-            "description": "An optional secret word used to sign the webhook",
+            "description": "An optional secret string used to sign the webhook",
             "nullable": true
           },
           "filters": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/BinaryFilter"
+              "$ref": "#/components/schemas/Filter"
             },
+            "description": "An optional set of additional filters used to retrict the messages \r\nto be routed to the destination",
             "nullable": true
           },
           "headers": {
@@ -3493,8 +3663,33 @@
         "additionalProperties": false,
         "description": "The request to create a new route to receive inbound messages"
       },
+      "RouteChannel": {
+        "required": [
+          "id",
+          "name",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "pattern": "^[a-zA-Z0-9_.-]+$",
+            "type": "string",
+            "description": "The name of the channel instance"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ChannelType"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the channel"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Describes a channel that receives and routes\r\ninbound messages"
+      },
       "MessageRoute": {
         "required": [
+          "active",
           "channel",
           "destinationUrl",
           "id",
@@ -3503,25 +3698,24 @@
         "type": "object",
         "properties": {
           "channel": {
-            "type": "string",
-            "description": "The name of the channel transporting the incoming messages"
+            "$ref": "#/components/schemas/RouteChannel"
           },
           "destinationUrl": {
             "type": "string",
-            "description": "The URL where to deliver the incoming messages",
+            "description": "The URL where to deliver the inbound messages",
             "format": "uri"
           },
           "secret": {
             "type": "string",
-            "description": "An optional secret word used to sign the webhook",
+            "description": "An optional secret string used to sign the webhook",
             "nullable": true
           },
           "filters": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/BinaryFilter"
+              "$ref": "#/components/schemas/Filter"
             },
-            "description": "An optional additional filter used to retrict the messages \r\nto be delivered",
+            "description": "An optional set of additional filters used to retrict the messages \r\nto be routed to the destination",
             "nullable": true
           },
           "headers": {
@@ -3534,29 +3728,72 @@
           },
           "id": {
             "type": "string",
-            "description": "The unique identifier of the receiver"
+            "description": "The unique identifier of the route"
           },
           "to": {
             "$ref": "#/components/schemas/Terminal"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Indicates the active state of a route"
+          },
+          "retryCount": {
+            "type": "integer",
+            "description": "The number of attempts to perform when trying to\r\ndeliver an inbound message, before failing",
+            "format": "int32"
           }
         },
         "additionalProperties": false,
-        "description": "A subscription to incoming messages (delivered as webhooks)"
+        "description": "Specifies the rules to route inbound messages (delivered as webhooks)"
+      },
+      "RouteUpdateField": {
+        "enum": [
+          "secret",
+          "destinationUrl",
+          "filter",
+          "headers"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "RouteUpdateField",
+          "modelAsString": true
+        }
       },
       "MessageRouteUpdate": {
+        "required": [
+          "fields"
+        ],
         "type": "object",
         "properties": {
+          "fields": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RouteUpdateField"
+            },
+            "description": "Indicates which fields have to be updated with the request"
+          },
           "destinationUrl": {
             "type": "string",
+            "description": "The URL where to deliver the inbound messages",
             "format": "uri",
             "nullable": true
           },
           "secret": {
             "type": "string",
+            "description": "An optional secret string used to sign the webhook",
             "nullable": true
           },
-          "filter": {
-            "type": "string",
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter"
+            },
+            "description": "An optional set of additional filters used to retrict the messages \r\nto be routed to the destination",
             "nullable": true
           },
           "headers": {
@@ -3564,11 +3801,12 @@
             "additionalProperties": {
               "type": "string"
             },
+            "description": "An optional set of headers attached to the delivery\r\nrequest (used for correlation)",
             "nullable": true
           }
         },
         "additionalProperties": false,
-        "description": "A request to update the configurations of a message receiver"
+        "description": "A request to update the configurations of a message route"
       },
       "PageResultOfMessageRoute": {
         "required": [
@@ -3634,7 +3872,7 @@
         "required": [
           "channel",
           "destinationUrl",
-          "event",
+          "events",
           "name"
         ],
         "type": "object",
@@ -3655,8 +3893,9 @@
           },
           "channel": {
             "minLength": 3,
+            "pattern": "^[a-zA-Z0-9_.-]+$",
             "type": "string",
-            "description": "The name of the channel subscribed"
+            "description": "The name of the channel used to transport the messages"
           },
           "headers": {
             "type": "object",
@@ -3666,14 +3905,23 @@
             "description": "A set of optional headers that are attached to the webhook\r\nrequest (for correlation)",
             "nullable": true
           },
-          "event": {
-            "type": "string",
+          "events": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
             "description": "The type of message event to subscribe"
           },
           "filter": {
             "type": "string",
             "description": "An optional filter that restricts the events to be notified",
             "nullable": true
+          },
+          "retryCount": {
+            "type": "integer",
+            "description": "The number of attempts to perform when trying to deliver\r\nthe webhook, before failing",
+            "format": "int32"
           }
         },
         "additionalProperties": false,
@@ -3681,31 +3929,28 @@
       },
       "MessageStateSubscription": {
         "required": [
-          "channel",
+          "active",
           "destinationUrl",
-          "event",
-          "id"
+          "events",
+          "id",
+          "name"
         ],
         "type": "object",
         "properties": {
           "channel": {
             "pattern": "^[a-zA-Z0-9_.-]+$",
             "type": "string",
-            "description": "The name of the channel where the events\r\nare listened to"
+            "description": "The name of the channel used to transport the messages",
+            "nullable": true
           },
           "destinationUrl": {
             "type": "string",
-            "description": "The HTTP URL address where the notifications (webhooks)\r\nare routed",
+            "description": "The HTTP URL address where the notifications\r\nare delivered (as webhooks)",
             "format": "uri"
           },
           "secret": {
             "type": "string",
-            "description": "An optional secret word used to sign the webhooks\r\ndelivered to the subscriber",
-            "nullable": true
-          },
-          "filter": {
-            "type": "string",
-            "description": "An optiona additional filter to limit the notifications",
+            "description": "An optional secret string used to sign the webhooks\r\ndelivered to the subscriber",
             "nullable": true
           },
           "headers": {
@@ -3720,13 +3965,38 @@
             "type": "string",
             "description": "The unique identider of the subscription"
           },
-          "event": {
+          "events": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The list of message event types subscribed"
+          },
+          "name": {
             "type": "string",
-            "description": "The type of message event to subscribe to"
+            "description": "A descriptive name of the subscription (for display)"
+          },
+          "active": {
+            "type": "boolean",
+            "description": "The active state of the subscription"
+          },
+          "retryCount": {
+            "type": "integer",
+            "description": "The number of attempts to perform when trying to deliver\r\nthe webhook, before failing",
+            "format": "int32"
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter"
+            },
+            "description": "An optional set of filters used to restrict the\r\ndelivery of message states",
+            "nullable": true
           }
         },
         "additionalProperties": false,
-        "description": "The specification of a subscription to changes of\r\nstate of messages sent through a channel"
+        "description": "The subscription to the notification of changes of state\r\nof messages sent through a channel during the transportation"
       },
       "PageResultOfMessageStateSubscription": {
         "required": [
