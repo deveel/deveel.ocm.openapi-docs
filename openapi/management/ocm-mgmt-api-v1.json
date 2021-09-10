@@ -67,6 +67,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/Channel"
                 }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Channel"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Channel"
+                }
               }
             }
           },
@@ -79,6 +89,16 @@
                 }
               },
               "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -97,6 +117,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
               }
             }
           },
@@ -109,6 +139,16 @@
                 }
               },
               "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -127,6 +167,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
               }
             }
           },
@@ -139,6 +189,16 @@
                 }
               },
               "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -159,7 +219,7 @@
           "channel"
         ],
         "summary": "Gets all Channels",
-        "operationId": "channel_getAll",
+        "operationId": "channel_listAll",
         "parameters": [
           {
             "name": "includeNotActive",
@@ -173,13 +233,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The list of channels of the current tenant",
+            "description": "The list of channels of the current user",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Channel"
+                    "$ref": "#/components/schemas/UserChannel"
                   }
                 }
               },
@@ -187,7 +247,23 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Channel"
+                    "$ref": "#/components/schemas/UserChannel"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserChannel"
+                  }
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserChannel"
                   }
                 }
               }
@@ -205,6 +281,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
               }
             }
           },
@@ -217,6 +303,16 @@
                 }
               },
               "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -257,12 +353,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Channel"
+                  "$ref": "#/components/schemas/UserChannel"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Channel"
+                  "$ref": "#/components/schemas/UserChannel"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserChannel"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserChannel"
                 }
               }
             }
@@ -276,6 +382,16 @@
                 }
               },
               "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -294,6 +410,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
               }
             }
           },
@@ -306,6 +432,146 @@
                 }
               },
               "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "read:channel"
+            ]
+          }
+        ]
+      }
+    },
+    "/channel/name/{channelName}": {
+      "get": {
+        "tags": [
+          "channel"
+        ],
+        "summary": "Gets a Channel by Name",
+        "operationId": "channel_getByName",
+        "parameters": [
+          {
+            "name": "channelName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^[a-zA-Z0-9_.-]+$",
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The channel with the given name is returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserChannel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserChannel"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserChannel"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserChannel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No channel with the given name was found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -376,6 +642,33 @@
                   "$ref": "#/components/schemas/SecureChannelCredentials"
                 }
               }
+            },
+            "application/xml": {
+              "schema": {
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SecureChannelCredentials"
+                }
+              }
+            },
+            "text/xml": {
+              "schema": {
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SecureChannelCredentials"
+                }
+              }
+            },
+            "application/*+xml": {
+              "schema": {
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SecureChannelCredentials"
+                }
+              }
             }
           },
           "required": true
@@ -383,6 +676,9 @@
         "responses": {
           "204": {
             "description": "The credentials were updated successfully"
+          },
+          "304": {
+            "description": "The channel was not modified"
           },
           "400": {
             "description": "The request contained some invalid elements",
@@ -393,6 +689,16 @@
                 }
               },
               "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -408,6 +714,16 @@
                 }
               },
               "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -1699,7 +2015,7 @@
         ]
       }
     },
-    "/message/state/subscription": {
+    "/message/state/state/subscription": {
       "post": {
         "tags": [
           "message"
@@ -1964,7 +2280,7 @@
         ]
       }
     },
-    "/message/state/subscription/{id}": {
+    "/message/state/state/subscription/{id}": {
       "get": {
         "tags": [
           "message"
@@ -2197,6 +2513,177 @@
           }
         ]
       }
+    },
+    "/message/state/state/subscription/{id}/status": {
+      "put": {
+        "tags": [
+          "message"
+        ],
+        "summary": "Sets the Subscription Status",
+        "operationId": "messageState_setStatus",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageStateSubscriptionStatusUpdate"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageStateSubscriptionStatusUpdate"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageStateSubscriptionStatusUpdate"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageStateSubscriptionStatusUpdate"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageStateSubscriptionStatusUpdate"
+              }
+            },
+            "text/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageStateSubscriptionStatusUpdate"
+              }
+            },
+            "application/*+xml": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageStateSubscriptionStatusUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The subscription was successfully updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageStateSubscription"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageStateSubscription"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageStateSubscription"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageStateSubscription"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "The subscription was not updated"
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The subscription was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "send:message"
+            ]
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -2373,28 +2860,22 @@
           "modelAsString": true
         }
       },
-      "ChannelTerminal": {
-        "required": [
-          "address",
-          "id",
-          "type"
-        ],
+      "NewChannelTerminal": {
         "type": "object",
         "properties": {
           "id": {
             "type": "string",
-            "description": "The unique identifier of the terminal instance"
+            "nullable": true
           },
           "type": {
             "$ref": "#/components/schemas/TerminalType"
           },
           "address": {
             "type": "string",
-            "description": "The address of the terminal"
+            "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A server terminal that is bound to a specific\r\nchannel instance"
+        "additionalProperties": false
       },
       "UserChannelRequest": {
         "required": [
@@ -2466,7 +2947,7 @@
           "terminals": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ChannelTerminal"
+              "$ref": "#/components/schemas/NewChannelTerminal"
             },
             "description": "An optional list of Terminals to be bound to the channel (as senders or receivers)",
             "nullable": true
@@ -2489,6 +2970,29 @@
           "modelAsString": true
         }
       },
+      "ChannelTerminal": {
+        "required": [
+          "address",
+          "id",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the terminal instance"
+          },
+          "type": {
+            "$ref": "#/components/schemas/TerminalType"
+          },
+          "address": {
+            "type": "string",
+            "description": "The address of the terminal"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A server terminal that is bound to a specific\r\nchannel instance"
+      },
       "Channel": {
         "required": [
           "contentTypes",
@@ -2496,6 +3000,7 @@
           "receiverTypes",
           "senderTypes",
           "status",
+          "tenantId",
           "type"
         ],
         "type": "object",
@@ -2515,6 +3020,10 @@
           },
           "type": {
             "$ref": "#/components/schemas/ChannelType"
+          },
+          "tenantId": {
+            "type": "string",
+            "description": "The identifier of the tenant of the channel"
           },
           "directions": {
             "$ref": "#/components/schemas/ChannelDirections"
@@ -2593,6 +3102,143 @@
         },
         "additionalProperties": {}
       },
+      "ChannelSource": {
+        "enum": [
+          "unknown",
+          "inventory",
+          "customer"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ChannelSource",
+          "modelAsString": true
+        }
+      },
+      "ChannelQuotaPeriod": {
+        "enum": [
+          "none",
+          "day",
+          "month",
+          "year"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ChannelQuotaPeriod",
+          "modelAsString": true
+        }
+      },
+      "ChannelQuota": {
+        "required": [
+          "limit",
+          "metricType"
+        ],
+        "type": "object",
+        "properties": {
+          "metricType": {
+            "type": "string",
+            "description": "The type of metric provisioned (eg. \"messages.outbound\", \"messages.fallbacks\")"
+          },
+          "period": {
+            "$ref": "#/components/schemas/ChannelQuotaPeriod"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The provisioned upper limit of the quota",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A provisioned usage quota of a channel capability"
+      },
+      "UserChannel": {
+        "required": [
+          "contentTypes",
+          "name",
+          "provider",
+          "receiverTypes",
+          "senderTypes",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the channel instance"
+          },
+          "tenantId": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/ChannelType"
+          },
+          "provider": {
+            "type": "string",
+            "description": "The provider of messaging services used by\r\nthe channel instance"
+          },
+          "directions": {
+            "$ref": "#/components/schemas/ChannelDirections"
+          },
+          "source": {
+            "$ref": "#/components/schemas/ChannelSource"
+          },
+          "sourceId": {
+            "type": "string",
+            "description": "",
+            "nullable": true
+          },
+          "settings": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "A collection of settings of the channel instance (Note: the\r\ntypes of settings depend on the type of channel)",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the channel instance",
+            "nullable": true
+          },
+          "contentTypes": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of message content types that are supported\r\nby the channel (either because of configuration or because\r\nof native capabilities of the channel)"
+          },
+          "quotas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChannelQuota"
+            },
+            "description": "A list of provisioned messaging quotas (limits)\r\nto the usage of the channel instance",
+            "nullable": true
+          },
+          "senderTypes": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TerminalType"
+            }
+          },
+          "receiverTypes": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TerminalType"
+            }
+          },
+          "terminals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChannelTerminal"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The instance of a channel owned by a customer"
+      },
       "TerminalSource": {
         "enum": [
           "unknown",
@@ -2646,27 +3292,22 @@
         "properties": {
           "address": {
             "type": "string",
-            "description": "The address part of the e-mail terminal",
             "format": "email"
           },
           "displayName": {
             "type": "string",
-            "description": "An optional display name of the sender",
             "nullable": true
           },
           "settings": {
             "type": "object",
             "additionalProperties": {},
-            "description": "A collection of settings of the terminal",
             "nullable": true
           },
           "id": {
-            "type": "string",
-            "description": "The unique identifier of the teminal"
+            "type": "string"
           },
           "sourceId": {
             "type": "string",
-            "description": "If the terminal is assigned from the inventory,\r\nthis is the unique identifier of the source terminal",
             "nullable": true
           },
           "source": {
@@ -2677,15 +3318,13 @@
           },
           "lastChanged": {
             "type": "string",
-            "description": "The exact time-stamp of the last change to\r\nthe settings or status of the terminal",
             "format": "date-time"
           },
           "role": {
             "$ref": "#/components/schemas/TerminalRoles"
           }
         },
-        "additionalProperties": false,
-        "description": "An e-mail address used to send messages from server applications"
+        "additionalProperties": false
       },
       "PageSortDirection": {
         "enum": [
@@ -3298,22 +3937,18 @@
         "properties": {
           "number": {
             "type": "string",
-            "description": "The number used by applications to send messages",
             "format": "tel"
           },
           "settings": {
             "type": "object",
             "additionalProperties": {},
-            "description": "A collection of settings of the terminal",
             "nullable": true
           },
           "id": {
-            "type": "string",
-            "description": "The unique identifier of the teminal"
+            "type": "string"
           },
           "sourceId": {
             "type": "string",
-            "description": "If the terminal is assigned from the inventory,\r\nthis is the unique identifier of the source terminal",
             "nullable": true
           },
           "source": {
@@ -3324,15 +3959,13 @@
           },
           "lastChanged": {
             "type": "string",
-            "description": "The exact time-stamp of the last change to\r\nthe settings or status of the terminal",
             "format": "date-time"
           },
           "role": {
             "$ref": "#/components/schemas/TerminalRoles"
           }
         },
-        "additionalProperties": false,
-        "description": "A telephone number (MSISDN) used to send messages from server applications"
+        "additionalProperties": false
       },
       "PageResultOfServerPhoneNumber": {
         "required": [
@@ -3421,7 +4054,6 @@
             "minLength": 2,
             "pattern": "^[a-zA-Z][a-zA-Z0-9]*$",
             "type": "string",
-            "description": "The sender requested is an alpha-numeric label",
             "nullable": true
           },
           "email": {
@@ -3430,18 +4062,15 @@
           "number": {
             "minLength": 6,
             "type": "string",
-            "description": "The sender terminal requested is a phone number",
             "format": "tel",
             "nullable": true
           },
           "terminalId": {
             "type": "string",
-            "description": "The unique identifier of the terminal requested",
             "nullable": true
           },
           "provider": {
             "type": "string",
-            "description": "If the terminal is ported from other providers, \r\nthis specified the provider of messaging services owning the terminal",
             "nullable": true
           },
           "role": {
@@ -3450,12 +4079,10 @@
           "settings": {
             "type": "object",
             "additionalProperties": {},
-            "description": "Additional settings to be configured for the terminal (currently ignored by the system)",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "The request of assignment of a terminal from the inventory"
+        "additionalProperties": false
       },
       "ServerTerminal": {
         "required": [
@@ -3472,12 +4099,10 @@
             "minLength": 2,
             "pattern": "^[a-zA-Z][a-zA-Z0-9]*$",
             "type": "string",
-            "description": "The sender is an alpha-numeric label",
             "nullable": true
           },
           "lastChanged": {
             "type": "string",
-            "description": "The date in which the last status was reported",
             "format": "date-time"
           },
           "source": {
@@ -3515,8 +4140,7 @@
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A terminal provisioned to the customer that can be used to \r\nsend messages from server applications"
+        "additionalProperties": false
       },
       "PageResultOfServerTerminal": {
         "required": [
@@ -3589,12 +4213,10 @@
             "$ref": "#/components/schemas/TerminalType"
           },
           "address": {
-            "type": "string",
-            "description": "The address of the terminal to lookup"
+            "type": "string"
           }
         },
-        "additionalProperties": false,
-        "description": "The request of lookup of a given terminal"
+        "additionalProperties": false
       },
       "Terminal": {
         "type": "object",
@@ -3889,31 +4511,26 @@
         "properties": {
           "name": {
             "type": "string",
-            "description": "A descriptive custom name of the subscription",
             "nullable": true
           },
           "destinationUrl": {
             "type": "string",
-            "description": "The URL where the webhooks should be delivered",
             "format": "uri"
           },
           "secret": {
             "type": "string",
-            "description": "An optional secret word that is used to sign the webhooks to secure them",
             "nullable": true
           },
           "channel": {
             "minLength": 3,
             "pattern": "^[a-zA-Z0-9_.-]+$",
-            "type": "string",
-            "description": "The name of the channel used to transport the messages"
+            "type": "string"
           },
           "headers": {
             "type": "object",
             "additionalProperties": {
               "type": "string"
             },
-            "description": "A set of optional headers that are attached to the webhook\r\nrequest (for correlation)",
             "nullable": true
           },
           "events": {
@@ -3921,25 +4538,21 @@
             "type": "array",
             "items": {
               "type": "string"
-            },
-            "description": "The type of message event to subscribe"
+            }
           },
           "filters": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Filter"
             },
-            "description": "An optional set of filters that restrict the events to be notified",
             "nullable": true
           },
           "retryCount": {
             "type": "integer",
-            "description": "The number of attempts to perform when trying to deliver\r\nthe webhook, before failing",
             "format": "int32"
           }
         },
-        "additionalProperties": false,
-        "description": "New subscription to the notification of status changes of messages\r\nsent through the system"
+        "additionalProperties": false
       },
       "MessageStateSubscription": {
         "required": [
@@ -3954,17 +4567,14 @@
           "channel": {
             "pattern": "^[a-zA-Z0-9_.-]+$",
             "type": "string",
-            "description": "The name of the channel used to transport the messages",
             "nullable": true
           },
           "destinationUrl": {
             "type": "string",
-            "description": "The HTTP URL address where the notifications\r\nare delivered (as webhooks)",
             "format": "uri"
           },
           "secret": {
             "type": "string",
-            "description": "An optional secret string used to sign the webhooks\r\ndelivered to the subscriber",
             "nullable": true
           },
           "headers": {
@@ -3972,32 +4582,26 @@
             "additionalProperties": {
               "type": "string"
             },
-            "description": "A set of additional headers attached to the HTTP request\r\nfired towards the destination URL (typically used for context)",
             "nullable": true
           },
           "id": {
-            "type": "string",
-            "description": "The unique identider of the subscription"
+            "type": "string"
           },
           "events": {
             "minItems": 1,
             "type": "array",
             "items": {
               "type": "string"
-            },
-            "description": "The list of message event types subscribed"
+            }
           },
           "name": {
-            "type": "string",
-            "description": "A descriptive name of the subscription (for display)"
+            "type": "string"
           },
           "active": {
-            "type": "boolean",
-            "description": "The active state of the subscription"
+            "type": "boolean"
           },
           "retryCount": {
             "type": "integer",
-            "description": "The number of attempts to perform when trying to deliver\r\nthe webhook, before failing",
             "format": "int32"
           },
           "filters": {
@@ -4005,12 +4609,10 @@
             "items": {
               "$ref": "#/components/schemas/Filter"
             },
-            "description": "An optional set of filters used to restrict the\r\ndelivery of message states",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "The subscription to the notification of changes of state\r\nof messages sent through a channel during the transportation"
+        "additionalProperties": false
       },
       "PageResultOfMessageStateSubscription": {
         "required": [
@@ -4068,6 +4670,18 @@
             "type": "string",
             "format": "uri",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MessageStateSubscriptionStatusUpdate": {
+        "required": [
+          "active"
+        ],
+        "type": "object",
+        "properties": {
+          "active": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
