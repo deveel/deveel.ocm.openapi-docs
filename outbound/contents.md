@@ -6,7 +6,7 @@ nav_order: 2
 permalink: /outbound/contents
 ---
 
-# Outbound Message Contents
+## Outbound Message Contents
 
 Although the foundational idea of the omni-channel messaging is _to be able to reach the users with one single message throught multiple channels_, this ambition is sometimes limited by the capabilities of the channels to transport certain type of contents.
 
