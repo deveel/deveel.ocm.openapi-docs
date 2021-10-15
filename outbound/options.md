@@ -8,9 +8,15 @@ permalink: /outbound/options
 
 Users can control the behavior of the system for each single outbound message, through the specification of well-known _options_ that are interpreted by each channel.
 
-Indeed options are specific to the type of channels used to send the message, to accommodate their idiosyncrasies 
+Some options are generic to control the overall behavior of the process, while some others are specific to the type of channel used to send the message, to accommodate its _idiosyncrasies_
 
 This set is represented as a key/value pair within the _message_ object
+
+## All Channels
+
+| Options             | Data Type       | Description                                                  |
+|---------------------|-----------------|--------------------------------------------------------------|
+| retry.count         | integer number  | The number of tries the system should attempt before failing |
 
 ## SMS
 
@@ -20,9 +26,9 @@ This set is represented as a key/value pair within the _message_ object
 
 ## E-mail
 
-| Option              | Description                                    |
-|---------------------|------------------------------------------------|
-|
+| Option              | Data Type       |  Description                                                                          |
+|---------------------|-----------------|---------------------------------------------------------------------------------------|
+| priority            | string          | The priority to give to the message (either 'high', 'normal', 'below normal', 'low' ) |
 
 ## Sandbox
 

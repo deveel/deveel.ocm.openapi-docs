@@ -483,6 +483,160 @@
         ]
       }
     },
+    "/message/{messageId}/state": {
+      "get": {
+        "tags": [
+          "message"
+        ],
+        "summary": "Gets the State of a Message",
+        "operationId": "message_getState",
+        "parameters": [
+          {
+            "name": "messageId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The state of the message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageState"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageState"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageState"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageState"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The message was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "A media item in the message is not supported by the channel",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "send:message"
+            ]
+          }
+        ]
+      }
+    },
     "/message/received/{id}": {
       "get": {
         "tags": [
@@ -835,6 +989,7 @@
             "nullable": true
           },
           "attach": {
+            "maxItems": 20,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Attachment"
@@ -1069,12 +1224,14 @@
         "type": "object",
         "properties": {
           "context": {
+            "maxLength": 50,
             "type": "object",
             "additionalProperties": {},
             "description": "A context that is provided to the batch: messages within the batch\r\nwill inherit this when they don't specify one explicitly",
             "nullable": true
           },
           "messages": {
+            "maxItems": 100,
             "minItems": 1,
             "type": "array",
             "items": {
@@ -1219,6 +1376,83 @@
         },
         "additionalProperties": false,
         "description": "Specifies the channel instance used to send \r\nor receive a message"
+      },
+      "MessageStatus": {
+        "enum": [
+          "unknown",
+          "queued",
+          "sent",
+          "delivered",
+          "deliveryRetried",
+          "deliveryFailed",
+          "read",
+          "deleted"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "MessageStatus",
+          "modelAsString": true
+        }
+      },
+      "MessageState": {
+        "required": [
+          "channel",
+          "messageId",
+          "status",
+          "timeStamp"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the state instance",
+            "nullable": true
+          },
+          "messageId": {
+            "type": "string",
+            "description": "The unique identifier of the message"
+          },
+          "channel": {
+            "$ref": "#/components/schemas/MessageChannel"
+          },
+          "status": {
+            "$ref": "#/components/schemas/MessageStatus"
+          },
+          "timeStamp": {
+            "type": "string",
+            "description": "The exact time when the event occured",
+            "format": "date-time"
+          },
+          "errorCode": {
+            "type": "string",
+            "description": "If the message was not delivered, this provides the \r\ntype of error that prevented the delivery",
+            "nullable": true
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "If the message was not delivered, this provides\r\nthe reason that prevented the delivery",
+            "nullable": true
+          },
+          "attemptCount": {
+            "type": "integer",
+            "description": "If the message delivery was retried, this\r\nindicates the number of attempts done so far",
+            "format": "int32",
+            "nullable": true
+          },
+          "fallbackTo": {
+            "type": "string",
+            "description": "If the message was not delivered and it had a fallback \r\nconfigured, this provides the unique identifier of \r\nthe message that will be enqueued",
+            "nullable": true
+          },
+          "context": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Provides a context of the state (eg. environment,\r\nmetadata, configured callbacks, etc.)",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Describes the change of state of an outbound message"
       },
       "InboundMessage": {
         "required": [
