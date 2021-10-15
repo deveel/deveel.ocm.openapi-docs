@@ -34,21 +34,24 @@ Some of the _known_ extensions by channel
 
 | Extension               | Data Type               | Description                             |
 |-------------------------|-------------------------|-----------------------------------------|
-
+|                         |                         |                                         |
 
 ## E-Mail Channel
 
 | Extension               | Data Type               | Description                             |
 |-------------------------|-------------------------|-----------------------------------------|
-
+| subject                 | string                  |                                         |
 
 ## Push Channel
 
 | Extension               | Data Type               | Description                             |
 |-------------------------|-------------------------|-----------------------------------------|
+| sound                   | string                  |                                         |
+| badgeCount              | integer number          |                                         |
 
 
 ## WhatsApp Channel
 
 | Extension               | Data Type               | Description                             |
 |-------------------------|-------------------------|-----------------------------------------|
+| namespace               | string                  |                                         |
