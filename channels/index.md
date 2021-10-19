@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Channels
-nav_order: 2
+nav_order: 1
 permalink: /channels
 has_children: true
 ---
