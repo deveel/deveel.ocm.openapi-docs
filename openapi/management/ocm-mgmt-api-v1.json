@@ -22,6 +22,1361 @@
     }
   ],
   "paths": {
+    "/client": {
+      "post": {
+        "tags": [
+          "client"
+        ],
+        "summary": "Creates a Client",
+        "operationId": "client_create",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewClient"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewClient"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewClient"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewClient"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NewClient"
+              }
+            },
+            "text/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NewClient"
+              }
+            },
+            "application/*+xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NewClient"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The client was successfully created",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Client"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Client"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Client"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Client"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Client"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "One or more of the data of the client are invalid",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The given tenant was not found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "create:client"
+            ]
+          }
+        ]
+      }
+    },
+    "/client/{id}": {
+      "get": {
+        "tags": [
+          "client"
+        ],
+        "summary": "Gets a Client",
+        "operationId": "client_get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The client was found in the identity manager",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Client"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Client"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Client"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Client"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Client"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The client or the tenant were not found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "read:client"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "client"
+        ],
+        "summary": "Deletes a Client",
+        "operationId": "client_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The client was deleted successfully"
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The client was not found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "delete:client"
+            ]
+          }
+        ]
+      }
+    },
+    "/user": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Create a New User",
+        "operationId": "user_create",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUser"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUser"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUser"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUser"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUser"
+              }
+            },
+            "text/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUser"
+              }
+            },
+            "application/*+xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The user was successfully created",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request contains some invalid elements",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "If the user is associated to a Tenant and this was not found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Another user with the same e-mail or the same name already exists",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "create:user"
+            ]
+          }
+        ]
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Gets a User",
+        "operationId": "user_get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user was found in the identity manager",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The user was not found in the identity manager",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "read:user"
+            ]
+          }
+        ]
+      }
+    },
+    "/user/me": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Gets the Current User",
+        "operationId": "user_getMe",
+        "responses": {
+          "200": {
+            "description": "The current user was found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The user could not be found in the identity manager",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "read:user"
+            ]
+          }
+        ]
+      }
+    },
+    "/user/page": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Gets a Page of Users",
+        "operationId": "user_getPage",
+        "parameters": [
+          {
+            "name": "number",
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A page of users for the tenant",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResultOfUser"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResultOfUser"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResultOfUser"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResultOfUser"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResultOfUser"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "One or more of the parameters of the request are invalid",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "read:user"
+            ]
+          }
+        ]
+      }
+    },
+    "/user/{id}/status": {
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Sets the Status of a User",
+        "operationId": "user_setStatus",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUserStatus"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUserStatus"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUserStatus"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUserStatus"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUserStatus"
+              }
+            },
+            "text/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUserStatus"
+              }
+            },
+            "application/*+xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NewUserStatus"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "The status of the user was changed"
+          },
+          "304": {
+            "description": "The status of the user was not chagened"
+          },
+          "400": {
+            "description": "One or more of the request data are invalid",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Either the tenant or the user were not found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "write:tenant",
+              "update:user"
+            ]
+          }
+        ]
+      }
+    },
     "/channel/request/{id}": {
       "get": {
         "tags": [
@@ -53,16 +1408,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ChannelAssignmentRequest"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ChannelAssignmentRequest"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ChannelAssignmentRequest"
-                }
               }
             }
           },
@@ -75,16 +1420,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -103,16 +1438,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
               }
             }
           },
@@ -125,16 +1450,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -177,22 +1492,6 @@
                     "$ref": "#/components/schemas/ChannelAssignmentRequest"
                   }
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ChannelAssignmentRequest"
-                  }
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ChannelAssignmentRequest"
-                  }
-                }
               }
             }
           },
@@ -205,16 +1504,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -233,16 +1522,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
               }
             }
           },
@@ -258,16 +1537,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
               }
             }
           }
@@ -275,7 +1544,7 @@
         "security": [
           {
             "oauth2": [
-              "read:channel"
+              "request:channel"
             ]
           }
         ]
@@ -307,21 +1576,6 @@
               "schema": {
                 "$ref": "#/components/schemas/NewChannelAssignmentRequest"
               }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/NewChannelAssignmentRequest"
-              }
-            },
-            "text/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/NewChannelAssignmentRequest"
-              }
-            },
-            "application/*+xml": {
-              "schema": {
-                "$ref": "#/components/schemas/NewChannelAssignmentRequest"
-              }
             }
           },
           "required": true
@@ -336,16 +1590,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ChannelAssignmentRequest"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ChannelAssignmentRequest"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ChannelAssignmentRequest"
                 }
@@ -364,16 +1608,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
               }
             }
           },
@@ -386,16 +1620,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -414,16 +1638,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
               }
             }
           },
@@ -436,16 +1650,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -464,16 +1668,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
               }
             }
           },
@@ -486,16 +1680,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -540,21 +1724,6 @@
               "schema": {
                 "$ref": "#/components/schemas/NewUserChannel"
               }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/NewUserChannel"
-              }
-            },
-            "text/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/NewUserChannel"
-              }
-            },
-            "application/*+xml": {
-              "schema": {
-                "$ref": "#/components/schemas/NewUserChannel"
-              }
             }
           },
           "required": true
@@ -569,16 +1738,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UserChannel"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/UserChannel"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/UserChannel"
                 }
@@ -597,16 +1756,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
               }
             }
           },
@@ -619,16 +1768,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -647,16 +1786,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
               }
             }
           },
@@ -669,16 +1798,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -697,16 +1816,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
               }
             }
           },
@@ -719,16 +1828,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -780,22 +1879,6 @@
                     "$ref": "#/components/schemas/UserChannel"
                   }
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/UserChannel"
-                  }
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/UserChannel"
-                  }
-                }
               }
             }
           },
@@ -811,16 +1894,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
               }
             }
           },
@@ -833,16 +1906,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -890,16 +1953,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/UserChannel"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/UserChannel"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/UserChannel"
-                }
               }
             }
           },
@@ -912,16 +1965,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -940,16 +1983,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
               }
             }
           },
@@ -962,16 +1995,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -1020,16 +2043,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/UserChannel"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/UserChannel"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/UserChannel"
-                }
               }
             }
           },
@@ -1042,16 +2055,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -1070,16 +2073,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
               }
             }
           },
@@ -1092,16 +2085,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -1127,7 +2110,7 @@
         "operationId": "channel_getPage",
         "parameters": [
           {
-            "name": "page",
+            "name": "number",
             "in": "query",
             "schema": {
               "minimum": 1,
@@ -1146,6 +2129,22 @@
               "format": "int32",
               "default": 10
             }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
           }
         ],
         "responses": {
@@ -1158,16 +2157,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageResultOfUserChannel"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageResultOfUserChannel"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/PageResultOfUserChannel"
                 }
@@ -1186,16 +2175,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
               }
             }
           },
@@ -1211,16 +2190,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
               }
             }
           },
@@ -1233,16 +2202,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -1313,33 +2272,6 @@
                   "$ref": "#/components/schemas/SecureChannelCredentials"
                 }
               }
-            },
-            "application/xml": {
-              "schema": {
-                "minItems": 1,
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/SecureChannelCredentials"
-                }
-              }
-            },
-            "text/xml": {
-              "schema": {
-                "minItems": 1,
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/SecureChannelCredentials"
-                }
-              }
-            },
-            "application/*+xml": {
-              "schema": {
-                "minItems": 1,
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/SecureChannelCredentials"
-                }
-              }
             }
           },
           "required": true
@@ -1363,16 +2295,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
               }
             }
           },
@@ -1385,16 +2307,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -1413,16 +2325,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
               }
             }
           },
@@ -1435,16 +2337,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -1495,16 +2387,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
               }
             }
           },
@@ -1517,16 +2399,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -1545,16 +2417,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
               }
             }
           },
@@ -1567,16 +2429,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -1625,16 +2477,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/Channel"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/Channel"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/Channel"
-                }
               }
             }
           },
@@ -1647,16 +2489,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -1675,16 +2507,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
               }
             }
           },
@@ -1697,16 +2519,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -1767,16 +2579,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/PageResultOfChannel"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageResultOfChannel"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageResultOfChannel"
-                }
               }
             }
           },
@@ -1789,16 +2591,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -1817,16 +2609,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
               }
             }
           },
@@ -1839,16 +2621,6 @@
                 }
               },
               "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
@@ -1869,353 +2641,7 @@
         ]
       }
     },
-    "/terminal/email/{id}": {
-      "get": {
-        "tags": [
-          "email"
-        ],
-        "summary": "Gets an E-Mail",
-        "operationId": "emailAddress_get",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The number was found and returned",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServerEmail"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServerEmail"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request is unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "The requested action is forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "None e-mail with the given ID was found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": [
-              "read:terminal"
-            ]
-          }
-        ]
-      }
-    },
-    "/terminal/email": {
-      "get": {
-        "tags": [
-          "email"
-        ],
-        "summary": "Gets a page of E-Mails",
-        "operationId": "emailAddress_getPage",
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "schema": {
-              "minimum": 1,
-              "type": "integer",
-              "format": "int32",
-              "default": 1
-            }
-          },
-          {
-            "name": "size",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 10
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A page of e-mail addresses",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageResultOfServerEmail"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageResultOfServerEmail"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request is unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "The requested action is forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": [
-              "read:terminal"
-            ]
-          }
-        ]
-      }
-    },
-    "/terminal/phone/{id}": {
-      "get": {
-        "tags": [
-          "phone"
-        ],
-        "summary": "Gets a Phone Number",
-        "operationId": "phoneNumber_get",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The number was found and returned",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServerPhoneNumber"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServerPhoneNumber"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request is unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "The requested action is forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "None number with the given ID was not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": [
-              "read:terminal"
-            ]
-          }
-        ]
-      }
-    },
-    "/terminal/phone": {
-      "get": {
-        "tags": [
-          "phone"
-        ],
-        "summary": "Gets a page of Phone Numbers",
-        "operationId": "phoneNumber_getPage",
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "schema": {
-              "minimum": 1,
-              "type": "integer",
-              "format": "int32",
-              "default": 1
-            }
-          },
-          {
-            "name": "size",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 10
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A page of phone numbers",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageResultOfServerPhoneNumber"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageResultOfServerPhoneNumber"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request is unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "The requested action is forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": [
-              "read:terminal"
-            ]
-          }
-        ]
-      }
-    },
-    "/terminal/": {
+    "/terminal/request": {
       "post": {
         "tags": [
           "terminal"
@@ -2346,89 +2772,6 @@
             ]
           }
         ]
-      },
-      "get": {
-        "tags": [
-          "terminal"
-        ],
-        "summary": "Gets a page of Terminals",
-        "operationId": "terminal_getPage",
-        "parameters": [
-          {
-            "name": "number",
-            "in": "query",
-            "schema": {
-              "minimum": 1,
-              "type": "integer",
-              "format": "int32",
-              "default": 1
-            }
-          },
-          {
-            "name": "size",
-            "in": "query",
-            "schema": {
-              "maximum": 50,
-              "type": "integer",
-              "format": "int32",
-              "default": 10
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The terminals page was found and returned",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageResultOfServerTerminal"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageResultOfServerTerminal"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "The request is unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "The requested action is forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "oauth2": [
-              "read:terminal"
-            ]
-          }
-        ]
       }
     },
     "/terminal/{id}": {
@@ -2497,6 +2840,99 @@
           },
           "404": {
             "description": "The terminal was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "read:terminal"
+            ]
+          }
+        ]
+      }
+    },
+    "/terminal/": {
+      "get": {
+        "tags": [
+          "terminal"
+        ],
+        "summary": "Gets a page of Terminals",
+        "operationId": "terminal_getPage",
+        "parameters": [
+          {
+            "name": "number",
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "maximum": 50,
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The terminals page was found and returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResultOfServerTerminal"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResultOfServerTerminal"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request is unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The requested action is forbidden",
             "content": {
               "application/json": {
                 "schema": {
@@ -2850,8 +3286,20 @@
               }
             }
           },
-          "500": {
-            "description": "An unknown error occurred"
+          "409": {
+            "description": "Another route matches the given receiving terminal",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -2941,9 +3389,6 @@
                 }
               }
             }
-          },
-          "500": {
-            "description": "An unknown error occurred"
           }
         },
         "security": [
@@ -3019,136 +3464,12 @@
                 }
               }
             }
-          },
-          "500": {
-            "description": "An unknown error occurred"
           }
         },
         "security": [
           {
             "oauth2": [
               "delete:route"
-            ]
-          }
-        ]
-      },
-      "patch": {
-        "tags": [
-          "route"
-        ],
-        "summary": "Updates the information of a Message Route",
-        "operationId": "route_update",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/MessageRouteUpdate"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MessageRouteUpdate"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MessageRouteUpdate"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/MessageRouteUpdate"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "The updated version of the route",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MessageRoute"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MessageRoute"
-                }
-              }
-            }
-          },
-          "204": {
-            "description": "The update request did not cause any changes"
-          },
-          "304": {
-            "description": "No changes were made to the route"
-          },
-          "401": {
-            "description": "The request is unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "The requested action is forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "None route was found with the given ID",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An unknown error occurred"
-          }
-        },
-        "security": [
-          {
-            "oauth2": [
-              "update:route"
             ]
           }
         ]
@@ -3216,6 +3537,21 @@
           },
           "304": {
             "description": "The update request did not cause any changes"
+          },
+          "400": {
+            "description": "The new status is invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           },
           "401": {
             "description": "The request is unauthorized",
@@ -3344,9 +3680,6 @@
                 }
               }
             }
-          },
-          "500": {
-            "description": "An unknown error occurred"
           }
         },
         "security": [
@@ -3358,48 +3691,48 @@
         ]
       }
     },
-    "/message/state/subscription": {
+    "/webhook/subscription": {
       "post": {
         "tags": [
-          "message"
+          "webhook"
         ],
         "summary": "Subscribes to Messages States",
-        "operationId": "messageState_subscribe",
+        "operationId": "webhook_subscribe",
         "requestBody": {
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/WebhookSubscriptionRequests"
+                "$ref": "#/components/schemas/NewWebhookSubscription"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/WebhookSubscriptionRequests"
+                "$ref": "#/components/schemas/NewWebhookSubscription"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/WebhookSubscriptionRequests"
+                "$ref": "#/components/schemas/NewWebhookSubscription"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/WebhookSubscriptionRequests"
+                "$ref": "#/components/schemas/NewWebhookSubscription"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/components/schemas/WebhookSubscriptionRequests"
+                "$ref": "#/components/schemas/NewWebhookSubscription"
               }
             },
             "text/xml": {
               "schema": {
-                "$ref": "#/components/schemas/WebhookSubscriptionRequests"
+                "$ref": "#/components/schemas/NewWebhookSubscription"
               }
             },
             "application/*+xml": {
               "schema": {
-                "$ref": "#/components/schemas/WebhookSubscriptionRequests"
+                "$ref": "#/components/schemas/NewWebhookSubscription"
               }
             }
           },
@@ -3407,7 +3740,7 @@
         },
         "responses": {
           "201": {
-            "description": "The subscription was created",
+            "description": "The webhook subscription was created",
             "content": {
               "application/json": {
                 "schema": {
@@ -3485,10 +3818,10 @@
       },
       "get": {
         "tags": [
-          "message"
+          "webhook"
         ],
-        "summary": "Gets a page of Message State Subscriptions",
-        "operationId": "messageState_getSubscriptions",
+        "summary": "Gets a page of Webhook Subscriptions",
+        "operationId": "webhook_getSubscriptions",
         "parameters": [
           {
             "name": "page",
@@ -3617,19 +3950,19 @@
         "security": [
           {
             "oauth2": [
-              "send:message"
+              "read:webhook_subscription"
             ]
           }
         ]
       }
     },
-    "/message/state/subscription/{id}": {
+    "/webhook/subscription/{id}": {
       "get": {
         "tags": [
-          "message"
+          "webhook"
         ],
-        "summary": "Gets a Subscription to Messages States",
-        "operationId": "messageState_getSubscription",
+        "summary": "Gets a Subscription to Webhooks",
+        "operationId": "webhook_getSubscription",
         "parameters": [
           {
             "name": "id",
@@ -3746,17 +4079,17 @@
         "security": [
           {
             "oauth2": [
-              "send:message"
+              "read:webhook_subscription"
             ]
           }
         ]
       },
       "delete": {
         "tags": [
-          "message"
+          "webhook"
         ],
-        "summary": "Unsubscribes from Message States",
-        "operationId": "messageState_unsubscribe",
+        "summary": "Unsubscribes from Webhooks",
+        "operationId": "webhook_unsubscribe",
         "parameters": [
           {
             "name": "id",
@@ -3851,19 +4184,19 @@
         "security": [
           {
             "oauth2": [
-              "send:message"
+              "unsubscribe:webhook"
             ]
           }
         ]
       }
     },
-    "/message/state/subscription/{id}/status": {
+    "/webhook/subscription/{id}/status": {
       "put": {
         "tags": [
-          "message"
+          "webhook"
         ],
         "summary": "Sets the Subscription Status",
-        "operationId": "messageState_setStatus",
+        "operationId": "webhook_setStatus",
         "parameters": [
           {
             "name": "id",
@@ -4022,7 +4355,7 @@
         "security": [
           {
             "oauth2": [
-              "send:message"
+              "update:webhook_subscription"
             ]
           }
         ]
@@ -4044,8 +4377,11 @@
               "request:terminal": "Request the assignment of existing or new terminals",
               "delete:terminal": "Delete existing terminals",
               "read:terminal": "Read access to the terminals",
-              "send:message": "Configure notifications of message state changes",
-              "receive:message": "Configure routing of incoming messages"
+              "create:route": "Create new inbound message routes",
+              "read:route": "Read access to message routes",
+              "update:route": "Update existing message routes",
+              "delete:route": "Delete existing message routes",
+              "send:message": "Configure notifications of message state changes"
             }
           },
           "authorizationCode": {
@@ -4059,14 +4395,972 @@
               "request:terminal": "Request the assignment of existing or new terminals",
               "delete:terminal": "Delete existing terminals",
               "read:terminal": "Read access to the terminals",
-              "send:message": "Configure notifications of message state changes",
-              "receive:message": "Configure routing of incoming messages"
+              "create:route": "Create new inbound message routes",
+              "read:route": "Read access to message routes",
+              "update:route": "Update existing message routes",
+              "delete:route": "Delete existing message routes",
+              "send:message": "Configure notifications of message state changes"
             }
           }
         }
       }
     },
     "schemas": {
+      "GrantType": {
+        "enum": [
+          "client_credentials",
+          "authorization_code",
+          "apiKey"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "GrantType",
+          "modelAsString": true
+        }
+      },
+      "NewClient": {
+        "required": [
+          "grantTypes",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "grantTypes": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GrantType"
+            }
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {},
+            "nullable": true
+          },
+          "consentType": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "UserPermission": {
+        "required": [
+          "name",
+          "resource"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "resource": {
+            "type": "string"
+          }
+        }
+      },
+      "Client": {
+        "required": [
+          "clientId",
+          "clientSecret",
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "tenantId": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string"
+          },
+          "clientId": {
+            "type": "string"
+          },
+          "grantTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GrantType"
+            },
+            "nullable": true
+          },
+          "clientSecret": {
+            "type": "string"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserPermission"
+            },
+            "nullable": true
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {},
+            "nullable": true
+          },
+          "consentType": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": {}
+      },
+      "NewUser": {
+        "required": [
+          "email",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "tenantId": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "phone": {
+            "type": "string",
+            "format": "tel",
+            "nullable": true
+          },
+          "picture": {
+            "type": "string",
+            "nullable": true
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {},
+            "nullable": true
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "UserIdentityType": {
+        "enum": [
+          "unknown",
+          "managed",
+          "social"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "UserIdentityType",
+          "modelAsString": true
+        }
+      },
+      "UserIdentity": {
+        "required": [
+          "identityType",
+          "provider",
+          "userId"
+        ],
+        "type": "object",
+        "properties": {
+          "provider": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "namespace": {
+            "type": "string",
+            "nullable": true
+          },
+          "identityType": {
+            "$ref": "#/components/schemas/UserIdentityType"
+          }
+        }
+      },
+      "UserRole": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "User": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "tenantId": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "format": "tel",
+            "nullable": true
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {},
+            "nullable": true
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "string"
+          },
+          "identities": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserIdentity"
+            },
+            "nullable": true
+          },
+          "picture": {
+            "type": "string",
+            "nullable": true
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserRole"
+            },
+            "nullable": true
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        }
+      },
+      "PageSortDirection": {
+        "enum": [
+          "default",
+          "asc",
+          "desc"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "PageSortDirection",
+          "modelAsString": true
+        }
+      },
+      "PageSort": {
+        "required": [
+          "field"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "direction": {
+            "$ref": "#/components/schemas/PageSortDirection"
+          },
+          "ascending": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "LogicalOperator": {
+        "enum": [
+          "and",
+          "or"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "LogicalOperator",
+          "modelAsString": true
+        }
+      },
+      "LogicalFilter": {
+        "required": [
+          "filters",
+          "op"
+        ],
+        "type": "object",
+        "properties": {
+          "op": {
+            "$ref": "#/components/schemas/LogicalOperator"
+          },
+          "filters": {
+            "minItems": 2,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter"
+            }
+          }
+        }
+      },
+      "WebFilterOperator": {
+        "enum": [
+          "eq",
+          "ne",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "between",
+          "contains",
+          "startsWith",
+          "endsWith"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "WebFilterOperator",
+          "modelAsString": true
+        }
+      },
+      "GeoPoint": {
+        "required": [
+          "lat",
+          "lon"
+        ],
+        "type": "object",
+        "properties": {
+          "lon": {
+            "type": "number",
+            "format": "double"
+          },
+          "lat": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "FilterValue": {
+        "type": "object",
+        "properties": {
+          "string": {
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "integer": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "boolean": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "point": {
+            "$ref": "#/components/schemas/GeoPoint"
+          }
+        }
+      },
+      "Range": {
+        "type": "object",
+        "properties": {
+          "lower": {
+            "$ref": "#/components/schemas/FilterValue"
+          },
+          "upper": {
+            "$ref": "#/components/schemas/FilterValue"
+          }
+        }
+      },
+      "BinaryFilter": {
+        "required": [
+          "field",
+          "op"
+        ],
+        "type": "object",
+        "properties": {
+          "op": {
+            "$ref": "#/components/schemas/WebFilterOperator"
+          },
+          "range": {
+            "$ref": "#/components/schemas/Range"
+          },
+          "field": {
+            "type": "string"
+          },
+          "string": {
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "integer": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "boolean": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "point": {
+            "$ref": "#/components/schemas/GeoPoint"
+          }
+        }
+      },
+      "EqualFilter": {
+        "required": [
+          "field"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "string": {
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "integer": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "boolean": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "point": {
+            "$ref": "#/components/schemas/GeoPoint"
+          }
+        }
+      },
+      "NotEqualFilter": {
+        "required": [
+          "field"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "string": {
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "integer": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "boolean": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "point": {
+            "$ref": "#/components/schemas/GeoPoint"
+          }
+        }
+      },
+      "GreaterThanFilter": {
+        "required": [
+          "field"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "string": {
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "integer": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "boolean": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "point": {
+            "$ref": "#/components/schemas/GeoPoint"
+          }
+        }
+      },
+      "GreaterThanOrEqualFilter": {
+        "required": [
+          "field"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "string": {
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "integer": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "boolean": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "point": {
+            "$ref": "#/components/schemas/GeoPoint"
+          }
+        }
+      },
+      "LesserThanFilter": {
+        "required": [
+          "field"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "string": {
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "integer": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "boolean": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "point": {
+            "$ref": "#/components/schemas/GeoPoint"
+          }
+        }
+      },
+      "LesserThanOrEqualFilter": {
+        "required": [
+          "field"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "string": {
+            "type": "string",
+            "nullable": true
+          },
+          "number": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "integer": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "boolean": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "point": {
+            "$ref": "#/components/schemas/GeoPoint"
+          }
+        }
+      },
+      "StartsWithFilter": {
+        "required": [
+          "field",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "value": {
+            "minLength": 1,
+            "type": "string"
+          }
+        }
+      },
+      "EndsWithFilter": {
+        "required": [
+          "field",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "value": {
+            "minLength": 1,
+            "type": "string"
+          }
+        }
+      },
+      "ContainsFilter": {
+        "required": [
+          "field",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "value": {
+            "minLength": 1,
+            "type": "string"
+          }
+        }
+      },
+      "RangeFilter": {
+        "required": [
+          "field"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "lower": {
+            "$ref": "#/components/schemas/FilterValue"
+          },
+          "upper": {
+            "$ref": "#/components/schemas/FilterValue"
+          }
+        }
+      },
+      "Filter": {
+        "type": "object",
+        "properties": {
+          "logical": {
+            "$ref": "#/components/schemas/LogicalFilter"
+          },
+          "and": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter"
+            },
+            "nullable": true
+          },
+          "or": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter"
+            },
+            "nullable": true
+          },
+          "binary": {
+            "$ref": "#/components/schemas/BinaryFilter"
+          },
+          "eq": {
+            "$ref": "#/components/schemas/EqualFilter"
+          },
+          "ne": {
+            "$ref": "#/components/schemas/NotEqualFilter"
+          },
+          "gt": {
+            "$ref": "#/components/schemas/GreaterThanFilter"
+          },
+          "gte": {
+            "$ref": "#/components/schemas/GreaterThanOrEqualFilter"
+          },
+          "lt": {
+            "$ref": "#/components/schemas/LesserThanFilter"
+          },
+          "lte": {
+            "$ref": "#/components/schemas/LesserThanOrEqualFilter"
+          },
+          "startsWith": {
+            "$ref": "#/components/schemas/StartsWithFilter"
+          },
+          "endsWith": {
+            "$ref": "#/components/schemas/EndsWithFilter"
+          },
+          "contains": {
+            "$ref": "#/components/schemas/ContainsFilter"
+          },
+          "between": {
+            "$ref": "#/components/schemas/RangeFilter"
+          },
+          "not": {
+            "$ref": "#/components/schemas/Filter"
+          }
+        }
+      },
+      "PageRequest": {
+        "required": [
+          "page",
+          "size"
+        ],
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sortBy": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PageSort"
+            },
+            "nullable": true
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter"
+            },
+            "nullable": true
+          }
+        }
+      },
+      "PageResultOfUser": {
+        "required": [
+          "request",
+          "totalItems",
+          "totalPages"
+        ],
+        "type": "object",
+        "properties": {
+          "request": {
+            "$ref": "#/components/schemas/PageRequest"
+          },
+          "totalResults": {
+            "type": "integer",
+            "format": "int32",
+            "deprecated": true
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User"
+            },
+            "nullable": true
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "self": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "first": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "next": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "previous": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "last": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          }
+        }
+      },
+      "NewUserStatus": {
+        "required": [
+          "active"
+        ],
+        "type": "object",
+        "properties": {
+          "active": {
+            "type": "boolean"
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "ChannelQuotaPeriod": {
         "enum": [
           "none",
@@ -4100,8 +5394,24 @@
             "format": "int64"
           }
         },
-        "additionalProperties": false,
         "description": "A provisioned usage quota of a channel capability"
+      },
+      "ChannelType": {
+        "enum": [
+          "sms",
+          "messenger",
+          "whatsapp",
+          "email",
+          "viber",
+          "rcs",
+          "push",
+          "sandbox"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ChannelType",
+          "modelAsString": true
+        }
       },
       "ChannelDirections": {
         "enum": [
@@ -4120,7 +5430,12 @@
         "enum": [
           "phoneNumber",
           "email",
-          "alphaNumeric"
+          "alphaNumeric",
+          "conversation",
+          "postalAddress",
+          "user",
+          "app",
+          "url"
         ],
         "type": "string",
         "x-ms-enum": {
@@ -4148,7 +5463,6 @@
             "description": "The address of the terminal"
           }
         },
-        "additionalProperties": false,
         "description": "A server terminal that is bound to a specific\r\nchannel instance"
       },
       "RequestedChannel": {
@@ -4161,17 +5475,24 @@
         "type": "object",
         "properties": {
           "sourceId": {
-            "type": "string"
+            "type": "string",
+            "description": "The identifier of the source channel from the inventory"
           },
           "quotas": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ChannelQuota"
             },
+            "description": "A set of usage quotas requested for assignment",
             "nullable": true
           },
           "name": {
-            "type": "string"
+            "pattern": "^[a-zA-Z0-9_.-]+$",
+            "type": "string",
+            "description": "The custom name of the channel"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ChannelType"
           },
           "directions": {
             "$ref": "#/components/schemas/ChannelDirections"
@@ -4181,13 +5502,15 @@
             "type": "array",
             "items": {
               "type": "string"
-            }
+            },
+            "description": "The type of message contents to be allowed by the channel"
           },
           "senderTypes": {
             "type": "array",
             "items": {
               "type": "string"
             },
+            "description": "The type of terminals allowed to send messages",
             "nullable": true
           },
           "receiverTypes": {
@@ -4195,11 +5518,13 @@
             "items": {
               "type": "string"
             },
+            "description": "The type of terminals allowed to receive messages",
             "nullable": true
           },
           "settings": {
             "type": "object",
             "additionalProperties": {},
+            "description": "Additional custom settings to be configured",
             "nullable": true
           },
           "terminals": {
@@ -4207,12 +5532,13 @@
             "items": {
               "$ref": "#/components/schemas/ChannelTerminal"
             },
+            "description": "An optional set of terminals to be initially associated to the channel\r\n(further ones can be added later, if the channel will be assigned).",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "description": "A configured channel that was requested for assignment"
       },
-      "AssignmentResponseType": {
+      "ResourceAssignmentResponseType": {
         "enum": [
           "none",
           "accepted",
@@ -4220,11 +5546,11 @@
         ],
         "type": "string",
         "x-ms-enum": {
-          "name": "AssignmentResponseType",
+          "name": "ResourceAssignmentResponseType",
           "modelAsString": true
         }
       },
-      "AssignmentResponse": {
+      "ChannelAssignmentResponse": {
         "required": [
           "responder",
           "responseType",
@@ -4233,23 +5559,24 @@
         "type": "object",
         "properties": {
           "responder": {
-            "type": "string"
+            "type": "string",
+            "description": "The unique identifier of the user responding"
           },
           "responseType": {
-            "$ref": "#/components/schemas/AssignmentResponseType"
+            "$ref": "#/components/schemas/ResourceAssignmentResponseType"
           },
           "timeStamp": {
             "type": "string",
             "description": "The exact time-stamp of the response",
             "format": "date-time"
           },
-          "reason": {
+          "notes": {
             "type": "string",
+            "description": "An optional set of notes that inform on the\r\nmotivation and reasons of the response",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "The response to the request of assignment of a resources"
+        "description": "The response to the request of assignment of a channel"
       },
       "ChannelAssignmentRequest": {
         "required": [
@@ -4264,7 +5591,7 @@
             "$ref": "#/components/schemas/RequestedChannel"
           },
           "response": {
-            "$ref": "#/components/schemas/AssignmentResponse"
+            "$ref": "#/components/schemas/ChannelAssignmentResponse"
           },
           "requester": {
             "type": "string",
@@ -4280,35 +5607,7 @@
             "description": "The unique identifier of the request"
           }
         },
-        "additionalProperties": false,
         "description": "The request of assignment of a channel from the inventory"
-      },
-      "ProblemDetails": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "nullable": true
-          },
-          "title": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "detail": {
-            "type": "string",
-            "nullable": true
-          },
-          "instance": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": {}
       },
       "MessageContentType": {
         "enum": [
@@ -4329,6 +5628,7 @@
         "properties": {
           "id": {
             "type": "string",
+            "description": "The unique identifier of the terminal (if not\r\nprovided, the terminal type and address will be used for the\r\nresolution)",
             "nullable": true
           },
           "type": {
@@ -4336,10 +5636,11 @@
           },
           "address": {
             "type": "string",
+            "description": "The address of the terminal to assign (if not provided,\r\nthe terminal identifier will be used for the resolution)",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "description": "The request to associate a terminal to the channel"
       },
       "NewChannelAssignmentRequest": {
         "required": [
@@ -4407,25 +5708,7 @@
             "nullable": true
           }
         },
-        "additionalProperties": false,
         "description": "A new assignment request of a channel from the inventory"
-      },
-      "ChannelType": {
-        "enum": [
-          "sms",
-          "messenger",
-          "whatsapp",
-          "email",
-          "viber",
-          "rcs",
-          "push",
-          "sandbox"
-        ],
-        "type": "string",
-        "x-ms-enum": {
-          "name": "ChannelType",
-          "modelAsString": true
-        }
       },
       "ChannelProvider": {
         "enum": [
@@ -4477,7 +5760,6 @@
             "nullable": true
           }
         },
-        "additionalProperties": false,
         "description": "The specification of an API Key used to secure a channel"
       },
       "BasicAuthCredentials": {
@@ -4498,7 +5780,6 @@
             "description": "The secret password of the credentials"
           }
         },
-        "additionalProperties": false,
         "description": "The specification of a Basic authentication used to\r\nsecure the connection of a channel"
       },
       "SecureChannelCredentials": {
@@ -4518,7 +5799,6 @@
             "$ref": "#/components/schemas/BasicAuthCredentials"
           }
         },
-        "additionalProperties": false,
         "description": "Specifies secure credentials for the authentication\r\nof channels towards providers"
       },
       "NewUserChannel": {
@@ -4600,7 +5880,6 @@
             "nullable": true
           }
         },
-        "additionalProperties": false,
         "description": ""
       },
       "ChannelStatus": {
@@ -4729,584 +6008,7 @@
             "nullable": true
           }
         },
-        "additionalProperties": false,
         "description": "The instance of a channel owned by a customer"
-      },
-      "PageSortDirection": {
-        "enum": [
-          "default",
-          "asc",
-          "desc"
-        ],
-        "type": "string",
-        "x-ms-enum": {
-          "name": "PageSortDirection",
-          "modelAsString": true
-        }
-      },
-      "PageSort": {
-        "required": [
-          "field"
-        ],
-        "type": "object",
-        "properties": {
-          "field": {
-            "type": "string"
-          },
-          "direction": {
-            "$ref": "#/components/schemas/PageSortDirection"
-          },
-          "ascending": {
-            "type": "boolean",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "LogicalOperator": {
-        "enum": [
-          "and",
-          "or"
-        ],
-        "type": "string",
-        "x-ms-enum": {
-          "name": "LogicalOperator",
-          "modelAsString": true
-        }
-      },
-      "LogicalFilter": {
-        "required": [
-          "filters",
-          "op"
-        ],
-        "type": "object",
-        "properties": {
-          "op": {
-            "$ref": "#/components/schemas/LogicalOperator"
-          },
-          "filters": {
-            "minItems": 2,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Filter"
-            }
-          }
-        },
-        "additionalProperties": false
-      },
-      "WebFilterOperator": {
-        "enum": [
-          "eq",
-          "ne",
-          "gt",
-          "gte",
-          "lt",
-          "lte",
-          "between",
-          "contains",
-          "startsWith",
-          "endsWith"
-        ],
-        "type": "string",
-        "x-ms-enum": {
-          "name": "WebFilterOperator",
-          "modelAsString": true
-        }
-      },
-      "GeoPoint": {
-        "required": [
-          "lat",
-          "lon"
-        ],
-        "type": "object",
-        "properties": {
-          "lon": {
-            "type": "number",
-            "format": "double"
-          },
-          "lat": {
-            "type": "number",
-            "format": "double"
-          }
-        },
-        "additionalProperties": false
-      },
-      "FilterValue": {
-        "type": "object",
-        "properties": {
-          "string": {
-            "type": "string",
-            "nullable": true
-          },
-          "number": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "date": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "integer": {
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "boolean": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "point": {
-            "$ref": "#/components/schemas/GeoPoint"
-          }
-        },
-        "additionalProperties": false
-      },
-      "Range": {
-        "type": "object",
-        "properties": {
-          "lower": {
-            "$ref": "#/components/schemas/FilterValue"
-          },
-          "upper": {
-            "$ref": "#/components/schemas/FilterValue"
-          }
-        },
-        "additionalProperties": false
-      },
-      "BinaryFilter": {
-        "required": [
-          "field",
-          "op"
-        ],
-        "type": "object",
-        "properties": {
-          "op": {
-            "$ref": "#/components/schemas/WebFilterOperator"
-          },
-          "range": {
-            "$ref": "#/components/schemas/Range"
-          },
-          "field": {
-            "type": "string"
-          },
-          "string": {
-            "type": "string",
-            "nullable": true
-          },
-          "number": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "date": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "integer": {
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "boolean": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "point": {
-            "$ref": "#/components/schemas/GeoPoint"
-          }
-        },
-        "additionalProperties": false
-      },
-      "EqualFilter": {
-        "required": [
-          "field"
-        ],
-        "type": "object",
-        "properties": {
-          "field": {
-            "type": "string"
-          },
-          "string": {
-            "type": "string",
-            "nullable": true
-          },
-          "number": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "date": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "integer": {
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "boolean": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "point": {
-            "$ref": "#/components/schemas/GeoPoint"
-          }
-        },
-        "additionalProperties": false
-      },
-      "NotEqualFilter": {
-        "required": [
-          "field"
-        ],
-        "type": "object",
-        "properties": {
-          "field": {
-            "type": "string"
-          },
-          "string": {
-            "type": "string",
-            "nullable": true
-          },
-          "number": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "date": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "integer": {
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "boolean": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "point": {
-            "$ref": "#/components/schemas/GeoPoint"
-          }
-        },
-        "additionalProperties": false
-      },
-      "GreaterThanFilter": {
-        "required": [
-          "field"
-        ],
-        "type": "object",
-        "properties": {
-          "field": {
-            "type": "string"
-          },
-          "string": {
-            "type": "string",
-            "nullable": true
-          },
-          "number": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "date": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "integer": {
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "boolean": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "point": {
-            "$ref": "#/components/schemas/GeoPoint"
-          }
-        },
-        "additionalProperties": false
-      },
-      "GreaterThanOrEqualFilter": {
-        "required": [
-          "field"
-        ],
-        "type": "object",
-        "properties": {
-          "field": {
-            "type": "string"
-          },
-          "string": {
-            "type": "string",
-            "nullable": true
-          },
-          "number": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "date": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "integer": {
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "boolean": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "point": {
-            "$ref": "#/components/schemas/GeoPoint"
-          }
-        },
-        "additionalProperties": false
-      },
-      "LesserThanFilter": {
-        "required": [
-          "field"
-        ],
-        "type": "object",
-        "properties": {
-          "field": {
-            "type": "string"
-          },
-          "string": {
-            "type": "string",
-            "nullable": true
-          },
-          "number": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "date": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "integer": {
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "boolean": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "point": {
-            "$ref": "#/components/schemas/GeoPoint"
-          }
-        },
-        "additionalProperties": false
-      },
-      "LesserThanOrEqualFilter": {
-        "required": [
-          "field"
-        ],
-        "type": "object",
-        "properties": {
-          "field": {
-            "type": "string"
-          },
-          "string": {
-            "type": "string",
-            "nullable": true
-          },
-          "number": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "date": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "integer": {
-            "type": "integer",
-            "format": "int64",
-            "nullable": true
-          },
-          "boolean": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "point": {
-            "$ref": "#/components/schemas/GeoPoint"
-          }
-        },
-        "additionalProperties": false
-      },
-      "StartsWithFilter": {
-        "required": [
-          "field",
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "field": {
-            "type": "string"
-          },
-          "value": {
-            "minLength": 1,
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "EndsWithFilter": {
-        "required": [
-          "field",
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "field": {
-            "type": "string"
-          },
-          "value": {
-            "minLength": 1,
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ContainsFilter": {
-        "required": [
-          "field",
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "field": {
-            "type": "string"
-          },
-          "value": {
-            "minLength": 1,
-            "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "RangeFilter": {
-        "required": [
-          "field"
-        ],
-        "type": "object",
-        "properties": {
-          "field": {
-            "type": "string"
-          },
-          "lower": {
-            "$ref": "#/components/schemas/FilterValue"
-          },
-          "upper": {
-            "$ref": "#/components/schemas/FilterValue"
-          }
-        },
-        "additionalProperties": false
-      },
-      "Filter": {
-        "type": "object",
-        "properties": {
-          "logical": {
-            "$ref": "#/components/schemas/LogicalFilter"
-          },
-          "and": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Filter"
-            },
-            "nullable": true
-          },
-          "or": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Filter"
-            },
-            "nullable": true
-          },
-          "binary": {
-            "$ref": "#/components/schemas/BinaryFilter"
-          },
-          "eq": {
-            "$ref": "#/components/schemas/EqualFilter"
-          },
-          "ne": {
-            "$ref": "#/components/schemas/NotEqualFilter"
-          },
-          "gt": {
-            "$ref": "#/components/schemas/GreaterThanFilter"
-          },
-          "gte": {
-            "$ref": "#/components/schemas/GreaterThanOrEqualFilter"
-          },
-          "lt": {
-            "$ref": "#/components/schemas/LesserThanFilter"
-          },
-          "lte": {
-            "$ref": "#/components/schemas/LesserThanOrEqualFilter"
-          },
-          "startsWith": {
-            "$ref": "#/components/schemas/StartsWithFilter"
-          },
-          "endsWith": {
-            "$ref": "#/components/schemas/EndsWithFilter"
-          },
-          "contains": {
-            "$ref": "#/components/schemas/ContainsFilter"
-          },
-          "between": {
-            "$ref": "#/components/schemas/RangeFilter"
-          },
-          "not": {
-            "$ref": "#/components/schemas/Filter"
-          }
-        },
-        "additionalProperties": false
-      },
-      "PageRequest": {
-        "required": [
-          "page",
-          "size"
-        ],
-        "type": "object",
-        "properties": {
-          "page": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "size": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "sortBy": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PageSort"
-            },
-            "nullable": true
-          },
-          "filters": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Filter"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
       },
       "PageResultOfUserChannel": {
         "required": [
@@ -5365,8 +6067,7 @@
             "format": "uri",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "Channel": {
         "required": [
@@ -5411,8 +6112,7 @@
           "id": {
             "type": "string"
           }
-        },
-        "additionalProperties": false
+        }
       },
       "PageResultOfChannel": {
         "required": [
@@ -5471,258 +6171,7 @@
             "format": "uri",
             "nullable": true
           }
-        },
-        "additionalProperties": false
-      },
-      "TerminalSource": {
-        "enum": [
-          "unknown",
-          "customer",
-          "inventory"
-        ],
-        "type": "string",
-        "x-ms-enum": {
-          "name": "TerminalSource",
-          "modelAsString": true
         }
-      },
-      "TerminalStatus": {
-        "enum": [
-          "none",
-          "requested",
-          "validated",
-          "active",
-          "reported",
-          "blocked"
-        ],
-        "type": "string",
-        "x-ms-enum": {
-          "name": "TerminalStatus",
-          "modelAsString": true
-        }
-      },
-      "TerminalRoles": {
-        "enum": [
-          "default",
-          "sender",
-          "receiver",
-          "both"
-        ],
-        "type": "string",
-        "x-ms-enum": {
-          "name": "TerminalRoles",
-          "modelAsString": true
-        }
-      },
-      "ServerEmail": {
-        "required": [
-          "address",
-          "id",
-          "lastChanged",
-          "role",
-          "source",
-          "status"
-        ],
-        "type": "object",
-        "properties": {
-          "address": {
-            "type": "string",
-            "format": "email"
-          },
-          "displayName": {
-            "type": "string",
-            "nullable": true
-          },
-          "settings": {
-            "type": "object",
-            "additionalProperties": {},
-            "nullable": true
-          },
-          "id": {
-            "type": "string"
-          },
-          "sourceId": {
-            "type": "string",
-            "nullable": true
-          },
-          "source": {
-            "$ref": "#/components/schemas/TerminalSource"
-          },
-          "status": {
-            "$ref": "#/components/schemas/TerminalStatus"
-          },
-          "lastChanged": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "role": {
-            "$ref": "#/components/schemas/TerminalRoles"
-          }
-        },
-        "additionalProperties": false
-      },
-      "PageResultOfServerEmail": {
-        "required": [
-          "request",
-          "totalItems",
-          "totalPages"
-        ],
-        "type": "object",
-        "properties": {
-          "request": {
-            "$ref": "#/components/schemas/PageRequest"
-          },
-          "totalResults": {
-            "type": "integer",
-            "format": "int32",
-            "deprecated": true
-          },
-          "totalItems": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ServerEmail"
-            },
-            "nullable": true
-          },
-          "totalPages": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "self": {
-            "type": "string",
-            "format": "uri",
-            "nullable": true
-          },
-          "first": {
-            "type": "string",
-            "format": "uri",
-            "nullable": true
-          },
-          "next": {
-            "type": "string",
-            "format": "uri",
-            "nullable": true
-          },
-          "previous": {
-            "type": "string",
-            "format": "uri",
-            "nullable": true
-          },
-          "last": {
-            "type": "string",
-            "format": "uri",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ServerPhoneNumber": {
-        "required": [
-          "id",
-          "lastChanged",
-          "number",
-          "role",
-          "source",
-          "status"
-        ],
-        "type": "object",
-        "properties": {
-          "number": {
-            "type": "string",
-            "format": "tel"
-          },
-          "settings": {
-            "type": "object",
-            "additionalProperties": {},
-            "nullable": true
-          },
-          "id": {
-            "type": "string"
-          },
-          "sourceId": {
-            "type": "string",
-            "nullable": true
-          },
-          "source": {
-            "$ref": "#/components/schemas/TerminalSource"
-          },
-          "status": {
-            "$ref": "#/components/schemas/TerminalStatus"
-          },
-          "lastChanged": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "role": {
-            "$ref": "#/components/schemas/TerminalRoles"
-          }
-        },
-        "additionalProperties": false
-      },
-      "PageResultOfServerPhoneNumber": {
-        "required": [
-          "request",
-          "totalItems",
-          "totalPages"
-        ],
-        "type": "object",
-        "properties": {
-          "request": {
-            "$ref": "#/components/schemas/PageRequest"
-          },
-          "totalResults": {
-            "type": "integer",
-            "format": "int32",
-            "deprecated": true
-          },
-          "totalItems": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ServerPhoneNumber"
-            },
-            "nullable": true
-          },
-          "totalPages": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "self": {
-            "type": "string",
-            "format": "uri",
-            "nullable": true
-          },
-          "first": {
-            "type": "string",
-            "format": "uri",
-            "nullable": true
-          },
-          "next": {
-            "type": "string",
-            "format": "uri",
-            "nullable": true
-          },
-          "previous": {
-            "type": "string",
-            "format": "uri",
-            "nullable": true
-          },
-          "last": {
-            "type": "string",
-            "format": "uri",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
       },
       "EmailAddress": {
         "required": [
@@ -5741,8 +6190,20 @@
             "nullable": true
           }
         },
-        "additionalProperties": false,
         "description": "Represents a full e-mail address terminal"
+      },
+      "TerminalRoles": {
+        "enum": [
+          "default",
+          "sender",
+          "receiver",
+          "both"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "TerminalRoles",
+          "modelAsString": true
+        }
       },
       "ServerTerminalRequest": {
         "type": "object",
@@ -5751,6 +6212,7 @@
             "minLength": 2,
             "pattern": "^[a-zA-Z][a-zA-Z0-9]*$",
             "type": "string",
+            "description": "The sender requested is an alpha-numeric label",
             "nullable": true
           },
           "email": {
@@ -5759,27 +6221,63 @@
           "number": {
             "minLength": 6,
             "type": "string",
+            "description": "The sender terminal requested is a phone number",
             "format": "tel",
             "nullable": true
           },
           "terminalId": {
             "type": "string",
+            "description": "The unique identifier of the terminal requested",
             "nullable": true
           },
           "provider": {
             "type": "string",
+            "description": "If the terminal is ported from other providers, \r\nthis specified the provider of messaging services owning the terminal",
             "nullable": true
           },
           "role": {
             "$ref": "#/components/schemas/TerminalRoles"
           },
+          "channel": {
+            "type": "string",
+            "description": "The name of the channel where to bound the terminal",
+            "nullable": true
+          },
           "settings": {
             "type": "object",
             "additionalProperties": {},
+            "description": "Additional settings to be configured for the terminal (currently ignored by the system)",
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "description": "The request of assignment of a terminal from the inventory"
+      },
+      "TerminalStatus": {
+        "enum": [
+          "none",
+          "requested",
+          "validated",
+          "active",
+          "reported",
+          "blocked"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "TerminalStatus",
+          "modelAsString": true
+        }
+      },
+      "TerminalSource": {
+        "enum": [
+          "unknown",
+          "customer",
+          "inventory"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "TerminalSource",
+          "modelAsString": true
+        }
       },
       "ServerTerminal": {
         "required": [
@@ -5796,10 +6294,12 @@
             "minLength": 2,
             "pattern": "^[a-zA-Z][a-zA-Z0-9]*$",
             "type": "string",
+            "description": "The sender is an alpha-numeric label",
             "nullable": true
           },
           "lastChanged": {
             "type": "string",
+            "description": "The date in which the last status was reported",
             "format": "date-time"
           },
           "source": {
@@ -5807,6 +6307,10 @@
           },
           "role": {
             "$ref": "#/components/schemas/TerminalRoles"
+          },
+          "channel": {
+            "type": "string",
+            "nullable": true
           },
           "sourceId": {
             "type": "string",
@@ -5837,7 +6341,8 @@
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": {},
+        "description": "A terminal provisioned to the customer that can be used to \r\nsend messages from server applications"
       },
       "PageResultOfServerTerminal": {
         "required": [
@@ -5896,8 +6401,19 @@
             "format": "uri",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
+      },
+      "ServerTerminalType": {
+        "enum": [
+          "email",
+          "phoneNumber",
+          "alphaNumeric"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ServerTerminalType",
+          "modelAsString": true
+        }
       },
       "TerminalLookup": {
         "required": [
@@ -5907,37 +6423,35 @@
         "type": "object",
         "properties": {
           "type": {
-            "$ref": "#/components/schemas/TerminalType"
+            "$ref": "#/components/schemas/ServerTerminalType"
           },
           "address": {
-            "type": "string"
+            "type": "string",
+            "description": "The address of the terminal to lookup"
           }
         },
-        "additionalProperties": false
+        "description": "The request of lookup of a given terminal"
       },
-      "Terminal": {
+      "RequestedTerminal": {
+        "required": [
+          "terminalId"
+        ],
         "type": "object",
         "properties": {
-          "emailAddress": {
+          "terminalId": {
+            "type": "string"
+          },
+          "type": {
             "type": "string",
-            "description": "The email address of the terminal",
-            "format": "email",
             "nullable": true
           },
-          "email": {
-            "$ref": "#/components/schemas/EmailAddress"
-          },
-          "number": {
+          "address": {
             "type": "string",
-            "description": "The telephone number (MSISDN) of the terminal",
-            "format": "tel",
             "nullable": true
           }
-        },
-        "additionalProperties": false,
-        "description": "A terminal allows to send or receive messages through channels"
+        }
       },
-      "AssignmentResponse1": {
+      "TerminalAssignmentResponse": {
         "required": [
           "responder",
           "responseType",
@@ -5950,21 +6464,19 @@
             "description": "The unique identifier of the user responding"
           },
           "responseType": {
-            "$ref": "#/components/schemas/AssignmentResponseType"
+            "$ref": "#/components/schemas/ResourceAssignmentResponseType"
           },
           "timeStamp": {
             "type": "string",
             "description": "The exact time-stamp of the response",
             "format": "date-time"
           },
-          "reason": {
+          "notes": {
             "type": "string",
             "description": "An optional set of notes that inform on the\r\nmotivation and reasons of the response",
             "nullable": true
           }
-        },
-        "additionalProperties": false,
-        "description": "The response to the request of assignment of a resource"
+        }
       },
       "TerminalAssignmentRequest": {
         "required": [
@@ -5976,7 +6488,7 @@
         "type": "object",
         "properties": {
           "terminal": {
-            "$ref": "#/components/schemas/Terminal"
+            "$ref": "#/components/schemas/RequestedTerminal"
           },
           "requester": {
             "type": "string"
@@ -5986,18 +6498,53 @@
             "format": "date-time"
           },
           "response": {
-            "$ref": "#/components/schemas/AssignmentResponse1"
+            "$ref": "#/components/schemas/TerminalAssignmentResponse"
           },
           "id": {
             "type": "string"
           }
+        }
+      },
+      "EmailAddress1": {
+        "required": [
+          "address"
+        ],
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "format": "email"
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "Terminal": {
+        "type": "object",
+        "properties": {
+          "emailAddress": {
+            "type": "string",
+            "format": "email",
+            "nullable": true
+          },
+          "email": {
+            "$ref": "#/components/schemas/EmailAddress1"
+          },
+          "number": {
+            "type": "string",
+            "format": "tel",
+            "nullable": true
+          }
         },
-        "additionalProperties": false
+        "additionalProperties": {}
       },
       "NewMessageRoute": {
         "required": [
           "channel",
           "destinationUrl",
+          "name",
           "to"
         ],
         "type": "object",
@@ -6009,45 +6556,36 @@
           },
           "name": {
             "type": "string",
-            "description": "A descriptive name of the route (for display)",
-            "nullable": true
-          },
-          "retryCount": {
-            "type": "integer",
-            "description": "The number of attempts to perform when trying to\r\ndeliver an inbound message, before failing",
-            "format": "int32"
-          },
-          "destinationUrl": {
-            "type": "string",
-            "description": "The URL where to deliver the inbound messages",
-            "format": "uri"
-          },
-          "secret": {
-            "type": "string",
-            "description": "An optional secret string used to sign the webhook",
-            "nullable": true
-          },
-          "filters": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Filter"
-            },
-            "description": "An optional set of additional filters used to retrict the messages \r\nto be routed to the destination",
-            "nullable": true
-          },
-          "headers": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "An optional set of headers attached to the delivery\r\nrequest (used for correlation)",
-            "nullable": true
+            "description": "A descriptive name of the route (for display)"
           },
           "to": {
             "$ref": "#/components/schemas/Terminal"
+          },
+          "destinationUrl": {
+            "type": "string",
+            "description": "The HTTP URL address where the inbound message\r\nwill be delivered"
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Whether the route must be set as immediately active"
+          },
+          "retryCount": {
+            "type": "integer",
+            "description": "The number of retries to deliver the inbound message",
+            "format": "int32"
+          },
+          "secret": {
+            "type": "string",
+            "description": "A secret code that is used to sign the webhooks",
+            "nullable": true
+          },
+          "context": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "A context that is appended to the message before\r\nthe delivery (useful for correlation)",
+            "nullable": true
           }
         },
-        "additionalProperties": false,
         "description": "The request to create a new route to receive inbound messages"
       },
       "RouteChannel": {
@@ -6071,7 +6609,6 @@
             "description": "The unique identifier of the channel"
           }
         },
-        "additionalProperties": false,
         "description": "Describes a channel that receives and routes\r\ninbound messages"
       },
       "MessageRoute": {
@@ -6080,38 +6617,13 @@
           "channel",
           "destinationUrl",
           "id",
+          "name",
           "to"
         ],
         "type": "object",
         "properties": {
           "channel": {
             "$ref": "#/components/schemas/RouteChannel"
-          },
-          "destinationUrl": {
-            "type": "string",
-            "description": "The URL where to deliver the inbound messages",
-            "format": "uri"
-          },
-          "secret": {
-            "type": "string",
-            "description": "An optional secret string used to sign the webhook",
-            "nullable": true
-          },
-          "filters": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Filter"
-            },
-            "description": "An optional set of additional filters used to retrict the messages \r\nto be routed to the destination",
-            "nullable": true
-          },
-          "headers": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "An optional set of headers attached to the delivery\r\nrequest (used for correlation)",
-            "nullable": true
           },
           "id": {
             "type": "string",
@@ -6122,79 +6634,34 @@
           },
           "name": {
             "type": "string",
-            "description": "The descriptive name of the route",
-            "nullable": true
+            "description": "The descriptive name of the route"
           },
           "active": {
             "type": "boolean",
             "description": "Indicates the active state of a route"
           },
-          "retryCount": {
-            "type": "integer",
-            "description": "The number of attempts to perform when trying to\r\ndeliver an inbound message, before failing",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false,
-        "description": "Specifies the rules to route inbound messages (delivered as webhooks)"
-      },
-      "RouteUpdateField": {
-        "enum": [
-          "secret",
-          "destinationUrl",
-          "filter",
-          "headers"
-        ],
-        "type": "string",
-        "x-ms-enum": {
-          "name": "RouteUpdateField",
-          "modelAsString": true
-        }
-      },
-      "MessageRouteUpdate": {
-        "required": [
-          "fields"
-        ],
-        "type": "object",
-        "properties": {
-          "fields": {
-            "minItems": 1,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RouteUpdateField"
-            },
-            "description": "Indicates which fields have to be updated with the request"
-          },
           "destinationUrl": {
             "type": "string",
-            "description": "The URL where to deliver the inbound messages",
-            "format": "uri",
-            "nullable": true
+            "description": "The HTTP URL address where the inbound message\r\nwill be delivered"
+          },
+          "retryCount": {
+            "type": "integer",
+            "description": "The number of retries to deliver the inbound message",
+            "format": "int32"
           },
           "secret": {
             "type": "string",
-            "description": "An optional secret string used to sign the webhook",
+            "description": "A secret code that is used to sign the webhooks",
             "nullable": true
           },
-          "filters": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Filter"
-            },
-            "description": "An optional set of additional filters used to retrict the messages \r\nto be routed to the destination",
-            "nullable": true
-          },
-          "headers": {
+          "context": {
             "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "An optional set of headers attached to the delivery\r\nrequest (used for correlation)",
+            "additionalProperties": {},
+            "description": "A context that is appended to the message before\r\nthe delivery (useful for correlation)",
             "nullable": true
           }
         },
-        "additionalProperties": false,
-        "description": "A request to update the configurations of a message route"
+        "description": "Specifies the rules to route inbound messages (delivered as webhooks)"
       },
       "MessageRouteStatusUpdate": {
         "required": [
@@ -6207,7 +6674,6 @@
             "description": "Wether or not the message route should be active or not"
           }
         },
-        "additionalProperties": false,
         "description": "The request to change the status of a message route"
       },
       "PageResultOfMessageRoute": {
@@ -6267,10 +6733,9 @@
             "format": "uri",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
-      "WebhookSubscriptionRequests": {
+      "NewWebhookSubscription": {
         "required": [
           "destinationUrl",
           "events"
@@ -6320,9 +6785,14 @@
             "type": "integer",
             "description": "The number of attempts to perform when trying to deliver\r\nthe webhook, before failing",
             "format": "int32"
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "A list of metadata associated to the subscription",
+            "nullable": true
           }
         },
-        "additionalProperties": false,
         "description": "Requests the subscription to the notification of event\r\noccurrences within the system"
       },
       "WebhookSubscription": {
@@ -6385,9 +6855,14 @@
             },
             "description": "An optional set of filters used to restrict the\r\ndelivery of webhooks",
             "nullable": true
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "A list of metadata associated to the subscription",
+            "nullable": true
           }
         },
-        "additionalProperties": false,
         "description": "The subscription to the notification of an event"
       },
       "PageResultOfWebhookSubscription": {
@@ -6447,8 +6922,7 @@
             "format": "uri",
             "nullable": true
           }
-        },
-        "additionalProperties": false
+        }
       },
       "WebhookSubscriptionStatusUpdate": {
         "required": [
@@ -6461,7 +6935,6 @@
             "description": "Wether or not the subscription should be active"
           }
         },
-        "additionalProperties": false,
         "description": "A request to change the active status of a subscription"
       }
     }
