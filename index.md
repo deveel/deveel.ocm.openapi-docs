@@ -11,7 +11,7 @@ This space provides the documentation for the Deveel OCM platform, a messaging i
 
 Please note that you will find a mix of technical details (eg. _how to authenticate the client applications_, _the format of the messages_, _how to create a channel_, etc.) and conceptual definitions: given the current scarcity of resources, we cannot provide dedicated spaces for the business aspects and the technology aspects, that will eventually be separated.
 
-> :warning: **Note**: The platform is currently under development, that reflects in the changeable nature of the documentation provided in these pages
+> **Note**: The platform is currently under development, that reflects in the changeable nature of the documentation provided in these pages
 
 ## Concepts
 
@@ -21,4 +21,4 @@ Please note that you will find a mix of technical details (eg. _how to authentic
 | _[Outbound Messaging](/outbound/)_        | Sending messages from an application to individuals                            |
 | _[Inbound Messaging](/inbound/)_          | Receiving messages from individuals directed to an application                 |
 | _[Terminals](/terminals/)_                | End-points of that allows parties (_sender_ and _receiver_) to communicate     |
-| _[Messaging Channels](/channels/)         | Means of transportation of messages between parties                            |
+| _[Messaging Channels](/channels/)_        | Means of transportation of messages between parties                            |
