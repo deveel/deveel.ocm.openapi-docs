@@ -16,7 +16,7 @@ Please note that you will find a mix of technical details (eg. _how to authentic
 ## Concepts
 
 | Concept                                   |  Brief                                                                         |
-+-------------------------------------------+--------------------------------------------------------------------------------+
+|-------------------------------------------|--------------------------------------------------------------------------------|
 | _[Omni-Channel Messaging](/omnichannel/)_ | Provides the virtual capability of activating any available messaging channel  |
 | _[Outbound Messaging](/outbound/)_        | Sending messages from an application to individuals                            |
 | _[Inbound Messaging](/inbound/)_          | Receiving messages from individuals directed to an application                 |
